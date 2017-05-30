@@ -27,17 +27,17 @@ public class UserCharExporter implements IExporter {
         String encoded_str = "alcoholcontent"+delim+"fancifulName"+delim+"brandName"+delim+"origin"+delim+"type"+delim+"formula"+delim+"serial"+delim+"pH"+delim+"vintageyear"+delim+"appellation"+delim+"varietals\r\n";
         for (SubmittedApplication app: apps){
             encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getAlcoholContent())) + delim; //alcohol content
-            encoded_str += escapeStr(app.getApplication().getAlcohol().getName()) + delim; //fanciul
+            encoded_str += escapeStr(app.getApplication().getAlcohol().getFancifulName()) + delim; //fanciul
             encoded_str += escapeStr(app.getApplication().getAlcohol().getBrandName()) + delim; //brandname
             encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getOrigin())) + delim; //origin
-            encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getAlcoholType())) + delim; //type
+            encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getType())) + delim; //type
             encoded_str += escapeStr(app.getApplication().getAlcohol().getFormula()) + delim; //formula
             encoded_str += escapeStr(app.getApplication().getAlcohol().getSerialNumber()) + delim; //serial
-            if (app.getApplication().getAlcohol().getAlcoholType() == AlcoholType.WINE) {
-                encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getWineInfo().pH)) + delim; //ph
-                encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getWineInfo().vintageYear)) + delim; //vintageyear
-                encoded_str += escapeStr(app.getApplication().getAlcohol().getWineInfo().appellation) + delim; //appelation
-                encoded_str += escapeStr(app.getApplication().getAlcohol().getWineInfo().grapeVarietal); //varietals
+            if (app.getApplication().getAlcohol().getType() == AlcoholType.WINE) {
+//                encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getWineInfo().pH)) + delim; //ph
+//                encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getWineInfo().vintageYear)) + delim; //vintageyear
+//                encoded_str += escapeStr(app.getApplication().getAlcohol().getWineInfo().appellation) + delim; //appelation
+//                encoded_str += escapeStr(app.getApplication().getAlcohol().getWineInfo().grapeVarietal); //varietals
             }
             else {
                 encoded_str += String.valueOf(delim) + String.valueOf(delim) + String.valueOf(delim);

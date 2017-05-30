@@ -180,7 +180,7 @@ public class HomeController implements IController {
                 case 0:
                     alc1.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
                     brand1.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful1.setText(recentApplication.getApplication().getAlcohol().getName());
+                    fanciful1.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
                     content1.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
                     date1.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
                     image1.setImage(recentApplication.getImage().display());
@@ -189,7 +189,7 @@ public class HomeController implements IController {
                 case 1:
                     alc2.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
                     brand2.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful2.setText(recentApplication.getApplication().getAlcohol().getName());
+                    fanciful2.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
                     content2.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
                     date2.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
                     image2.setImage(recentApplication.getImage().display());
@@ -198,7 +198,7 @@ public class HomeController implements IController {
                 case 2:
                     alc3.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
                     brand3.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful3.setText(recentApplication.getApplication().getAlcohol().getName());
+                    fanciful3.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
                     content3.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
                     date3.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
                     image3.setImage(recentApplication.getImage().display());
@@ -207,7 +207,7 @@ public class HomeController implements IController {
                 case 3:
                     alc4.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
                     brand4.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful4.setText(recentApplication.getApplication().getAlcohol().getName());
+                    fanciful4.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
                     content4.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
                     date4.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
                     image4.setImage(recentApplication.getImage().display());
@@ -223,7 +223,7 @@ public class HomeController implements IController {
 
             for (SubmittedApplication application : resultsList) {
                 possibleSuggestions.add(application.getApplication().getAlcohol().getBrandName());
-                possibleSuggestions.add(application.getApplication().getAlcohol().getName());
+                possibleSuggestions.add(application.getApplication().getAlcohol().getFancifulName());
             }
 
             autoCompletionBinding = TextFields.bindAutoCompletion(searchbox, possibleSuggestions);

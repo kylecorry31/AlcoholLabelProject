@@ -112,9 +112,9 @@ public class ApprovalProcessController implements IController {
 
         agentInterface = new TTBAgentInterface(Authenticator.getInstance().getUsername());
         brandName.setText(application.getApplication().getAlcohol().getBrandName());
-        fancifulName.setText(application.getApplication().getAlcohol().getName());
+        fancifulName.setText(application.getApplication().getAlcohol().getFancifulName());
         String type = "";
-        switch (application.getApplication().getAlcohol().getAlcoholType()) {
+        switch (application.getApplication().getAlcohol().getType()) {
             case BEER:
                 type = "Beer";
                 break;

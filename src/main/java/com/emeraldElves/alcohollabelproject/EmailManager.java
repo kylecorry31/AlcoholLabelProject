@@ -52,9 +52,9 @@ public class EmailManager {
                     InternetAddress.parse(application.getApplication().getManufacturer().getEmailAddress().getEmailAddress()));
             message.setSubject("Update to your recent application status");
             if (application.getStatus() == ApplicationStatus.REJECTED) {
-                message.setText("Your application for " + application.getApplication().getAlcohol().getName() + " has been " + application.getStatus() + "for the reason " + application.getStatus().getMessage());
+                message.setText("Your application for " + application.getApplication().getAlcohol().getFancifulName() + " has been " + application.getStatus() + "for the reason " + application.getStatus().getMessage());
             } else if (application.getStatus() == ApplicationStatus.APPROVED) {
-                message.setText("Your application for " + application.getApplication().getAlcohol().getName() + " has been " + application.getStatus());
+                message.setText("Your application for " + application.getApplication().getAlcohol().getFancifulName() + " has been " + application.getStatus());
             }
             Transport.send(message);
 

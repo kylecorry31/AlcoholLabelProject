@@ -60,9 +60,9 @@ public class TTBWorkflowController implements IController {
             Date date = p.getValue().getApplication().getSubmissionDate();
             return new ReadOnlyObjectWrapper<String>(StringEscapeUtils.escapeJava(DateHelper.dateToString(date)));
         });
-        manufacturerCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<String>(StringEscapeUtils.escapeJava(p.getValue().getApplication().getAlcohol().getName())));
+        manufacturerCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<String>(StringEscapeUtils.escapeJava(p.getValue().getApplication().getAlcohol().getFancifulName())));
         brandCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<String>(StringEscapeUtils.escapeJava(p.getValue().getApplication().getAlcohol().getBrandName())));
-        typeCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<String>(StringEscapeUtils.escapeJava(p.getValue().getApplication().getAlcohol().getAlcoholType().name())));
+        typeCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<String>(StringEscapeUtils.escapeJava(p.getValue().getApplication().getAlcohol().getType().name())));
         appIDCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<String>(StringEscapeUtils.escapeJava(String.valueOf(p.getValue().getApplicationID()))));
         resultsTable.setItems(data);
         resultsTable.setRowFactory(tv -> {
@@ -86,7 +86,7 @@ public class TTBWorkflowController implements IController {
         List<SubmittedApplication> unassigned = Storage.getInstance().getUnassignedApplications();
 
         unassigned = unassigned.stream().filter((a) -> {
-            AlcoholType type = a.getApplication().getAlcohol().getAlcoholType();
+            AlcoholType type = a.getApplication().getAlcohol().getType();
             return type.equals(AlcoholType.BEER) && beer.isSelected() ||
                     type.equals(AlcoholType.WINE) && wine.isSelected() ||
                     type.equals(AlcoholType.DISTILLEDSPIRITS) && spirits.isSelected();

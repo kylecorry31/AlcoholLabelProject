@@ -83,9 +83,9 @@ public class DetailedSearchController {
         this.application = application;
         this.searchTerm = searchTerm;
         brandName.setText(application.getApplication().getAlcohol().getBrandName());
-        fancifulName.setText(application.getApplication().getAlcohol().getName());
+        fancifulName.setText(application.getApplication().getAlcohol().getFancifulName());
         String type = "";
-        switch (application.getApplication().getAlcohol().getAlcoholType()) {
+        switch (application.getApplication().getAlcohol().getType()) {
             case BEER:
                 wineInfo.setVisible(false);
                 type = "BEER";
@@ -93,30 +93,30 @@ public class DetailedSearchController {
             case WINE:
                 wineInfo.setVisible(true);
                 type = "WINE";
-                if((Integer)application.getApplication().getAlcohol().getWineInfo().vintageYear != null){
-                    vintageYear.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().vintageYear));
-                }
-                else {
-                    vintageYear.setText("");
-                }
-                if((Double)application.getApplication().getAlcohol().getWineInfo().pH != null){
-                    pH.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().pH));
-                }
-                else {
-                    pH.setText("");
-                }
-                if(!application.getApplication().getAlcohol().getWineInfo().grapeVarietal.equals("")){
-                    varietals.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().grapeVarietal));
-                }
-                else {
-                    varietals.setText("");
-                }
-                if(!application.getApplication().getAlcohol().getWineInfo().appellation.equals("")){
-                    appellation.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().appellation));
-                }
-                else {
-                    appellation.setText("");
-                }
+//                if((Integer)application.getApplication().getAlcohol().getWineInfo().vintageYear != null){
+//                    vintageYear.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().vintageYear));
+//                }
+//                else {
+//                    vintageYear.setText("");
+//                }
+//                if((Double)application.getApplication().getAlcohol().getWineInfo().pH != null){
+//                    pH.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().pH));
+//                }
+//                else {
+//                    pH.setText("");
+//                }
+//                if(!application.getApplication().getAlcohol().getWineInfo().grapeVarietal.equals("")){
+//                    varietals.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().grapeVarietal));
+//                }
+//                else {
+//                    varietals.setText("");
+//                }
+//                if(!application.getApplication().getAlcohol().getWineInfo().appellation.equals("")){
+//                    appellation.setText(String.valueOf(application.getApplication().getAlcohol().getWineInfo().appellation));
+//                }
+//                else {
+//                    appellation.setText("");
+//                }
                 break;
             case DISTILLEDSPIRITS:
                 wineInfo.setVisible(false);
