@@ -752,9 +752,9 @@ public class AlcoholDatabase {
                 long applicationID = results.getLong("applicationID");
 
                 applicationType = new ApplicationType(labelApproval, stateOnly, bottleCapacity);
-                alcoholInfo = new AlcoholInfo(Double.valueOf(alcoholContent), fancifulName, brandName, ProductSource.fromInt(origin),
+                alcoholInfo = new AlcoholInfo(brandName,
                         AlcoholType.fromInt(type),
-                        serialNumber, formula);
+                        serialNumber, ProductSource.fromInt(origin));
                 // TODO: Wine info
                 SavedApplication temp = new SavedApplication(applicationType, alcoholInfo, extraInfo, new LabelImage(imageURL));
                 //sets application ID for thing
@@ -910,10 +910,9 @@ public class AlcoholDatabase {
 //                            alcoholResult.getString("varietals"), alcoholResult.getString("wineAppellation"));
 //                    return info;
                 } else {
-                    return new AlcoholInfo(Double.valueOf(alcoholResult.getString("alcoholContent")),
-                            alcoholResult.getString("fancifulName"), alcoholResult.getString("brandName"),
-                            ProductSource.fromInt(alcoholResult.getInt("origin")), type,
-                            alcoholResult.getString("serialNumber"), alcoholResult.getString("formula"));
+                    return new AlcoholInfo(alcoholResult.getString("brandName"),
+                            type,
+                            alcoholResult.getString("serialNumber"), ProductSource.fromInt(alcoholResult.getInt("origin")));
                 }
 
             }

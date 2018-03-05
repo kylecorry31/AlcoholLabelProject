@@ -64,7 +64,9 @@ class NewApplicationController: IController {
         } else {
             alcoholContent = alcoholContentField.text.toDouble()
         }
-        val alcoholInfo = AlcoholInfo(alcoholContent, alcoholName.text, brandNameField.text, ProductSource.DOMESTIC, AlcoholType.BEER, "", "")
+        val alcoholInfo = AlcoholInfo(brandNameField.text, AlcoholType.BEER, "12345678", ProductSource.DOMESTIC)
+        alcoholInfo.alcoholContent = alcoholContent
+        alcoholInfo.fancifulName = alcoholName.text
         return alcoholInfo
     }
 

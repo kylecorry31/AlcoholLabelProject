@@ -14,7 +14,6 @@ public class Authenticator {
 
     private Authenticator() {
         storage = Storage.getInstance();
-        username = "";
         userType = UserType.BASIC;
     }
 

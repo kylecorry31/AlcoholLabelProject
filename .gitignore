@@ -200,3 +200,5 @@ Log.txt
 src/main/resources/fxml/ApprovalPage.fxml
 
 src/main/resources/fxml/NewUser.fxml
+
+*.db/
