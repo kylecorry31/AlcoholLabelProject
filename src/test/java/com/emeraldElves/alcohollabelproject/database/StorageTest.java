@@ -23,8 +23,8 @@ public class StorageTest {
 
     @After
     public void teardown(){
-        database.dropTable(AlcoholInfo.Companion.getDB_TABLE());
-        database.dropTable(User.Companion.getDB_TABLE());
+        database.dropTable(AlcoholInfo.DB_TABLE);
+        database.dropTable(User.DB_TABLE);
         database.disconnect();
     }
 
