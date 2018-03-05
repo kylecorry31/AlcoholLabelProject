@@ -3,6 +3,8 @@ package com.emeraldElves.alcohollabelproject.UserInterface;
 import com.emeraldElves.alcohollabelproject.Data.PotentialUser;
 import com.emeraldElves.alcohollabelproject.Data.SavedApplication;
 import com.emeraldElves.alcohollabelproject.Data.SubmittedApplication;
+import com.emeraldElves.alcohollabelproject.database.ApacheDerbyDatabase;
+import com.emeraldElves.alcohollabelproject.database.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.print.PageLayout;
@@ -18,6 +20,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static Stage stage;
+    public static Storage storage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -194,6 +197,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        storage = Storage.getInstance();
+        storage.setDatabase(new ApacheDerbyDatabase("cola.db"));
         launch(args);
     }
 

@@ -3,8 +3,7 @@ package com.emeraldElves.alcohollabelproject.UserInterface;
 
 import com.emeraldElves.alcohollabelproject.Authenticator;
 import com.emeraldElves.alcohollabelproject.COLASearch;
-import com.emeraldElves.alcohollabelproject.Data.DateHelper;
-import com.emeraldElves.alcohollabelproject.Data.SubmittedApplication;
+import com.emeraldElves.alcohollabelproject.Data.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -93,6 +92,8 @@ public class HomeController implements IController {
 
     private COLASearch search;
 
+    private List<AlcoholInfo> alcohol;
+
     public void aboutProject(){
         main.loadFXML("/fxml/AboutPage.fxml");
     }
@@ -101,6 +102,11 @@ public class HomeController implements IController {
         mostRecentSubmissions = new ArrayList<>();
         search = new COLASearch();
         submitted = search.searchRecentApplications(4);
+        AlcoholInfo info = new AlcoholInfo("Drunk", AlcoholType.WINE, "12345678", ProductSource.DOMESTIC);
+        info.setAlcoholContent(50);
+        info.setFancifulName("Drug$");
+        Main.storage.saveAlcoholInfo(info);
+        alcohol = Main.storage.getAllAlcoholInfo();
     }
 
 
@@ -174,43 +180,43 @@ public class HomeController implements IController {
 
     public void init(Main main) {
         this.main = main;
-        for (int i = 0; i < submitted.size(); i++) {
-            SubmittedApplication recentApplication = submitted.get(i);
+        for (int i = 0; i < alcohol.size(); i++) {
+            AlcoholInfo recentApplication = alcohol.get(i);
             switch (i) {
                 case 0:
-                    alc1.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
-                    brand1.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful1.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
-                    content1.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
-                    date1.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-                    image1.setImage(recentApplication.getImage().display());
+//                    alc1.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getBrandName()));
+                    brand1.setText(recentApplication.getBrandName().toUpperCase());
+                    fanciful1.setText(recentApplication.getFancifulName());
+                    content1.setText(recentApplication.getAlcoholContent() + "%");
+//                    date1.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
+//                    image1.setImage(recentApplication.getImage().display());
                     ImageUtils.centerImage(image1);
                     break;
                 case 1:
-                    alc2.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
-                    brand2.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful2.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
-                    content2.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
-                    date2.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-                    image2.setImage(recentApplication.getImage().display());
+//                    alc2.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
+                    brand2.setText(recentApplication.getBrandName().toUpperCase());
+                    fanciful2.setText(recentApplication.getFancifulName());
+                    content2.setText(recentApplication.getAlcoholContent() + "%");
+//                    date2.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
+//                    image2.setImage(recentApplication.getImage().display());
                     ImageUtils.centerImage(image2);
                     break;
                 case 2:
-                    alc3.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
-                    brand3.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful3.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
-                    content3.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
-                    date3.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-                    image3.setImage(recentApplication.getImage().display());
+//                    alc3.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
+                    brand3.setText(recentApplication.getBrandName().toUpperCase());
+                    fanciful3.setText(recentApplication.getFancifulName());
+                    content3.setText(recentApplication.getAlcoholContent() + "%");
+//                    date3.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
+//                    image3.setImage(recentApplication.getImage().display());
                     ImageUtils.centerImage(image3);
                     break;
                 case 3:
-                    alc4.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
-                    brand4.setText(recentApplication.getApplication().getAlcohol().getBrandName().toUpperCase());
-                    fanciful4.setText(recentApplication.getApplication().getAlcohol().getFancifulName());
-                    content4.setText(recentApplication.getApplication().getAlcohol().getAlcoholContent() + "%");
-                    date4.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-                    image4.setImage(recentApplication.getImage().display());
+//                    alc4.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
+                    brand4.setText(recentApplication.getBrandName().toUpperCase());
+                    fanciful4.setText(recentApplication.getFancifulName());
+                    content4.setText(recentApplication.getAlcoholContent() + "%");
+//                    date4.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
+//                    image4.setImage(recentApplication.getImage().display());
                     ImageUtils.centerImage(image4);
                     break;
             }
