@@ -3,9 +3,12 @@ package com.emeraldElves.alcohollabelproject.UserInterface;
 import com.emeraldElves.alcohollabelproject.Authenticator;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,13 +24,12 @@ public class ToolbarController implements Initializable {
     @FXML
     private Button extraButton;
 
-    private Main main;
 
     public static boolean onLoginPage = false;
 
     public void goHome() {
         onLoginPage = false;
-        main.loadHomepage();
+        UIManager.getInstance().displayPage(logButton.getScene(), UIManager.HOME_PAGE);
     }
 
     public void loadLog() {
@@ -45,41 +47,40 @@ public class ToolbarController implements Initializable {
                 goHome();
                 break;
             case BASIC:
-                main.loadFXML("/fxml/Login.fxml");
+//                main.loadFXML("/fxml/Login.fxml");
                 break;
         }
     }
 
     public void utilityButton() {
-        switch (Authenticator.getInstance().getUserType()) {
-            case TTBAGENT:
-                main.loadFXML("/fxml/TTBWorkflowPage.fxml");
-                break;
-            case APPLICANT:
-                main.loadFXML("/fxml/ApplicantWorkflowPage.fxml");
-                break;
-            case SUPERAGENT:
-                main.loadFXML("/fxml/SuperagentWorkflowPage.fxml");
-                break;
-            case BASIC:
-                utility.setVisible(true);
-                main.loadFXML("/fxml/NewUser.fxml");
-                break;
-        }
+//        switch (Authenticator.getInstance().getUserType()) {
+//            case TTBAGENT:
+//                main.loadFXML("/fxml/TTBWorkflowPage.fxml");
+//                break;
+//            case APPLICANT:
+//                main.loadFXML("/fxml/ApplicantWorkflowPage.fxml");
+//                break;
+//            case SUPERAGENT:
+//                main.loadFXML("/fxml/SuperagentWorkflowPage.fxml");
+//                break;
+//            case BASIC:
+//                utility.setVisible(true);
+//                main.loadFXML("/fxml/NewUser.fxml");
+//                break;
+//        }
     }
 
     public void extraFunction() {
-        if (Authenticator.getInstance().getUserType() == UserType.APPLICANT) {
-            main.loadFXML("/fxml/ProfilePage.fxml");
-        }
-        if (Authenticator.getInstance().getUserType() == UserType.SUPERAGENT){
-            main.loadFXML("/fxml/SuperagentViewAllApplications.fxml");
-        }
+//        if (Authenticator.getInstance().getUserType() == UserType.APPLICANT) {
+//            main.loadFXML("/fxml/ProfilePage.fxml");
+//        }
+//        if (Authenticator.getInstance().getUserType() == UserType.SUPERAGENT){
+//            main.loadFXML("/fxml/SuperagentViewAllApplications.fxml");
+//        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        main = UISwitcher.getInstance().getMain();
         switch (Authenticator.getInstance().getUserType()) {
             case SUPERAGENT:
                 extraButton.setVisible(true);

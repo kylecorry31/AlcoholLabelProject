@@ -153,6 +153,8 @@ public class ApplicationSubmissionController implements Initializable{
 
         System.out.println("Saved " + cola.toString());
 
+        UIManager.getInstance().displayPage(brandName.getScene(), UIManager.HOME_PAGE);
+
     }
 
     @Override

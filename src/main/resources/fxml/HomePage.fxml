@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.UserInterface.HomeController">
+<GridPane alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.UserInterface.HomeController">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -24,64 +26,76 @@
     <children>
         <Pane prefHeight="675.0" prefWidth="1024.0" GridPane.rowIndex="2">
             <children>
-            <TextField fx:id="searchbox" layoutX="93.0" layoutY="49.0" prefHeight="36.0" prefWidth="575.0" promptText="Search..." styleClass="search-box" />
-            <Button layoutX="565.0" layoutY="49.0" mnemonicParsing="false" onMouseClicked="#searchDatabase" prefHeight="56.0" prefWidth="103.0" style="-fx-border-radius: 0;" styleClass="button-flat" text="SEARCH" />
-                <GridPane layoutX="93.0" layoutY="204.0" prefHeight="407.0" prefWidth="838.0" styleClass="card">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints />
+            <Button layoutX="810.0" layoutY="620.0" mnemonicParsing="false" onMouseClicked="#aboutProject" styleClass="button-raised" text="About" />
+            <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1024.0" spacing="32.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="32.0">
+                     <children>
+                        <JFXTextField fx:id="searchbox" prefHeight="26.0" prefWidth="524.0" promptText="Search" styleClass="custom-jfx-text-field" />
+                        <Button mnemonicParsing="false" onMouseClicked="#searchDatabase" prefWidth="103.0" styleClass="button-raised" text="Search" />
+                        <Button mnemonicParsing="false" onMouseClicked="#feelingThirsty" prefWidth="186.0" styleClass="button-raised" text="I'M FEELING THIRSTY" />
+                     </children>
+                  </HBox>
+                      <GridPane alignment="CENTER" prefHeight="407.0" prefWidth="838.0" styleClass="card">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="802.0" style="-fx-border-width: 1;" styleClass="card-title" text="RECENTLY APPROVED BEVERAGES">
-                     <GridPane.margin>
-                        <Insets bottom="16.0" />
-                     </GridPane.margin></Label>
-                  <AnchorPane fx:id="alc1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 2 0 2 0 !important;" styleClass="recent-alcohol" GridPane.rowIndex="1">
-                     <children>
-                        <Label fx:id="brand1" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
-                        <Label fx:id="fanciful1" layoutX="90.0" layoutY="40.0" />
-                        <Label fx:id="date1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
-                        <Label fx:id="content1" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
-                        <ImageView fx:id="image1" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="alc2" prefHeight="200.0" prefWidth="200.0" styleClass="recent-alcohol" GridPane.rowIndex="2">
-                     <children>
-                        <Label fx:id="brand2" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
-                        <Label fx:id="fanciful2" layoutX="90.0" layoutY="40.0" />
-                        <Label fx:id="date2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
-                        <Label fx:id="content2" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
-                        <ImageView fx:id="image2" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="alc3" prefHeight="200.0" prefWidth="200.0" styleClass="recent-alcohol" GridPane.rowIndex="3">
-                     <children>
-                        <Label fx:id="brand3" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
-                        <Label fx:id="fanciful3" layoutX="90.0" layoutY="40.0" />
-                        <Label fx:id="date3" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
-                        <Label fx:id="content3" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
-                        <ImageView fx:id="image3" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="alc4" prefHeight="55.0" prefWidth="806.0" style="-fx-border-width: 0 !important;" styleClass="recent-alcohol" GridPane.rowIndex="4">
-                     <children>
-                        <Label fx:id="brand4" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
-                        <Label fx:id="fanciful4" layoutX="90.0" layoutY="40.0" />
-                        <Label fx:id="date4" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
-                        <Label fx:id="content4" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
-                        <ImageView fx:id="image4" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                    </children>
-                </GridPane>
-            <Button layoutX="751.0" layoutY="49.0" mnemonicParsing="false" onMouseClicked="#feelingThirsty" prefHeight="56.0" prefWidth="186.0" styleClass="button-raised" text="I'M FEELING THIRSTY" />
-            <Button layoutX="948.0" layoutY="611.0" mnemonicParsing="false" onMouseClicked="#aboutProject" styleClass="button-raised" text="About" />
+                          </rowConstraints>
+                          <children>
+                            <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-border-width: 1;" styleClass="card-title" text="RECENTLY APPROVED BEVERAGES">
+                           <GridPane.margin>
+                              <Insets bottom="16.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <AnchorPane fx:id="alc1" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 2 0 2 0 !important;" styleClass="recent-alcohol" GridPane.rowIndex="1">
+                           <children>
+                              <Label fx:id="brand1" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                              <Label fx:id="fanciful1" layoutX="90.0" layoutY="40.0" />
+                              <Label fx:id="date1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
+                              <Label fx:id="content1" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
+                              <ImageView fx:id="image1" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="alc2" prefHeight="200.0" prefWidth="200.0" styleClass="recent-alcohol" GridPane.rowIndex="2">
+                           <children>
+                              <Label fx:id="brand2" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                              <Label fx:id="fanciful2" layoutX="90.0" layoutY="40.0" />
+                              <Label fx:id="date2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
+                              <Label fx:id="content2" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
+                              <ImageView fx:id="image2" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="alc3" prefHeight="200.0" prefWidth="200.0" styleClass="recent-alcohol" GridPane.rowIndex="3">
+                           <children>
+                              <Label fx:id="brand3" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                              <Label fx:id="fanciful3" layoutX="90.0" layoutY="40.0" />
+                              <Label fx:id="date3" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
+                              <Label fx:id="content3" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
+                              <ImageView fx:id="image3" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="alc4" prefHeight="55.0" prefWidth="806.0" style="-fx-border-width: 0 !important;" styleClass="recent-alcohol" GridPane.rowIndex="4">
+                           <children>
+                              <Label fx:id="brand4" layoutX="90.0" layoutY="15.0" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                              <Label fx:id="fanciful4" layoutX="90.0" layoutY="40.0" />
+                              <Label fx:id="date4" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="664.0" layoutY="19.0" prefHeight="20.0" prefWidth="132.0" textAlignment="RIGHT" />
+                              <Label fx:id="content4" alignment="CENTER_RIGHT" layoutX="730.0" layoutY="41.0" prefHeight="20.0" prefWidth="61.0" />
+                              <ImageView fx:id="image4" fitHeight="60.0" fitWidth="60.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                          </children>
+                      </GridPane>
+               </children>
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+            </VBox>
 
             </children>
         </Pane>
