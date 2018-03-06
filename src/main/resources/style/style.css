@@ -1,0 +1,202 @@
+* {
+    -color-primary: #2c4b7c;
+    -color-primary-dark: #233d66;
+    -color-primary-light: #3c6ab2;
+    -color-accent: #008000;
+    -color-background: whitesmoke;
+    -background-color: white;
+    -color-text: BLACK;
+    -color-button-text: WHITE;
+}
+
+.button-raised {
+    -fx-padding: 0.7em 0.57em;
+    -fx-font-size: 14px;
+    -jfx-button-type: RAISED;
+    -fx-background-color: -color-accent;
+    -fx-pref-width: 200;
+    -fx-text-fill: -color-button-text;
+}
+
+.custom-jfx-check-box {
+    -jfx-checked-color: -color-accent;
+    -jfx-unchecked-color: -color-accent;
+    -fx-text-fill: -color-text;
+    -fx-font-size: 16px;
+}
+
+.custom-jfx-combo-box {
+    -jfx-focus-color: -color-accent;
+    -jfx-unfocus-color: -color-accent;
+}
+
+.custom-jfx-combo-box > .combo-box-popup .list-view .jfx-list-cell {
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-background;
+}
+
+.custom-jfx-combo-box > .combo-box-popup .list-view .jfx-list-cell:hover {
+    -fx-background-color: #94a000;
+}
+
+.custom-jfx-radio-button {
+    -jfx-selected-color: -color-accent;
+    -jfx-unselected-color: -color-accent;
+    -fx-text-fill: -color-text;
+}
+
+.custom-jfx-progress-bar > .bar {
+    -fx-background-color: -color-accent;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+
+.settingsPane, .settingsPaneHolder {
+    -fx-background-color: -color-background;
+}
+
+.custom-jfx-slider {
+    -jfx-default-thumb: -color-accent;
+    -jfx-default-track: -color-text;
+}
+
+.custom-jfx-slider .slider-value {
+    -fx-stroke: -color-background;
+    -fx-font-size: 10;
+}
+
+.link {
+    -fx-text-fill: -color-accent;
+}
+
+.root {
+    -fx-background-color: -color-background;
+}
+
+.header {
+    -fx-font-size: 20px;
+    -fx-font-family: 'sans-serif' !important;
+}
+
+#desc-label, #star-photos-desc, #dark-photos-desc, .custom-jfx-radio-button, #progress-text, .folder-path, .custom-jfx-check-box, .normal-text {
+    -fx-font-size: 15px;
+    -fx-line-spacing: 2.5;
+    -fx-font-family: 'sans-serif';
+}
+
+
+.credits {
+    -fx-font-family: 'sans-serif';
+    -fx-line-spacing: 2.5;
+}
+
+.list-view {
+    -fx-background-color: -color-background;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #434343;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #434343;
+}
+
+.list-view .list-cell {
+    -fx-background-color: -color-background;
+    -fx-text-fill: -color-text;
+    -fx-font-size: 16px;
+}
+
+.list-view .label {
+    -fx-text-fill: -color-text;
+    -fx-font-size: 16px;
+}
+
+.jfx-rippler {
+    -jfx-rippler-fill: -color-accent;
+}
+
+.custom-jfx-date-picker {
+    -jfx-default-color: -color-accent;
+}
+
+.custom-jfx-text-field {
+    -jfx-focus-color: -color-accent;
+}
+
+.label, .text-area, .text-field {
+    -fx-text-fill: -color-text;
+}
+
+.custom-jfx-text-area {
+    -jfx-focus-color: -color-accent;
+}
+
+.custom-jfx-text-area .content {
+    -fx-background-color: -color-background;
+}
+
+.custom-jfx-scroll-pane .main-header {
+    -fx-background-color: -color-background;
+}
+
+.custom-jfx-scroll-pane, .custom-vbox{
+    -fx-background-color: -color-background;
+}
+
+.jfx-scroll-pane {
+    -fx-background-color: -color-background;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color: -color-background;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-background;
+}
+
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-background;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: grey;
+}
+
+
+.scroll-pane {
+    -fx-background-color: -color-background;
+     -fx-border-color: -color-background;
+}
+
+.root{
+    -fx-base: -color-accent;
+    -fx-background: -background-color;
+}
+
+/*
+.button {
+    -fx-background: -color-accent;
+}
+
+.header {
+    -fx-text-color: -color-primary;
+}
+
+.title {
+    -fx-text-fill: white;
+    -fx-background-color: -color-primary;
+}*/
+
+#ttbID {
+    -fx-text-fill: grey;
+    -fx-font-size: 12px;
+}

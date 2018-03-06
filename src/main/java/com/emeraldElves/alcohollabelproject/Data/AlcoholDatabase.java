@@ -753,7 +753,7 @@ public class AlcoholDatabase {
                 long applicationID = results.getLong("applicationID");
 
                 applicationType = new ApplicationType(labelApproval, stateOnly, bottleCapacity);
-                alcoholInfo = new COLA(brandName,
+                alcoholInfo = new COLA(applicationID, brandName,
                         AlcoholType.fromInt(type),
                         serialNumber, ProductSource.fromInt(origin));
                 // TODO: Wine info
@@ -911,7 +911,7 @@ public class AlcoholDatabase {
 //                            alcoholResult.getString("varietals"), alcoholResult.getString("wineAppellation"));
 //                    return info;
                 } else {
-                    return new COLA(alcoholResult.getString("brandName"),
+                    return new COLA(applicationID, alcoholResult.getString("brandName"),
                             type,
                             alcoholResult.getString("serialNumber"), ProductSource.fromInt(alcoholResult.getInt("origin")));
                 }

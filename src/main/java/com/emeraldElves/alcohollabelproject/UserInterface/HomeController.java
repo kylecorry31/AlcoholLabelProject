@@ -103,10 +103,10 @@ public class HomeController implements IController {
         mostRecentSubmissions = new ArrayList<>();
         search = new COLASearch();
         submitted = search.searchRecentApplications(4);
-        COLA info = new COLA("Drunk", AlcoholType.WINE, "12345678", ProductSource.DOMESTIC);
-        info.setAlcoholContent(50);
-        info.setFancifulName("Drug$");
-        Main.storage.saveCOLA(info);
+//        COLA info = new COLA(0, "Drunk", AlcoholType.WINE, "12345678", ProductSource.DOMESTIC);
+//        info.setAlcoholContent(50);
+//        info.setFancifulName("Drug$");
+//        Main.storage.saveCOLA(info);
         alcohol = Main.storage.getAllCOLAs();
     }
 

@@ -36,13 +36,14 @@ public class COLA {
     private ApplicationStatus status;
     private ILabelImage labelImage;
 
-    public COLA(String brandName, AlcoholType type, String serialNumber, ProductSource origin) {
+    public COLA(long id, String brandName, AlcoholType type, String serialNumber, ProductSource origin) {
         this.brandName = brandName;
         this.type = type;
         this.serialNumber = serialNumber;
         this.origin = origin;
-        id = -1;
+        this.id = id;
         fancifulName = "";
+        formula = "";
         alcoholContent = 0;
         submissionDate = LocalDate.now();
         approvalDate = LocalDate.of(1990, 1, 1);
@@ -161,5 +162,23 @@ public class COLA {
     public int hashCode() {
 
         return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage);
+    }
+
+    @Override
+    public String toString() {
+        return "COLA{" +
+                "brandName='" + brandName + '\'' +
+                ", type=" + type +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", origin=" + origin +
+                ", id=" + id +
+                ", fancifulName='" + fancifulName + '\'' +
+                ", alcoholContent=" + alcoholContent +
+                ", formula='" + formula + '\'' +
+                ", submissionDate=" + submissionDate +
+                ", approvalDate=" + approvalDate +
+                ", status=" + status +
+                ", labelImage=" + labelImage +
+                '}';
     }
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.UserInterface.ApplicationSubmissionController">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="96.0" minHeight="96.0" percentHeight="0.0" prefHeight="96.0" />
+        <RowConstraints maxHeight="672.0" minHeight="672.0" percentHeight="0.0" prefHeight="672.0" />
+    </rowConstraints>
+    <children>
+        <Pane prefHeight="644.0" prefWidth="1024.0" GridPane.rowIndex="1">
+         <children>
+            <Label id="ttbID" fx:id="ttbID" layoutX="32.0" layoutY="612.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" text="TTB ID #18001001000000" />
+            <JFXButton fx:id="submit" layoutX="412.0" layoutY="611.0" styleClass="button-raised" text="Submit" />
+            <ScrollPane id="custom-scroll-pane" fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1024.0" vvalue="1.0">
+               <content>
+                  <VBox prefWidth="1024.0" spacing="48.0" styleClass="custom-vbox">
+                     <children>
+                        <Label style="-fx-text-fill: -color-accent; -fx-font-weight: bold;" text="REQUIRED" />
+                        <JFXTextField fx:id="brandName" labelFloat="true" prefHeight="24.0" prefWidth="360.0" promptText="Brand Name" styleClass="custom-jfx-text-field" />
+                        <JFXTextField fx:id="serialNumber" labelFloat="true" prefHeight="24.0" prefWidth="360.0" promptText="Serial Number (6 digits)" styleClass="custom-jfx-text-field" />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label text="Type:" />
+                              <JFXRadioButton fx:id="beerRadio" selected="true" styleClass="custom-jfx-radio-button" text="Beer">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="type" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="wineRadio" styleClass="custom-jfx-radio-button" text="Wine" toggleGroup="$type" />
+                              <JFXRadioButton fx:id="spiritRadio" styleClass="custom-jfx-radio-button" text="Distilled Spirits" toggleGroup="$type" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label text="Origin:" />
+                              <JFXRadioButton fx:id="domesticRadio" selected="true" styleClass="custom-jfx-radio-button" text="Domestic">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="origin" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="importedRadio" styleClass="custom-jfx-radio-button" text="Imported" toggleGroup="$origin" />
+                           </children>
+                        </HBox>
+                        <Label style="-fx-text-fill: -color-accent; -fx-font-weight: bold;" text="OPTIONAL" />
+                        <JFXTextField fx:id="fancifulName" labelFloat="true" prefHeight="24.0" prefWidth="360.0" promptText="Fanciful Name (if any)" styleClass="custom-jfx-text-field" />
+                        <JFXTextField fx:id="alcoholContent" labelFloat="true" prefHeight="24.0" prefWidth="360.0" promptText="Alcohol Content (%)" styleClass="custom-jfx-text-field" />
+                        <JFXTextArea fx:id="formulaText" labelFloat="true" promptText="Formula" styleClass="custom-jfx-text-area" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton fx:id="uploadButton" styleClass="button-raised" text="Upload Label" />
+                              <Label fx:id="uploadLabelLocation" text="No label selected">
+                                 <HBox.margin>
+                                    <Insets left="16.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+        </Pane>
+        <Pane prefHeight="118.0" prefWidth="1024.0" />
+      <fx:include source="toolbar.fxml" />
+    </children>
+</GridPane>

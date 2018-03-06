@@ -1,6 +1,8 @@
 package com.emeraldElves.alcohollabelproject.database;
 
 import com.emeraldElves.alcohollabelproject.Data.*;
+import com.emeraldElves.alcohollabelproject.IDGenerator2.IDGenerator.ApplicationIDGenerator;
+import com.emeraldElves.alcohollabelproject.IDGenerator2.IDGenerator.TTBIDGenerator;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 import org.junit.After;
@@ -35,25 +37,23 @@ public class StorageTest {
     public void testAlcohol(){
         assertEquals(0, storage.getAllCOLAs().size());
 
-        COLA test = new COLA("Brand", AlcoholType.BEER, "345678", ProductSource.DOMESTIC);
+        ApplicationIDGenerator idGenerator = new TTBIDGenerator();
+
+        COLA test = new COLA(idGenerator.generateID(), "Brand", AlcoholType.BEER, "345678", ProductSource.DOMESTIC);
         test.setAlcoholContent(2);
         test.setStatus(ApplicationStatus.NEEDS_CORRECTION);
         test.setSubmissionDate(LocalDate.of(2018, 2, 24));
         test.setApprovalDate(LocalDate.of(2018, 3, 2));
         storage.saveCOLA(test);
 
-        test.setId(1);
-
         List<COLA> infos = storage.getAllCOLAs();
 
         assertEquals(1, infos.size());
         assertTrue(infos.contains(test));
 
-        COLA test2 = new COLA("Brand2", AlcoholType.WINE, "654321", ProductSource.IMPORTED);
+        COLA test2 = new COLA(idGenerator.generateID(),"Brand2", AlcoholType.WINE, "654321", ProductSource.IMPORTED);
         test2.setAlcoholContent(5);
         storage.saveCOLA(test2);
-
-        test2.setId(2);
 
         infos = storage.getAllCOLAs();
 

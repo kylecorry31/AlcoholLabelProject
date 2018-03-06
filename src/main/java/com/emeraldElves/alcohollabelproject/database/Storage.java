@@ -1,6 +1,7 @@
 package com.emeraldElves.alcohollabelproject.database;
 
 import com.emeraldElves.alcohollabelproject.Data.*;
+import com.emeraldElves.alcohollabelproject.IDGenerator2.IDGenerator.IDCounter;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 
@@ -13,13 +14,15 @@ import java.util.List;
 public class Storage {
 
     private IDatabase database;
-    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
-            COLA.DB_BRAND_NAME, COLA.DB_ALCOHOL_TYPE,
+    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
+            COLA.DB_ID, COLA.DB_BRAND_NAME, COLA.DB_ALCOHOL_TYPE,
             COLA.DB_SERIAL_NUMBER, COLA.DB_ORIGIN,
             COLA.DB_ALCOHOL_CONTENT, COLA.DB_FANCIFUL_NAME,
             COLA.DB_SUBMISSION_DATE, COLA.DB_STATUS,
             COLA.DB_APPROVAL_DATE, COLA.DB_LABEL_IMAGE);
     private final String USER_VALUES = String.format("( %s, %s, %s )", User.DB_NAME, User.DB_PASSWORD, User.DB_USER_TYPE);
+    private final String COUNTER_VALUES = String.format("( %s, %s )", IDCounter.DB_COUNTER, IDCounter.DB_LAST_MODIFIED);
+
 
     private static final String DELIMITER = ":::";
 
@@ -34,6 +37,7 @@ public class Storage {
     // Insert
     public void saveCOLA(COLA info) {
         database.insert(COLA.DB_TABLE + ALCOHOL_VALUES, new String[]{
+                String.valueOf(info.getId()),
                 ApacheDerbyDatabase.addQuotes(info.getBrandName()),
                 ApacheDerbyDatabase.addQuotes(info.getType().toString()),
                 ApacheDerbyDatabase.addQuotes(info.getSerialNumber()),
@@ -55,9 +59,17 @@ public class Storage {
         });
     }
 
+    public void saveCounter(IDCounter counter){
+        database.insert(IDCounter.DB_TABLE + COUNTER_VALUES, new String[]{
+                String.valueOf(counter.getCount()),
+                ApacheDerbyDatabase.addQuotes(counter.getLastModified().toString()),
+        });
+    }
+
     // Update
     public void updateCOLA(COLA info) {
         String values[] = new String[]{
+                String.format("%s = %d", COLA.DB_ID, info.getId()),
                 String.format("%s = '%s'", COLA.DB_BRAND_NAME, info.getBrandName()),
                 String.format("%s = '%s'", COLA.DB_ALCOHOL_TYPE, info.getType().toString()),
                 String.format("%s = '%s'", COLA.DB_SERIAL_NUMBER, info.getSerialNumber()),
@@ -83,6 +95,15 @@ public class Storage {
         database.update(User.DB_TABLE, values, User.DB_ID + " = " + user.getId(), null);
     }
 
+    public void updateCounter(IDCounter counter){
+        String values[] = new String[]{
+            String.format("%s = %d", IDCounter.DB_COUNTER, counter.getCount()),
+            String.format("%s = '%s'", IDCounter.DB_LAST_MODIFIED, counter.getLastModified().toString()),
+        };
+
+        database.update(IDCounter.DB_TABLE, values, IDCounter.DB_ID + " = " + IDCounter.ID, null);
+    }
+
     // Delete
     public void deleteAlcoholInfo(COLA info) {
         database.delete(COLA.DB_TABLE, COLA.DB_ID + " = " + info.getId(), null);
@@ -92,6 +113,9 @@ public class Storage {
         database.delete(User.DB_TABLE, User.DB_ID + " = " + user.getId(), null);
     }
 
+    public void deleteCounter(IDCounter counter){
+        database.delete(IDCounter.DB_TABLE, IDCounter.DB_COUNTER + " = " + IDCounter.ID, null);
+    }
 
     // Get
     public List<COLA> getAllCOLAs() {
@@ -121,6 +145,11 @@ public class Storage {
     public List<User> getAllUsers() {
         ResultSet resultSet = database.query(User.DB_TABLE, null, null, null, null);
         return getUsers(resultSet);
+    }
+
+    public IDCounter getCounter(){
+        ResultSet resultSet = database.query(IDCounter.DB_TABLE, null, null, null, null);
+        return getCounter(resultSet);
     }
 
     // Result set parsing
@@ -157,8 +186,7 @@ public class Storage {
             LocalDate approvalDate = resultSet.getDate(COLA.DB_APPROVAL_DATE).toLocalDate();
             ILabelImage labelImage = new ProxyLabelImage(resultSet.getString(COLA.DB_LABEL_IMAGE));
 
-            COLA COLA = new COLA(brandName, type, serialNumber, origin);
-            COLA.setId(id);
+            COLA COLA = new COLA(id, brandName, type, serialNumber, origin);
             COLA.setAlcoholContent(alcoholContent);
             COLA.setFancifulName(fancifulName);
             COLA.setSubmissionDate(submissionDate);
@@ -210,13 +238,29 @@ public class Storage {
         return null;
     }
 
+    public IDCounter getCounter(ResultSet resultSet){
+        try {
+            if (resultSet == null || !resultSet.next()) {
+                return new IDCounter(-1, LocalDate.now());
+            }
+
+            long count = resultSet.getLong(IDCounter.DB_COUNTER);
+            LocalDate lastModified = resultSet.getDate(IDCounter.DB_LAST_MODIFIED).toLocalDate();
+
+            return new IDCounter(count, lastModified);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new IDCounter(-1, LocalDate.now());
+    }
+
 
     public void setDatabase(IDatabase database) {
         this.database = database;
         database.connect();
         if (!database.doesTableExist(COLA.DB_TABLE)) {
             database.createTable(COLA.DB_TABLE, new String[]{
-                    String.format("%s BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)", COLA.DB_ID),
+                    String.format("%s BIGINT PRIMARY KEY NOT NULL", COLA.DB_ID),
                     String.format("%s VARCHAR (128)", COLA.DB_BRAND_NAME),
                     String.format("%s VARCHAR (16)", COLA.DB_ALCOHOL_TYPE),
                     String.format("%s VARCHAR (6)", COLA.DB_SERIAL_NUMBER),
@@ -239,6 +283,16 @@ public class Storage {
                     String.format("%s VARCHAR (10)", User.DB_USER_TYPE),
             });
             System.out.println("Created table " + User.DB_TABLE);
+        }
+
+        if (!database.doesTableExist(IDCounter.DB_TABLE)) {
+            database.createTable(IDCounter.DB_TABLE, new String[]{
+                    String.format("%s BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)", IDCounter.DB_ID),
+                    String.format("%s BIGINT", IDCounter.DB_COUNTER),
+                    String.format("%s DATE", IDCounter.DB_LAST_MODIFIED),
+            });
+            saveCounter(new IDCounter(-1, LocalDate.now()));
+            System.out.println("Created table " + IDCounter.DB_TABLE);
         }
     }
 

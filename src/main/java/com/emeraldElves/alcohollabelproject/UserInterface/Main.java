@@ -25,34 +25,34 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         UISwitcher.getInstance().setMain(this);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationDetailPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationSubmissionPage.fxml"));
         Parent root = loader.load();
 //        UISwitcher.getInstance().setStage(primaryStage);
 //        UISwitcher.getInstance().switchToPage(UISwitcher.HOME_PAGE);
 //        primaryStage.setResizable(false);
 
 
-        ApplicationDetailController controller = loader.getController();
+//        ApplicationDetailController controller = loader.getController();
 
-        COLA cola = new COLA("Hollow Creek Moonshine", AlcoholType.DISTILLEDSPIRITS, "180001", ProductSource.DOMESTIC);
-        cola.setAlcoholContent(35);
-        cola.setFancifulName("Apple Pie");
-        cola.setId(1);
-        cola.setFormula("Nothing cool here");
-        cola.setSubmissionDate(LocalDate.now());
-        cola.setApprovalDate(LocalDate.now().plusDays(2));
-        cola.setLabelImage(new ProxyLabelImage("labeltest.jpg"));
-        cola.setStatus(ApplicationStatus.APPROVED);
+//        COLA cola = new COLA("Hollow Creek Moonshine", AlcoholType.DISTILLEDSPIRITS, "180001", ProductSource.DOMESTIC);
+//        cola.setAlcoholContent(35);
+//        cola.setFancifulName("Apple Pie");
+//        cola.setId(1);
+//        cola.setFormula("Nothing cool here");
+//        cola.setSubmissionDate(LocalDate.now());
+//        cola.setApprovalDate(LocalDate.now().plusDays(2));
+//        cola.setLabelImage(new ProxyLabelImage("labeltest.jpg"));
+//        cola.setStatus(ApplicationStatus.APPROVED);
+//
+//        storage.updateCOLA(cola);
 
-        storage.updateCOLA(cola);
-
-        controller.setAlcohol(storage.getCOLA(1));
+//        controller.setAlcohol(storage.getCOLA(1));
 
 //        HomeController controller = loader.getController();
 //        controller.init(this);
         primaryStage.setTitle("Alcohol Label Project");
         primaryStage.getIcons().add(new Image(("images/logo.png")));
-        root.getStylesheets().add("/style/material.css");
+        root.getStylesheets().add("/style/style.css");
         primaryStage.setScene(new Scene(root,1024,768));
         primaryStage.show();
         stage = primaryStage;
