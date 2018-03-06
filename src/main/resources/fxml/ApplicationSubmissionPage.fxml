@@ -28,7 +28,7 @@
          <children>
             <Label id="ttbID" fx:id="ttbID" layoutX="32.0" layoutY="612.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" text="TTB ID #18001001000000" />
             <JFXButton fx:id="submit" layoutX="412.0" layoutY="611.0" styleClass="button-raised" text="Submit" />
-            <ScrollPane id="custom-scroll-pane" fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1024.0" vvalue="1.0">
+            <ScrollPane id="custom-scroll-pane" fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1024.0">
                <content>
                   <VBox prefWidth="1024.0" spacing="48.0" styleClass="custom-vbox">
                      <children>

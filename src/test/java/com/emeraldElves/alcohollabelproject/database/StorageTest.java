@@ -44,6 +44,7 @@ public class StorageTest {
         test.setStatus(ApplicationStatus.NEEDS_CORRECTION);
         test.setSubmissionDate(LocalDate.of(2018, 2, 24));
         test.setApprovalDate(LocalDate.of(2018, 3, 2));
+        test.setApplicantID(10);
         storage.saveCOLA(test);
 
         List<COLA> infos = storage.getAllCOLAs();

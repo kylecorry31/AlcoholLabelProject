@@ -6,6 +6,8 @@ import com.emeraldElves.alcohollabelproject.COLASearch;
 import com.emeraldElves.alcohollabelproject.Data.*;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -185,39 +188,76 @@ public class HomeController implements IController {
             COLA recentApplication = alcohol.get(i);
             switch (i) {
                 case 0:
-//                    alc1.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getBrandName()));
+                    alc1.setOnMouseClicked(event -> {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationDetailPage.fxml"));
+                            Parent root = loader.load();
+                            ApplicationDetailController controller = loader.getController();
+                            controller.setAlcohol(recentApplication);
+                            alc1.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                     brand1.setText(recentApplication.getBrandName().toUpperCase());
                     fanciful1.setText(recentApplication.getFancifulName());
                     content1.setText(recentApplication.getAlcoholContent() + "%");
-//                    date1.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-//                    image1.setImage(recentApplication.getImage().display());
+                    date1.setText(recentApplication.getApprovalDate().toString());
+                    image1.setImage(recentApplication.getLabelImage().display());
                     ImageUtils.centerImage(image1);
                     break;
                 case 1:
-//                    alc2.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
-                    brand2.setText(recentApplication.getBrandName().toUpperCase());
+                    alc2.setOnMouseClicked(event -> {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationDetailPage.fxml"));
+                            Parent root = loader.load();
+                            ApplicationDetailController controller = loader.getController();
+                            controller.setAlcohol(recentApplication);
+                            alc1.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });                    brand2.setText(recentApplication.getBrandName().toUpperCase());
                     fanciful2.setText(recentApplication.getFancifulName());
                     content2.setText(recentApplication.getAlcoholContent() + "%");
-//                    date2.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-//                    image2.setImage(recentApplication.getImage().display());
+                    date2.setText(recentApplication.getApprovalDate().toString());
+                    image2.setImage(recentApplication.getLabelImage().display());
                     ImageUtils.centerImage(image2);
                     break;
                 case 2:
-//                    alc3.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
-                    brand3.setText(recentApplication.getBrandName().toUpperCase());
+                    alc3.setOnMouseClicked(event -> {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationDetailPage.fxml"));
+                            Parent root = loader.load();
+                            ApplicationDetailController controller = loader.getController();
+                            controller.setAlcohol(recentApplication);
+                            alc1.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });                    brand3.setText(recentApplication.getBrandName().toUpperCase());
                     fanciful3.setText(recentApplication.getFancifulName());
                     content3.setText(recentApplication.getAlcoholContent() + "%");
-//                    date3.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-//                    image3.setImage(recentApplication.getImage().display());
+                    date3.setText(recentApplication.getApprovalDate().toString());
+                    image3.setImage(recentApplication.getLabelImage().display());
                     ImageUtils.centerImage(image3);
                     break;
                 case 3:
-//                    alc4.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getApplication().getAlcohol().getBrandName()));
-                    brand4.setText(recentApplication.getBrandName().toUpperCase());
+                    alc4.setOnMouseClicked(event -> {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationDetailPage.fxml"));
+                            Parent root = loader.load();
+                            ApplicationDetailController controller = loader.getController();
+                            controller.setAlcohol(recentApplication);
+                            alc1.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });                    brand4.setText(recentApplication.getBrandName().toUpperCase());
                     fanciful4.setText(recentApplication.getFancifulName());
                     content4.setText(recentApplication.getAlcoholContent() + "%");
-//                    date4.setText(DateHelper.dateToString(recentApplication.getApplication().getSubmissionDate()));
-//                    image4.setImage(recentApplication.getImage().display());
+                    date4.setText(recentApplication.getApprovalDate().toString());
+                    image4.setImage(recentApplication.getLabelImage().display());
                     ImageUtils.centerImage(image4);
                     break;
             }

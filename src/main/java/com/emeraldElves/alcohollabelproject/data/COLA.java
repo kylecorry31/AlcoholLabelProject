@@ -18,6 +18,7 @@ public class COLA {
     public static final String DB_APPROVAL_DATE = "approval_date";
     public static final String DB_STATUS = "status";
     public static final String DB_LABEL_IMAGE = "label_image";
+    public static final String DB_APPLICANT_ID = "applicant_id";
     public static final String DB_ID = "id";
 
     public static final String DEFAULT_LABEL_IMAGE = "/images/noLabel.png";
@@ -35,6 +36,7 @@ public class COLA {
     private LocalDate approvalDate;
     private ApplicationStatus status;
     private ILabelImage labelImage;
+    private long applicantID;
 
     public COLA(long id, String brandName, AlcoholType type, String serialNumber, ProductSource origin) {
         this.brandName = brandName;
@@ -45,6 +47,7 @@ public class COLA {
         fancifulName = "";
         formula = "";
         alcoholContent = 0;
+        applicantID = -1;
         submissionDate = LocalDate.now();
         approvalDate = LocalDate.of(1990, 1, 1);
         status = ApplicationStatus.RECEIVED;
@@ -139,29 +142,38 @@ public class COLA {
         return labelImage.getFileName();
     }
 
+    public long getApplicantID() {
+        return applicantID;
+    }
+
+    public void setApplicantID(long applicantID) {
+        this.applicantID = applicantID;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        COLA that = (COLA) o;
-        return id == that.id &&
-                Double.compare(that.alcoholContent, alcoholContent) == 0 &&
-                Objects.equals(brandName, that.brandName) &&
-                type == that.type &&
-                Objects.equals(serialNumber, that.serialNumber) &&
-                origin == that.origin &&
-                Objects.equals(fancifulName, that.fancifulName) &&
-                Objects.equals(formula, that.formula) &&
-                Objects.equals(submissionDate, that.submissionDate) &&
-                Objects.equals(approvalDate, that.approvalDate) &&
-                status == that.status &&
-                Objects.equals(labelImage, that.labelImage);
+        COLA cola = (COLA) o;
+        return id == cola.id &&
+                Double.compare(cola.alcoholContent, alcoholContent) == 0 &&
+                applicantID == cola.applicantID &&
+                Objects.equals(brandName, cola.brandName) &&
+                type == cola.type &&
+                Objects.equals(serialNumber, cola.serialNumber) &&
+                origin == cola.origin &&
+                Objects.equals(fancifulName, cola.fancifulName) &&
+                Objects.equals(formula, cola.formula) &&
+                Objects.equals(submissionDate, cola.submissionDate) &&
+                Objects.equals(approvalDate, cola.approvalDate) &&
+                status == cola.status &&
+                Objects.equals(labelImage, cola.labelImage);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage);
+        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage, applicantID);
     }
 
     @Override
@@ -179,6 +191,7 @@ public class COLA {
                 ", approvalDate=" + approvalDate +
                 ", status=" + status +
                 ", labelImage=" + labelImage +
+                ", applicantID=" + applicantID +
                 '}';
     }
 }

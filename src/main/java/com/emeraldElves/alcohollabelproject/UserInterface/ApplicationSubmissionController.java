@@ -2,6 +2,7 @@ package com.emeraldElves.alcohollabelproject.UserInterface;
 
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ProductSource;
+import com.emeraldElves.alcohollabelproject.Data.ProxyLabelImage;
 import com.emeraldElves.alcohollabelproject.IDGenerator2.IDGenerator.TTBIDGenerator;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.Storage;
@@ -14,11 +15,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import org.apache.commons.io.FilenameUtils;
 import org.controlsfx.validation.ValidationResult;
 import org.controlsfx.validation.Validator;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -77,23 +81,17 @@ public class ApplicationSubmissionController implements Initializable{
 
     private File labelFile;
 
+    private long applicantID;
+
     public ApplicationSubmissionController(){
         validators = new LinkedList<>();
     }
 
-    public void submit(){
+    public void setApplicantID(long applicantID){
+        this.applicantID = applicantID;
+    }
 
-//        if(!isFilledOut(brandName) || !isFilledOut(serialNumber)){
-//            if(!isFilledOut(brandName)){
-//                // Brand name required
-//                Validator<JFXTextField> textFieldValidator = Vali
-//            }
-//
-//            if(!isFilledOut(serialNumber)){
-//                // Serial number required
-//            }
-//            return;
-//        }
+    public void submit(){
 
         boolean hasError = false;
 
@@ -129,6 +127,27 @@ public class ApplicationSubmissionController implements Initializable{
         cola.setFancifulName(fanciful_name);
         cola.setAlcoholContent(alcoholContentPercent);
         cola.setFormula(formula);
+        cola.setApplicantID(applicantID);
+
+        if(labelFile != null) {
+            Path imageSrc = Paths.get((labelFile.getPath()));
+            Path targetDir = Paths.get("Labels");
+            try {
+                Files.createDirectories(targetDir);//in case target directory didn't exist
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String fileName = String.format("%d.%s", id, FilenameUtils.getExtension(labelFile.getAbsolutePath()));
+            Path target = targetDir.resolve(fileName);
+            try {
+                Files.copy(imageSrc, target, StandardCopyOption.REPLACE_EXISTING);
+                cola.setLabelImage(new ProxyLabelImage(fileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
 
         Storage.getInstance().saveCOLA(cola); // TODO: replace this with higher up storage mechanism
 

@@ -14,12 +14,13 @@ import java.util.List;
 public class Storage {
 
     private IDatabase database;
-    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
+    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
             COLA.DB_ID, COLA.DB_BRAND_NAME, COLA.DB_ALCOHOL_TYPE,
             COLA.DB_SERIAL_NUMBER, COLA.DB_ORIGIN,
             COLA.DB_ALCOHOL_CONTENT, COLA.DB_FANCIFUL_NAME,
             COLA.DB_SUBMISSION_DATE, COLA.DB_STATUS,
-            COLA.DB_APPROVAL_DATE, COLA.DB_LABEL_IMAGE);
+            COLA.DB_APPROVAL_DATE, COLA.DB_LABEL_IMAGE,
+            COLA.DB_APPLICANT_ID);
     private final String USER_VALUES = String.format("( %s, %s, %s )", User.DB_NAME, User.DB_PASSWORD, User.DB_USER_TYPE);
     private final String COUNTER_VALUES = String.format("( %s, %s )", IDCounter.DB_COUNTER, IDCounter.DB_LAST_MODIFIED);
 
@@ -48,6 +49,7 @@ public class Storage {
                 ApacheDerbyDatabase.addQuotes(info.getStatus().toString()),
                 ApacheDerbyDatabase.addQuotes(info.getApprovalDate().toString()),
                 ApacheDerbyDatabase.addQuotes(info.getLabelImageFilename()),
+                String.valueOf(info.getApplicantID()),
         });
     }
 
@@ -80,6 +82,7 @@ public class Storage {
                 String.format("%s = '%s'", COLA.DB_STATUS, info.getStatus().toString()),
                 String.format("%s = '%s'", COLA.DB_APPROVAL_DATE, info.getApprovalDate().toString()),
                 String.format("%s = '%s'", COLA.DB_LABEL_IMAGE, info.getLabelImageFilename()),
+                String.format("%s = %d", COLA.DB_APPLICANT_ID, info.getApplicantID()),
         };
 
         database.update(COLA.DB_TABLE, values, COLA.DB_ID + " = " + info.getId(), null);
@@ -185,16 +188,18 @@ public class Storage {
             ApplicationStatus status = ApplicationStatus.valueOf(resultSet.getString(COLA.DB_STATUS));
             LocalDate approvalDate = resultSet.getDate(COLA.DB_APPROVAL_DATE).toLocalDate();
             ILabelImage labelImage = new ProxyLabelImage(resultSet.getString(COLA.DB_LABEL_IMAGE));
+            long applicantID = resultSet.getLong(COLA.DB_APPLICANT_ID);
 
-            COLA COLA = new COLA(id, brandName, type, serialNumber, origin);
-            COLA.setAlcoholContent(alcoholContent);
-            COLA.setFancifulName(fancifulName);
-            COLA.setSubmissionDate(submissionDate);
-            COLA.setStatus(status);
-            COLA.setApprovalDate(approvalDate);
-            COLA.setLabelImage(labelImage);
+            COLA cola = new COLA(id, brandName, type, serialNumber, origin);
+            cola.setAlcoholContent(alcoholContent);
+            cola.setFancifulName(fancifulName);
+            cola.setSubmissionDate(submissionDate);
+            cola.setStatus(status);
+            cola.setApprovalDate(approvalDate);
+            cola.setLabelImage(labelImage);
+            cola.setApplicantID(applicantID);
 
-            return COLA;
+            return cola;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -271,6 +276,7 @@ public class Storage {
                     String.format("%s VARCHAR (16)", COLA.DB_STATUS),
                     String.format("%s DATE", COLA.DB_APPROVAL_DATE),
                     String.format("%s VARCHAR (256)", COLA.DB_LABEL_IMAGE),
+                    String.format("%s BIGINT", COLA.DB_APPLICANT_ID),
             });
             System.out.println("Created table " + COLA.DB_TABLE);
         }

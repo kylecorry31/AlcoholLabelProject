@@ -48,8 +48,8 @@ public class Main extends Application {
 
 //        controller.setAlcohol(storage.getCOLA(1));
 
-//        HomeController controller = loader.getController();
-//        controller.init(this);
+        ApplicationSubmissionController controller = loader.getController();
+        controller.setApplicantID(10);
         primaryStage.setTitle("Alcohol Label Project");
         primaryStage.getIcons().add(new Image(("images/logo.png")));
         root.getStylesheets().add("/style/style.css");
