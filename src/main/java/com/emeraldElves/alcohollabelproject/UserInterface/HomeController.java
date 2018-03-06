@@ -4,6 +4,7 @@ package com.emeraldElves.alcohollabelproject.UserInterface;
 import com.emeraldElves.alcohollabelproject.Authenticator;
 import com.emeraldElves.alcohollabelproject.COLASearch;
 import com.emeraldElves.alcohollabelproject.Data.*;
+import com.emeraldElves.alcohollabelproject.data.COLA;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -92,7 +93,7 @@ public class HomeController implements IController {
 
     private COLASearch search;
 
-    private List<AlcoholInfo> alcohol;
+    private List<COLA> alcohol;
 
     public void aboutProject(){
         main.loadFXML("/fxml/AboutPage.fxml");
@@ -102,11 +103,11 @@ public class HomeController implements IController {
         mostRecentSubmissions = new ArrayList<>();
         search = new COLASearch();
         submitted = search.searchRecentApplications(4);
-        AlcoholInfo info = new AlcoholInfo("Drunk", AlcoholType.WINE, "12345678", ProductSource.DOMESTIC);
+        COLA info = new COLA("Drunk", AlcoholType.WINE, "12345678", ProductSource.DOMESTIC);
         info.setAlcoholContent(50);
         info.setFancifulName("Drug$");
-        Main.storage.saveAlcoholInfo(info);
-        alcohol = Main.storage.getAllAlcoholInfo();
+        Main.storage.saveCOLA(info);
+        alcohol = Main.storage.getAllCOLAs();
     }
 
 
@@ -181,7 +182,7 @@ public class HomeController implements IController {
     public void init(Main main) {
         this.main = main;
         for (int i = 0; i < alcohol.size(); i++) {
-            AlcoholInfo recentApplication = alcohol.get(i);
+            COLA recentApplication = alcohol.get(i);
             switch (i) {
                 case 0:
 //                    alc1.setOnMouseClicked(event -> main.loadFXML("/fxml/DetailedSearchPage.fxml", recentApplication, recentApplication.getBrandName()));

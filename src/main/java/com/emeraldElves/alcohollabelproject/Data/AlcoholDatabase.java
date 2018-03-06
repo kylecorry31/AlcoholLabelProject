@@ -5,6 +5,7 @@ import com.emeraldElves.alcohollabelproject.Applicant;
 import com.emeraldElves.alcohollabelproject.IDGenerator.ApplicationIDGenerator;
 import com.emeraldElves.alcohollabelproject.IDGenerator.TTBIDGenerator;
 import com.emeraldElves.alcohollabelproject.Log;
+import com.emeraldElves.alcohollabelproject.data.COLA;
 //import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.ResultSet;
@@ -129,7 +130,7 @@ public class AlcoholDatabase {
      * @return A list of approved alcohols containing the brandName ordered by time approved.
      */
     public List<SubmittedApplication> searchByBrandName(String brandName) {
-        ResultSet results = db.select("*", "AlcoholInfo", "UPPER(brandName) LIKE UPPER('%" + brandName + "%')");
+        ResultSet results = db.select("*", "COLA", "UPPER(brandName) LIKE UPPER('%" + brandName + "%')");
 
         List<SubmittedApplication> applications = getApplicationsFromResultSet(results);
 
@@ -147,7 +148,7 @@ public class AlcoholDatabase {
      * @return A list of approved alcohols containing the brandName ordered by time approved.
      */
     public List<SubmittedApplication> searchByFancifulName(String fancifulName) {
-        ResultSet results = db.select("*", "AlcoholInfo", "UPPER(fancifulName) LIKE UPPER('%" + fancifulName + "%')");
+        ResultSet results = db.select("*", "COLA", "UPPER(fancifulName) LIKE UPPER('%" + fancifulName + "%')");
 
         List<SubmittedApplication> applications = getApplicationsFromResultSet(results);
 
@@ -175,7 +176,7 @@ public class AlcoholDatabase {
         //getting all info needed from submitted application into variables
         ApplicationStatus status = application.getStatus();
         ApplicationInfo info = application.getApplication();
-        AlcoholInfo alcInfo = info.getAlcohol();
+        COLA alcInfo = info.getAlcohol();
         ManufacturerInfo manInfo = info.getManufacturer();
 
         //Image name
@@ -246,7 +247,7 @@ public class AlcoholDatabase {
                         + manInfo.getEmailAddress().getEmailAddress() + "'", "applicationID = " + application.getApplicationID());
 
                 if (alcInfo.getType() == AlcoholType.WINE) {
-                    db.update("AlcoholInfo", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
+                    db.update("COLA", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
                                     + alcInfo.getFancifulName() + "', brandName = '" //fanciful name
                                     + alcInfo.getBrandName() + "', origin = " //brand name
                                     + alcInfo.getOrigin().getValue() + ", type = " //origin: still not sure how it handles enums...
@@ -258,7 +259,7 @@ public class AlcoholDatabase {
                                     + "'"
                             , "applicationID = " + application.getApplicationID());
                 } else {
-                    db.update("AlcoholInfo", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
+                    db.update("COLA", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
                                     + alcInfo.getFancifulName() + "', brandName = '" //fanciful name
                                     + alcInfo.getBrandName() + "', origin = " //brand name
                                     + alcInfo.getOrigin().getValue() + ", type = " //origin: still not sure how it handles enums...
@@ -311,7 +312,7 @@ public class AlcoholDatabase {
                 if (!worked) {
                     return false;
                 }//didn't add to at least 1 table, so return false
-                //AlcoholInfo
+                //COLA
 
 
                 if (alcInfo.getType() == AlcoholType.WINE) {
@@ -327,7 +328,7 @@ public class AlcoholDatabase {
                                     + 1990 + ", '" //vintage year: see above comment
                                     + " " + "', '" //grape vaietal
                                     + " " + "'" //appalation
-                            , "AlcoholInfo");
+                            , "COLA");
                 } else {
                     worked = db.insert(appID + ", '"
                                     + alcInfo.getAlcoholContent() + "', '" //alcohol content
@@ -337,7 +338,7 @@ public class AlcoholDatabase {
                                     + alcInfo.getType().getValue() + ", '"
                                     + alcInfo.getFormula() + "', '" //formula
                                     + alcInfo.getSerialNumber() + "'"
-                            , "AlcoholInfo (applicationID, alcoholContent, fancifulName, brandName, origin, type, formula, serialNumber)");
+                            , "COLA (applicationID, alcoholContent, fancifulName, brandName, origin, type, formula, serialNumber)");
                 }
 
                 if (!worked) {
@@ -359,7 +360,7 @@ public class AlcoholDatabase {
         //getting all info needed from submitted application into variables
         ApplicationStatus status = application.getStatus();
         ApplicationInfo info = application.getApplication();
-        AlcoholInfo alcInfo = info.getAlcohol();
+        COLA alcInfo = info.getAlcohol();
         ManufacturerInfo manInfo = info.getManufacturer();
 
 
@@ -421,7 +422,7 @@ public class AlcoholDatabase {
                 }
 
                 if (alcInfo.getType() == AlcoholType.WINE) {
-                    worked = db.update("AlcoholInfo", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
+                    worked = db.update("COLA", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
                                     + alcInfo.getFancifulName() + "', brandName = '" //fanciful name
                                     + alcInfo.getBrandName() + "', origin = " //brand name
                                     + alcInfo.getOrigin().getValue() + ", type = " //origin: still not sure how it handles enums...
@@ -437,7 +438,7 @@ public class AlcoholDatabase {
                         return false;
                     }
                 } else {
-                    worked = db.update("AlcoholInfo", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
+                    worked = db.update("COLA", "alcoholContent = '" + alcInfo.getAlcoholContent() + "', fancifulName = '" //alcohol content
                                     + alcInfo.getFancifulName() + "', brandName = '" //fanciful name
                                     + alcInfo.getBrandName() + "', origin = " //brand name
                                     + alcInfo.getOrigin().getValue() + ", type = " //origin: still not sure how it handles enums...
@@ -468,7 +469,7 @@ public class AlcoholDatabase {
         //making application type
         ApplicationType appType = application.getApplicationType();
 
-        AlcoholInfo alcInfo = application.getAlcoholInfo();
+        COLA alcInfo = application.getAlcoholInfo();
 
         //Image name
         String image;
@@ -597,7 +598,7 @@ public class AlcoholDatabase {
         //making application type
         ApplicationType appType = application.getApplication().getApplicationType();
 
-        AlcoholInfo alcInfo = application.getApplication().getAlcohol();
+        COLA alcInfo = application.getApplication().getAlcohol();
 
         //Image name
         String image;
@@ -729,7 +730,7 @@ public class AlcoholDatabase {
         List<SavedApplication> saveList = new ArrayList<SavedApplication>();
         //TODO fill in save list
         ApplicationType applicationType;
-        AlcoholInfo alcoholInfo;
+        COLA alcoholInfo;
         try {
             while (results.next()) {
                 Boolean labelApproval = results.getBoolean("labelApproval");
@@ -752,7 +753,7 @@ public class AlcoholDatabase {
                 long applicationID = results.getLong("applicationID");
 
                 applicationType = new ApplicationType(labelApproval, stateOnly, bottleCapacity);
-                alcoholInfo = new AlcoholInfo(brandName,
+                alcoholInfo = new COLA(brandName,
                         AlcoholType.fromInt(type),
                         serialNumber, ProductSource.fromInt(origin));
                 // TODO: Wine info
@@ -778,7 +779,7 @@ public class AlcoholDatabase {
      * @return A list of the most recent unapproved applications ordered from most recent to least recent.
      */
     public List<SubmittedApplication> getMostRecentUnapproved(int numApplications) {
-        ResultSet results = db.selectOrdered("*", "SubmittedApplications", "status = " + ApplicationStatus.PENDINGREVIEW.getValue(), "submissionTime ASC");
+        ResultSet results = db.selectOrdered("*", "SubmittedApplications", "status = " + ApplicationStatus.RECEIVED.getValue(), "submissionTime ASC");
         return getApplicationsFromResultSet(results, numApplications);
     }
 
@@ -801,7 +802,7 @@ public class AlcoholDatabase {
 
                 ManufacturerInfo manufacturerInfo = getManufacturerInfoByID(id);
 
-                AlcoholInfo alcoholInfo = getAlcoholInfoByID(id);
+                COLA alcoholInfo = getAlcoholInfoByID(id);
 
 
                 ApplicationInfo info = new ApplicationInfo(subDate, manufacturerInfo, alcoholInfo,
@@ -866,7 +867,7 @@ public class AlcoholDatabase {
 
 //        application.getApplication().getAlcohol().getWineInfo().vintageYear = vintageYear;
 
-        return db.update("AlcoholInfo", "vintageYear = " + vintageYear, "applicationID = " + application.getApplicationID());
+        return db.update("COLA", "vintageYear = " + vintageYear, "applicationID = " + application.getApplicationID());
     }
 
     public boolean changePH(SubmittedApplication application, double pH) {
@@ -876,13 +877,13 @@ public class AlcoholDatabase {
 
 //        application.getApplication().getAlcohol().getWineInfo().pH = pH;
 
-        return db.update("AlcoholInfo", "pH = " + pH, "applicationID = " + application.getApplicationID());
+        return db.update("COLA", "pH = " + pH, "applicationID = " + application.getApplicationID());
     }
 
     public boolean changeAlcoholContent(SubmittedApplication application, String alcoholContent) {
         application.getApplication().getAlcohol().setAlcoholContent(Double.valueOf(alcoholContent));
 
-        return db.update("AlcoholInfo", "alcoholContent = '" + alcoholContent + "'", "applicationID = " + application.getApplicationID());
+        return db.update("COLA", "alcoholContent = '" + alcoholContent + "'", "applicationID = " + application.getApplicationID());
 
     }
 
@@ -897,8 +898,8 @@ public class AlcoholDatabase {
         return applications.get(pos);
     }
 
-    private AlcoholInfo getAlcoholInfoByID(long applicationID) {
-        ResultSet alcoholResult = db.select("*", "AlcoholInfo", "applicationID = " + applicationID);
+    private COLA getAlcoholInfoByID(long applicationID) {
+        ResultSet alcoholResult = db.select("*", "COLA", "applicationID = " + applicationID);
         try {
             if (alcoholResult.next()) {
                 AlcoholType type = AlcoholType.fromInt(alcoholResult.getInt("type"));
@@ -910,7 +911,7 @@ public class AlcoholDatabase {
 //                            alcoholResult.getString("varietals"), alcoholResult.getString("wineAppellation"));
 //                    return info;
                 } else {
-                    return new AlcoholInfo(alcoholResult.getString("brandName"),
+                    return new COLA(alcoholResult.getString("brandName"),
                             type,
                             alcoholResult.getString("serialNumber"), ProductSource.fromInt(alcoholResult.getInt("origin")));
                 }
@@ -943,7 +944,7 @@ public class AlcoholDatabase {
     }
 
     public List<SubmittedApplication> getAssignedApplications(String ttbAgentUsername) {
-        ResultSet results = db.selectOrdered("*", "SubmittedApplications", "status = " + ApplicationStatus.PENDINGREVIEW.getValue() + " AND TTBUsername = '" + ttbAgentUsername + "'", "submissionTime ASC");
+        ResultSet results = db.selectOrdered("*", "SubmittedApplications", "status = " + ApplicationStatus.RECEIVED.getValue() + " AND TTBUsername = '" + ttbAgentUsername + "'", "submissionTime ASC");
 
         return getApplicationsFromResultSet(results);
     }
@@ -964,17 +965,17 @@ public class AlcoholDatabase {
         db.setMaxRows(rows);
         String typeWhere = "";
         if (hideBeer) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.BEER.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.BEER.getValue();
         }
 
         if (hideWine) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.WINE.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.WINE.getValue();
         }
 
         if (hideSpirits) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.DISTILLEDSPIRITS.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.DISTILLEDSPIRITS.getValue();
         }
-        ResultSet results = db.select("SubmittedApplications.applicationId, AlcoholInfo.type, AlcoholInfo.brandName, AlcoholInfo.fancifulName", "SubmittedApplications INNER JOIN AlcoholInfo ON SubmittedApplications.applicationId=AlcoholInfo.applicationId", "SubmittedApplications.status = " + ApplicationStatus.APPROVED.getValue() + typeWhere + " AND (UPPER(brandName)  LIKE UPPER('%" + name + "%') OR UPPER(fancifulName) LIKE UPPER('%" + name + "%'))");
+        ResultSet results = db.select("SubmittedApplications.applicationId, COLA.type, COLA.brandName, COLA.fancifulName", "SubmittedApplications INNER JOIN COLA ON SubmittedApplications.applicationId=COLA.applicationId", "SubmittedApplications.status = " + ApplicationStatus.APPROVED.getValue() + typeWhere + " AND (UPPER(brandName)  LIKE UPPER('%" + name + "%') OR UPPER(fancifulName) LIKE UPPER('%" + name + "%'))");
 
         return getApplicationsFromResultSet(results);
     }
@@ -983,25 +984,25 @@ public class AlcoholDatabase {
         db.setMaxRows(100);
         String typeWhere = "";
         if (hideBeer) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.BEER.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.BEER.getValue();
         }
 
         if (hideWine) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.WINE.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.WINE.getValue();
         }
 
         if (hideSpirits) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.DISTILLEDSPIRITS.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.DISTILLEDSPIRITS.getValue();
         }
-        ResultSet results = db.select("SubmittedApplications.applicationId, AlcoholInfo.type", "SubmittedApplications INNER JOIN AlcoholInfo ON SubmittedApplications.applicationId=AlcoholInfo.applicationId", "SubmittedApplications.status = " + ApplicationStatus.APPROVED.getValue() + typeWhere);
+        ResultSet results = db.select("SubmittedApplications.applicationId, COLA.type", "SubmittedApplications INNER JOIN COLA ON SubmittedApplications.applicationId=COLA.applicationId", "SubmittedApplications.status = " + ApplicationStatus.APPROVED.getValue() + typeWhere);
         return getApplicationsFromResultSet(results);
     }
 
     public List<SubmittedApplication> advancedSearch(String brandName, String fancifulName, boolean wantBeer, boolean wantWine, boolean wantSpirits, String email, String address, Date startDate, Date endDate, double contentMin, double contentMax) {
         db.setMaxRows(100);
 
-        String brandWhere = " AND UPPER(AlcoholInfo.brandName) LIKE UPPER('%" + brandName + "%')";
-        String fancifulWhere = " AND UPPER(AlcoholInfo.fancifulName) LIKE UPPER('%" + fancifulName + "%')";
+        String brandWhere = " AND UPPER(COLA.brandName) LIKE UPPER('%" + brandName + "%')";
+        String fancifulWhere = " AND UPPER(COLA.fancifulName) LIKE UPPER('%" + fancifulName + "%')";
 
         //String emailWhere = " AND UPPER(emailAddress)  LIKE UPPER('%" + email + "%')";
 
@@ -1013,17 +1014,17 @@ public class AlcoholDatabase {
 
         String typeWhere = "";
         if (!wantBeer) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.BEER.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.BEER.getValue();
         }
 
         if (!wantWine) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.WINE.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.WINE.getValue();
         }
 
         if (!wantSpirits) {
-            typeWhere += " AND AlcoholInfo.type <> " + AlcoholType.DISTILLEDSPIRITS.getValue();
+            typeWhere += " AND COLA.type <> " + AlcoholType.DISTILLEDSPIRITS.getValue();
         }
-        ResultSet results = db.select("SubmittedApplications.applicationId, AlcoholInfo.type, AlcoholInfo.brandName, AlcoholInfo.fancifulName", "SubmittedApplications INNER JOIN AlcoholInfo ON SubmittedApplications.applicationId=AlcoholInfo.applicationId",
+        ResultSet results = db.select("SubmittedApplications.applicationId, COLA.type, COLA.brandName, COLA.fancifulName", "SubmittedApplications INNER JOIN COLA ON SubmittedApplications.applicationId=COLA.applicationId",
                 "SubmittedApplications.status = " + ApplicationStatus.APPROVED.getValue() + typeWhere + brandWhere + fancifulWhere /*+ emailWhere + addressWhere*/ + dateWhere);
         return getApplicationsFromResultSet(results);
 

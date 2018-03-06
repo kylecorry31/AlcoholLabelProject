@@ -75,7 +75,7 @@
 //    private String alcName;
 //    private String brandName;
 //    private String alcContent;
-//    private AlcoholInfo.Wine wineType = null; //null if type is not wine
+//    private COLA.Wine wineType = null; //null if type is not wine
 //    private String formula;
 //    private String serialNum;
 //    private String extraInfo;
@@ -154,7 +154,7 @@
 //        //TODO set field of image
 //        this.savedApplication = savedApplication;
 //        ApplicationType applicationType = savedApplication.getApplicationType();
-//        AlcoholInfo alcoholInfo = savedApplication.getAlcoholInfo();
+//        COLA alcoholInfo = savedApplication.getCOLA();
 //        String extraInfo = savedApplication.getExtraInfo();
 //        String imageURL = (savedApplication.getImage().getFileName());
 //
@@ -316,7 +316,7 @@
 //                        varietal = varietalText.getText();
 //                    if (!appellationText.getText().isEmpty())
 //                        appellation = appellationText.getText();
-//                    wineType = new AlcoholInfo.Wine(pH, vintageYr, varietal, appellation);
+//                    wineType = new COLA.Wine(pH, vintageYr, varietal, appellation);
 //                }
 //
 //                //Checking if the product is domestic or imported
@@ -350,7 +350,7 @@
 //                } else extraInfo = extraInfoText.getText();
 //
 //                //creates alcohol info
-//                AlcoholInfo appAlcoholInfo = new AlcoholInfo(alcContent, alcName, brandName, pSource, alcType, wineType, serialNum, formula);
+//                COLA appAlcoholInfo = new COLA(alcContent, alcName, brandName, pSource, alcType, wineType, serialNum, formula);
 //
 //                //sets the date value
 //                Date newDate = DateHelper.getDate(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonthValue() - 1, datePicker.getValue().getYear());
@@ -368,7 +368,7 @@
 //                Applicant applicant = new Applicant(appList);
 //
 //                //Create a SubmittedApplication
-//                SubmittedApplication newApp = new SubmittedApplication(appInfo, ApplicationStatus.PENDINGREVIEW, applicant);
+//                SubmittedApplication newApp = new SubmittedApplication(appInfo, ApplicationStatus.RECEIVED, applicant);
 //                if (application != null)
 //                    newApp.setApplicationID(application.getApplicationID());
 //                applicant.addSubmittedApp(newApp);
@@ -411,7 +411,7 @@
 //        SavedApplication app; // app to be submitted to database
 //        //Things to add into SavedApplication
 //        ApplicationType appType;
-//        AlcoholInfo alcoholInfo;
+//        COLA alcoholInfo;
 //        String extraInfo;
 //
 //        //appType
@@ -432,7 +432,7 @@
 //        ProductSource origin;
 //        String serialNumber;
 //        String formula;
-//        AlcoholInfo.Wine wineInfo;
+//        COLA.Wine wineInfo;
 //        AlcoholType alcoholType;
 //        //alcoholContent
 //        if(alcoholContentField.getText().isEmpty()){ alcoholContent = "";}
@@ -498,9 +498,9 @@
 //            varietal = "";
 //            appellation = "";
 //        }
-//        wineInfo = new AlcoholInfo.Wine(pH,vintageYear,varietal,appellation);
+//        wineInfo = new COLA.Wine(pH,vintageYear,varietal,appellation);
 //        //END wineInfo
-//        alcoholInfo = new AlcoholInfo(alcoholContent,fanciful,brand,origin,alcoholType,wineInfo,serialNumber,formula);
+//        alcoholInfo = new COLA(alcoholContent,fanciful,brand,origin,alcoholType,wineInfo,serialNumber,formula);
 //        //END alcoholInfo
 //
 //        //extra info

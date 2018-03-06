@@ -1,19 +1,21 @@
 package com.emeraldElves.alcohollabelproject.Data;
 
+import com.emeraldElves.alcohollabelproject.data.COLA;
+
 /**
  * Created by Dan on 4/23/2017.
  */
 public class SavedApplication {
 
     private ApplicationType applicationType;
-    private AlcoholInfo alcoholInfo;
+    private COLA alcoholInfo;
     private String extraInfo;
     private LabelImage image;
     private long applicationID = -1;
 
-    public SavedApplication(ApplicationType applicationType, AlcoholInfo alcoholInfo, String extraInfo, LabelImage imageURL) {
+    public SavedApplication(ApplicationType applicationType, COLA COLA, String extraInfo, LabelImage imageURL) {
         this.applicationType = applicationType;
-        this.alcoholInfo = alcoholInfo;
+        this.alcoholInfo = COLA;
         this.extraInfo = extraInfo;
         this.image = imageURL;
     }
@@ -22,7 +24,7 @@ public class SavedApplication {
         return applicationType;
     }
 
-    public AlcoholInfo getAlcoholInfo() {
+    public COLA getAlcoholInfo() {
         return alcoholInfo;
     }
 

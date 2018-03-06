@@ -87,7 +87,7 @@ public class UpdateApplicationController implements IController{
 //    private ProductSource pSource;
 //    private AlcoholType alcType;
 //    private String alcName, brandName, alcContent;
-//    private AlcoholInfo.Wine wineType = null;
+//    private COLA.Wine wineType = null;
 //    private String formula, serialNum, extraInfo;
 //    private File file;
 //
@@ -241,7 +241,7 @@ public class UpdateApplicationController implements IController{
 //                varietal = varietalText.getText();
 //            if (!appellationText.getText().isEmpty())
 //                appellation = appellationText.getText();
-//            wineType = new AlcoholInfo.Wine(pH, vintageYr, varietal, appellation);
+//            wineType = new COLA.Wine(pH, vintageYr, varietal, appellation);
 //        }
 //
 //        if (pSourceSelect.getValue().equals("Domestic")) {
@@ -282,7 +282,7 @@ public class UpdateApplicationController implements IController{
 //
 //
 //
-//        AlcoholInfo appAlcoholInfo = new AlcoholInfo(alcContent, alcName, brandName, pSource, alcType, wineType, serialNum, formula);
+//        COLA appAlcoholInfo = new COLA(alcContent, alcName, brandName, pSource, alcType, wineType, serialNum, formula);
 //        ManufacturerInfo appManInfo = new ManufacturerInfo(applicant.getApplicant().getNamefromDB(username), address, "company", "" + representativeID,
 //                permitNum, phoneNum, emailAddress);
 //        Date newDate= DateHelper.getDate(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonthValue() - 1, datePicker.getValue().getYear());

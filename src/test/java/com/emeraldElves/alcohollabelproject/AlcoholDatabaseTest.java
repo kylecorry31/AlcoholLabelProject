@@ -18,7 +18,7 @@ public class AlcoholDatabaseTest {
         try {
             db.dropTable("SubmittedApplications");
             db.dropTable("ManufacturerInfo");
-            db.dropTable("AlcoholInfo");
+            db.dropTable("COLA");
             db.dropTable("TTBAgentLogin");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class AlcoholDatabaseTest {
 
     @Test
     public void testSubmitApplication() {
-        AlcoholInfo alc = new AlcoholInfo(5, "name", "brand", ProductSource.DOMESTIC
+        COLA alc = new COLA(5, "name", "brand", ProductSource.DOMESTIC
                 , AlcoholType.BEER, null); //alcohol info for test
         Date subDate = new Date(1997, 5, 20);
         ManufacturerInfo man = new ManufacturerInfo("dan", "WPI", "Dell-EMC", 69, 96, new PhoneNumber("5088888888"),
@@ -43,13 +43,13 @@ public class AlcoholDatabaseTest {
 
         setUpAgents();
 
-        SubmittedApplication test = new SubmittedApplication(appInfo, ApplicationStatus.PENDINGREVIEW, applicant);
+        SubmittedApplication test = new SubmittedApplication(appInfo, ApplicationStatus.RECEIVED, applicant);
         assertTrue(alcoholDatabase.submitApplication(test, "Admin1"));
         assertTrue(alcoholDatabase.submitApplication(test, "Admin1"));
 
 
-        AlcoholInfo alc2 = new AlcoholInfo(5, "name", "brand", ProductSource.DOMESTIC
-                , AlcoholType.WINE, new AlcoholInfo.Wine(1.3, 1998, "asdf", "asfd")); //alcohol info for test
+        COLA alc2 = new COLA(5, "name", "brand", ProductSource.DOMESTIC
+                , AlcoholType.WINE, new COLA.Wine(1.3, 1998, "asdf", "asfd")); //alcohol info for test
         Date subDate2 = new Date(2000, 10, 20);
         ManufacturerInfo man2 = new ManufacturerInfo("dan", "WPI", "Dell-EMC", 69, 96, new PhoneNumber("5088888888"),
                 new EmailAddress("dbmckay@wpi.edu"));//manufacturer info for test
@@ -59,7 +59,7 @@ public class AlcoholDatabaseTest {
 
         Applicant applicant2 = new Applicant(null);
 
-        SubmittedApplication test2 = new SubmittedApplication(appInfo2, ApplicationStatus.PENDINGREVIEW, applicant2);
+        SubmittedApplication test2 = new SubmittedApplication(appInfo2, ApplicationStatus.RECEIVED, applicant2);
 
 
         assertTrue(alcoholDatabase.submitApplication(test2, "Admin1"));

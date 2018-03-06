@@ -1,10 +1,13 @@
 package com.emeraldElves.alcohollabelproject.database;
 
 import com.emeraldElves.alcohollabelproject.Data.*;
+import com.emeraldElves.alcohollabelproject.data.COLA;
+import com.emeraldElves.alcohollabelproject.data.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -23,33 +26,36 @@ public class StorageTest {
 
     @After
     public void teardown(){
-        database.dropTable(AlcoholInfo.DB_TABLE);
+        database.dropTable(COLA.DB_TABLE);
         database.dropTable(User.DB_TABLE);
         database.disconnect();
     }
 
     @Test
     public void testAlcohol(){
-        assertEquals(0, storage.getAllAlcoholInfo().size());
+        assertEquals(0, storage.getAllCOLAs().size());
 
-        AlcoholInfo test = new AlcoholInfo("Brand", AlcoholType.BEER, "12345678", ProductSource.DOMESTIC);
+        COLA test = new COLA("Brand", AlcoholType.BEER, "345678", ProductSource.DOMESTIC);
         test.setAlcoholContent(2);
-        storage.saveAlcoholInfo(test);
+        test.setStatus(ApplicationStatus.NEEDS_CORRECTION);
+        test.setSubmissionDate(LocalDate.of(2018, 2, 24));
+        test.setApprovalDate(LocalDate.of(2018, 3, 2));
+        storage.saveCOLA(test);
 
         test.setId(1);
 
-        List<AlcoholInfo> infos = storage.getAllAlcoholInfo();
+        List<COLA> infos = storage.getAllCOLAs();
 
         assertEquals(1, infos.size());
         assertTrue(infos.contains(test));
 
-        AlcoholInfo test2 = new AlcoholInfo("Brand2", AlcoholType.WINE, "87654321", ProductSource.IMPORTED);
+        COLA test2 = new COLA("Brand2", AlcoholType.WINE, "654321", ProductSource.IMPORTED);
         test2.setAlcoholContent(5);
-        storage.saveAlcoholInfo(test2);
+        storage.saveCOLA(test2);
 
         test2.setId(2);
 
-        infos = storage.getAllAlcoholInfo();
+        infos = storage.getAllCOLAs();
 
         assertEquals(2, infos.size());
         assertTrue(infos.contains(test));
@@ -58,21 +64,21 @@ public class StorageTest {
         test2.setAlcoholContent(10);
         test.setFancifulName("Fanciful");
 
-        storage.updateAlcoholInfo(test2);
-        storage.updateAlcoholInfo(test);
+        storage.updateCOLA(test2);
+        storage.updateCOLA(test);
 
-        infos = storage.getAllAlcoholInfo();
+        infos = storage.getAllCOLAs();
 
         assertEquals(2, infos.size());
         assertTrue(infos.contains(test));
         assertTrue(infos.contains(test2));
 
-        AlcoholInfo info = storage.getAlcoholInfo(test.getId());
+        COLA info = storage.getCOLA(test.getId());
         assertEquals(test, info);
 
         storage.deleteAlcoholInfo(test);
 
-        infos = storage.getAllAlcoholInfo();
+        infos = storage.getAllCOLAs();
 
         assertEquals(1, infos.size());
         assertTrue(infos.contains(test2));

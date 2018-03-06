@@ -113,7 +113,7 @@ public class Storage {
         }
 
         try {
-            database.createTable("AlcoholInfo", new Database.TableField("applicationID", "BIGINT UNIQUE NOT NULL"),
+            database.createTable("COLA", new Database.TableField("applicationID", "BIGINT UNIQUE NOT NULL"),
                     new Database.TableField("alcoholContent", "VARCHAR (255)"),
                     new Database.TableField("fancifulName", "VARCHAR (255)"),
                     new Database.TableField("brandName", "VARCHAR (10000) NOT NULL"),
@@ -125,9 +125,9 @@ public class Storage {
                     new Database.TableField("vintageYear", "INTEGER"),
                     new Database.TableField("varietals", "VARCHAR (255)"),
                     new Database.TableField("wineAppellation", "VARCHAR (255)"));
-            Log.console("Created new AlcoholInfo table");
+            Log.console("Created new COLA table");
         } catch (SQLException e) {
-            Log.console("Used existing AlcoholInfo table");
+            Log.console("Used existing COLA table");
         }
         try{
             database.createTable("NewApplicant",
@@ -500,8 +500,8 @@ public class Storage {
         }
 
         try {
-            db.dropTable("AlcoholInfo");
-            db.createTable("AlcoholInfo", new Database.TableField("applicationID", "BIGINT UNIQUE NOT NULL"),
+            db.dropTable("COLA");
+            db.createTable("COLA", new Database.TableField("applicationID", "BIGINT UNIQUE NOT NULL"),
                     new Database.TableField("alcoholContent", "VARCHAR (255)"),
                     new Database.TableField("fancifulName", "VARCHAR (255)"),
                     new Database.TableField("brandName", "VARCHAR (10000) NOT NULL"),
@@ -513,9 +513,9 @@ public class Storage {
                     new Database.TableField("vintageYear", "INTEGER"),
                     new Database.TableField("varietals", "VARCHAR (255)"),
                     new Database.TableField("wineAppellation", "VARCHAR (255)"));
-            Log.console("Created new AlcoholInfo table");
+            Log.console("Created new COLA table");
         } catch (SQLException e) {
-            Log.console("Used existing AlcoholInfo table");
+            Log.console("Used existing COLA table");
         }
     }
 }

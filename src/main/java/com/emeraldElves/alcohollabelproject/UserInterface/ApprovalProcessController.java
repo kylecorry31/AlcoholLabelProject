@@ -199,14 +199,14 @@ public class ApprovalProcessController implements IController {
     }
 
     public void PendingReview() {
-        application.setStatus(ApplicationStatus.PENDINGREVIEW);
+        application.setStatus(ApplicationStatus.RECEIVED);
         application.getApplication().setExpirationDate((DateHelper.getDate(ExpirationDate.getValue().getYear()+1, ExpirationDate.getValue().getMonthValue(), ExpirationDate.getValue().getDayOfMonth())));
         Storage.getInstance().submitApplication(application, Authenticator.getInstance().getUsername());
         main.loadFXML("/fxml/TTBWorkflowPage.fxml");
     }
 
     public void ApprovedConditionally() {
-        application.setStatus(ApplicationStatus.APPROVEDWITHCONDITIONS);
+        application.setStatus(ApplicationStatus.NEEDS_CORRECTION);
         Storage.getInstance().submitApplication(application, Authenticator.getInstance().getUsername());
         main.loadFXML("/fxml/TTBWorkflowPage.fxml");
     }

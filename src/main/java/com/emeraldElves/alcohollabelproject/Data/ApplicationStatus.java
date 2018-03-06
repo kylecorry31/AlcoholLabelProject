@@ -4,10 +4,10 @@ package com.emeraldElves.alcohollabelproject.Data;
  * Created by elijaheldredge on 3/31/17.
  */
 public enum ApplicationStatus {
-    APPROVED("Your application was approved", 0),
-    PENDINGREVIEW("Pending Review", 1),
-    REJECTED("Reason", 2),
-    APPROVEDWITHCONDITIONS("Approved with conditions",3),
+    APPROVED("Approved", 0),
+    RECEIVED("Received", 1),
+    REJECTED("Rejected", 2),
+    NEEDS_CORRECTION("Needs corrections",3),
     NEEDSCORRECTIONS("Needs corrections",4);
     private String message;
     private int value;
@@ -27,15 +27,6 @@ public enum ApplicationStatus {
     }
 
     /**
-     * This sets the message for the ApplicationStatus
-     *
-     * @param message The message for ApplicationStatus
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    /**
      * This returns the message for application status
      *
      * @return The message for the application status
@@ -50,7 +41,7 @@ public enum ApplicationStatus {
             case 0:
                 return APPROVED;
             case 1:
-                return PENDINGREVIEW;
+                return RECEIVED;
             case 2:
                 return NEEDSCORRECTIONS;
             default:

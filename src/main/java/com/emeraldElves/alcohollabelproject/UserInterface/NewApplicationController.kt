@@ -1,7 +1,7 @@
 package com.emeraldElves.alcohollabelproject.UserInterface
 
 import com.emeraldElves.alcohollabelproject.Authenticator
-import com.emeraldElves.alcohollabelproject.Data.AlcoholInfo
+import com.emeraldElves.alcohollabelproject.data.COLA
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType
 import com.emeraldElves.alcohollabelproject.Data.ProductSource
 import javafx.fxml.FXML
@@ -55,7 +55,7 @@ class NewApplicationController: IController {
         }
     }
 
-    fun getAlcoholFields(): AlcoholInfo {
+    fun getAlcoholFields(): COLA {
 
         val alcoholContent: Double
 
@@ -64,7 +64,7 @@ class NewApplicationController: IController {
         } else {
             alcoholContent = alcoholContentField.text.toDouble()
         }
-        val alcoholInfo = AlcoholInfo(brandNameField.text, AlcoholType.BEER, "12345678", ProductSource.DOMESTIC)
+        val alcoholInfo = COLA(brandNameField.text, AlcoholType.BEER, "12345678", ProductSource.DOMESTIC)
         alcoholInfo.alcoholContent = alcoholContent
         alcoholInfo.fancifulName = alcoholName.text
         return alcoholInfo

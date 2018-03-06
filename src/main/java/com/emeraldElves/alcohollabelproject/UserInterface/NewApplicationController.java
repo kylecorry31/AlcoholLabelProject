@@ -158,7 +158,7 @@
 //        //TODO set field of image
 //        this.savedApplication = savedApplication;
 //        ApplicationType applicationType = savedApplication.getApplicationType();
-//        AlcoholInfo alcoholInfo = savedApplication.getAlcoholInfo();
+//        COLA alcoholInfo = savedApplication.getCOLA();
 //        String extraInfo = savedApplication.getExtraInfo();
 //        String imageURL = (savedApplication.getImage().getFileName());
 //
@@ -410,7 +410,7 @@
 //        } else extraInfo = extraInfoText.getText();
 //
 //
-//        AlcoholInfo info;
+//        COLA info;
 //        if (formFilled && fieldsValid) {
 //            //Checking if the product is domestic or imported
 //            if (pSourceSelect.getValue().equals("Domestic")) {
@@ -467,7 +467,7 @@
 //            Applicant applicant = new Applicant(appList);
 //
 //            //Create a SubmittedApplication
-//            SubmittedApplication newApp = new SubmittedApplication(appInfo, ApplicationStatus.PENDINGREVIEW, applicant);
+//            SubmittedApplication newApp = new SubmittedApplication(appInfo, ApplicationStatus.RECEIVED, applicant);
 //            if (application != null)
 //                newApp.setApplicationID(application.getApplicationID());
 //            applicant.addSubmittedApp(newApp);
@@ -510,7 +510,7 @@
 //        SavedApplication app; // app to be submitted to database
 //        //Things to add into SavedApplication
 //        ApplicationType appType;
-//        AlcoholInfo alcoholInfo;
+//        COLA alcoholInfo;
 //        String extraInfo;
 //
 //        //appType
@@ -629,9 +629,9 @@
 //            varietal = "";
 //            appellation = "";
 //        }
-//        wineInfo = new AlcoholInfo.Wine(pH, vintageYear, varietal, appellation);
+//        wineInfo = new COLA.Wine(pH, vintageYear, varietal, appellation);
 //        //END wineInfo
-//        alcoholInfo = new AlcoholInfo(alcoholContent, fanciful, brand, origin, alcoholType, wineInfo, serialNumber, formula);
+//        alcoholInfo = new COLA(alcoholContent, fanciful, brand, origin, alcoholType, wineInfo, serialNumber, formula);
 //        //END alcoholInfo
 //
 //        //extra info

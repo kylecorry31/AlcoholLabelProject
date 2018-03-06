@@ -64,7 +64,7 @@ public class ApplicantWorkflowController implements IController {
                 case REJECTED:
                     name += " - Rejected: " + application.getTtbMessage();
                     break;
-                case PENDINGREVIEW:
+                case RECEIVED:
                     name += " - Pending Review";
                     break;
                 case NEEDSCORRECTIONS:
@@ -123,7 +123,7 @@ public class ApplicantWorkflowController implements IController {
                     updateMenu.setVisible(false);
                     reviseMenu.setVisible(true);
                     break;
-                case PENDINGREVIEW:
+                case RECEIVED:
                     updateMenu.setVisible(false);
                     reviseMenu.setVisible(false);
                     break;

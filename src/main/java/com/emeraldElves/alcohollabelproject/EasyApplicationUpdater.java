@@ -80,11 +80,11 @@
 //
 //
 //            ManufacturerInfo manufacturerInfo = new ManufacturerInfo(permitName, permitAddress, brandName, repID, permitID, new PhoneNumber(""), new EmailAddress("asfdsaf@fsadf.com"));
-//            AlcoholInfo alcoholInfo;
+//            COLA alcoholInfo;
 //            if(type == AlcoholType.WINE){
 //                alcoholInfo = new WineInfo(alcoholContent, fancifulName, brandName, source, vintageYear, 0, "", appellation);
 //            } else {
-//                alcoholInfo = new AlcoholInfo(alcoholContent, fancifulName, brandName, source, type, null);
+//                alcoholInfo = new COLA(alcoholContent, fancifulName, brandName, source, type, null);
 //            }
 //
 //            alcoholInfo.setSerialNumber(serialNum);

@@ -1,8 +1,7 @@
 package com.emeraldElves.alcohollabelproject.UserInterface;
 
-import com.emeraldElves.alcohollabelproject.Data.PotentialUser;
-import com.emeraldElves.alcohollabelproject.Data.SavedApplication;
-import com.emeraldElves.alcohollabelproject.Data.SubmittedApplication;
+import com.emeraldElves.alcohollabelproject.Data.*;
+import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.ApacheDerbyDatabase;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 import javafx.application.Application;
@@ -16,6 +15,7 @@ import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Main extends Application {
 
@@ -25,13 +25,31 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         UISwitcher.getInstance().setMain(this);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationDetailPage.fxml"));
         Parent root = loader.load();
-        UISwitcher.getInstance().setStage(primaryStage);
+//        UISwitcher.getInstance().setStage(primaryStage);
 //        UISwitcher.getInstance().switchToPage(UISwitcher.HOME_PAGE);
 //        primaryStage.setResizable(false);
-        HomeController controller = loader.getController();
-        controller.init(this);
+
+
+        ApplicationDetailController controller = loader.getController();
+
+        COLA cola = new COLA("Hollow Creek Moonshine", AlcoholType.DISTILLEDSPIRITS, "180001", ProductSource.DOMESTIC);
+        cola.setAlcoholContent(35);
+        cola.setFancifulName("Apple Pie");
+        cola.setId(1);
+        cola.setFormula("Nothing cool here");
+        cola.setSubmissionDate(LocalDate.now());
+        cola.setApprovalDate(LocalDate.now().plusDays(2));
+        cola.setLabelImage(new ProxyLabelImage("labeltest.jpg"));
+        cola.setStatus(ApplicationStatus.APPROVED);
+
+        storage.updateCOLA(cola);
+
+        controller.setAlcohol(storage.getCOLA(1));
+
+//        HomeController controller = loader.getController();
+//        controller.init(this);
         primaryStage.setTitle("Alcohol Label Project");
         primaryStage.getIcons().add(new Image(("images/logo.png")));
         root.getStylesheets().add("/style/material.css");

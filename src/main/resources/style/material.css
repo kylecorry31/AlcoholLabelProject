@@ -32,6 +32,17 @@
  * Root					 				                       				   *
  *                                                                             *
  ******************************************************************************/
+
+
+* {
+    -color-primary: #2c4b7c;
+    -color-primary-dark: #233d66;
+    -color-primary-light: #3c6ab2;
+    -color-accent: #cfdb00;
+    -color-background: #303030;
+    -background-color: white;
+}
+
 .root {
 	/* Swatch Colors - Blue*/
 	-swatch-100: #7EE8A1;
@@ -62,7 +73,7 @@
 	-swatch-light-grey: rgb(230.0, 230.0, 230.0);
 	-swatch-toolbar: -swatch-green;
 	-swatch-toolbar-selected: rgb(215.0, 215.0, 215.0);
-	/* 
+	/*
      Modena colors
      */
 	-fx-dark-text-color: white; /* Text color when selected*/
@@ -858,4 +869,17 @@
 
 .toolbar-colored .text {
 	-fx-fill: white;
+}
+
+#alcoholContentLabel {
+    -fx-font-size: 20px;
+}
+
+#ttbID {
+    -fx-text-fill: -swatch-grey;
+    -fx-font-size: 12px;
+}
+
+.rejected {
+    -fx-text-fill: red;
 }

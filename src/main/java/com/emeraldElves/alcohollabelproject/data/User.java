@@ -1,4 +1,6 @@
-package com.emeraldElves.alcohollabelproject.Data;
+package com.emeraldElves.alcohollabelproject.data;
+
+import com.emeraldElves.alcohollabelproject.Data.UserType;
 
 import java.util.Objects;
 

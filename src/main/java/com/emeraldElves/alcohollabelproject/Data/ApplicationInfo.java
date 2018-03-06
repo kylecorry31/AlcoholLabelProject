@@ -1,5 +1,7 @@
 package com.emeraldElves.alcohollabelproject.Data;
 
+import com.emeraldElves.alcohollabelproject.data.COLA;
+
 import java.util.Date;
 
 /**
@@ -8,14 +10,14 @@ import java.util.Date;
 public class ApplicationInfo {
     private Date submissionDate;
     private ManufacturerInfo manufacturer;
-    private AlcoholInfo submittedAlcohol;
+    private COLA submittedAlcohol;
     private ApplicationType appType;
     private String extraInfo;
     private String qualifications = ""; //Only used by TTB agents
     private Date expirationDate = new Date();
     
 
-    public ApplicationInfo(Date submissionDate, ManufacturerInfo manufacturer, AlcoholInfo submittedAlcohol, String extraInfo, ApplicationType appType) {
+    public ApplicationInfo(Date submissionDate, ManufacturerInfo manufacturer, COLA submittedAlcohol, String extraInfo, ApplicationType appType) {
         this.submissionDate = submissionDate;
         this.manufacturer = manufacturer;
         this.submittedAlcohol = submittedAlcohol;
@@ -32,7 +34,7 @@ public class ApplicationInfo {
         return manufacturer;
     }
 
-    public AlcoholInfo getAlcohol(){
+    public COLA getAlcohol(){
         return submittedAlcohol;
     }
 
