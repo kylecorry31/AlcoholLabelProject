@@ -18,7 +18,7 @@ public class COLASubmissionHandler {
         idGenerator = new TTBIDGenerator();
     }
 
-    public void submitCOLA(COLA cola){
+    public synchronized void submitCOLA(COLA cola){
         COLA inDBCOLA = storage.getCOLA(cola.getId());
         cola.setStatus(ApplicationStatus.RECEIVED);
         if(inDBCOLA == null){
@@ -28,12 +28,12 @@ public class COLASubmissionHandler {
         }
     }
 
-    public long getNextCOLAID(){
+    public synchronized long getNextCOLAID(){
         ApplicationIDGenerator idGenerator = new TTBIDGenerator();
         return idGenerator.generateID();
     }
 
-    public List<COLA> getSubmittedCOLAS(User user){
+    public synchronized List<COLA> getSubmittedCOLAS(User user){
         return storage.getCOLAsByUser(user);
     }
 
@@ -41,7 +41,7 @@ public class COLASubmissionHandler {
         return getSubmittedCOLAS(user).size();
     }
 
-    public String getNextSerialNumber(User user){
+    public synchronized String getNextSerialNumber(User user){
         long submittedCount = getSubmittedCOLACount(user);
         long year = LocalDate.now().getYear() % 100;
 

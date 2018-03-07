@@ -1,6 +1,9 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
+import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
+import com.emeraldElves.alcohollabelproject.data.COLASearchHandler;
+import com.emeraldElves.alcohollabelproject.data.search.*;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.ui.controllers.ApplicationDetailController;
 import com.emeraldElves.alcohollabelproject.data.COLA;
@@ -58,12 +61,16 @@ public class COLASearchController implements Initializable {
 
     private ObservableList<COLA> data = FXCollections.observableArrayList();
 
-    private List<COLA> allApps = new LinkedList<>();
+    private COLASearchHandler colaSearchHandler;
+
+    public COLASearchController(){
+        colaSearchHandler = new COLASearchHandler();
+    }
 
     public void setSearchTerm(String searchTerm){
         this.searchTerm = searchTerm;
         searchField.setText(searchTerm);
-        search(searchTerm);
+//        search(searchTerm);
     }
 
     public void search(ActionEvent e) {
@@ -80,19 +87,42 @@ public class COLASearchController implements Initializable {
 
         this.searchTerm = searchTerm;
 
+        SearchFilter filter = genFilter();
+
+        data.addAll(colaSearchHandler.filteredSearch(filter));
+
         //Find & add matching applications
-        data.addAll(allApps);
-        filterList(data);
         descriptionLabel.setText("Showing top " + data.size() + " results for \"" + searchTerm + "\"");
         descriptionLabel.setVisible(true);
         saveBtn.setDisable(data.size() == 0);
         contextSaveBtn.setDisable(data.size() == 0);
     }
 
+    private SearchFilter genFilter(){
+
+        SearchFilter filter = new FuzzyBrandNameFilter(searchTerm).and(new FuzzyFancifulNameFilter(searchTerm));
+
+//        filter = filter.or(new StatusFilter(ApplicationStatus.APPROVED));
+
+        if (filterBeers.isSelected()){
+            filter = filter.or(new TypeFilter(AlcoholType.BEER));
+        }
+
+        if(filterWine.isSelected()){
+            filter = filter.or(new TypeFilter(AlcoholType.WINE));
+        }
+
+        if(filterSpirits.isSelected()){
+            filter = filter.or(new TypeFilter(AlcoholType.DISTILLEDSPIRITS));
+        }
+
+        return filter;
+    }
+
     private void refreshSuggestions() {
         possibleSuggestions.clear();
 
-        for(COLA app: allApps){
+        for(COLA app: colaSearchHandler.filteredSearch(null)){//new StatusFilter(ApplicationStatus.APPROVED))){
             possibleSuggestions.add(app.getBrandName());
             possibleSuggestions.add(app.getFancifulName());
         }
@@ -112,17 +142,6 @@ public class COLASearchController implements Initializable {
             search(e);
         });
 
-    }
-
-    private void filterList(List<COLA> appList) {
-//        appList.removeIf(p -> (p.getStatus() != ApplicationStatus.APPROVED));
-        appList.removeIf(p -> {
-            boolean remove = !p.getBrandName().toLowerCase().contains(searchTerm.toLowerCase()) && !p.getFancifulName().toLowerCase().contains(searchTerm.toLowerCase());
-            remove = remove || filterBeers.isSelected() && p.getType() == AlcoholType.BEER;
-            remove = remove || filterWine.isSelected() && p.getType() == AlcoholType.WINE;
-            remove = remove || filterSpirits.isSelected() && p.getType() == AlcoholType.DISTILLEDSPIRITS;
-            return remove;
-        });
     }
 
     public void saveTSV(ActionEvent e) {
@@ -154,6 +173,7 @@ public class COLASearchController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         dateCol.setCellValueFactory(p -> {
             LocalDate date = p.getValue().getApprovalDate();
             return new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(date.toString()));
@@ -189,7 +209,8 @@ public class COLASearchController implements Initializable {
         });
 
         Platform.runLater(() -> {
-            allApps = Storage.getInstance().getAllCOLAs();
+//            allApps = Storage.getInstance().getAllCOLAs();
+            colaSearchHandler.receiveAllCOLAs();
             search(searchTerm);
             refreshSuggestions();
         });

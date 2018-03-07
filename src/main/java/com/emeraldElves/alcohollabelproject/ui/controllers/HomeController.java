@@ -1,9 +1,13 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 
+import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
+import com.emeraldElves.alcohollabelproject.data.COLASearchHandler;
+import com.emeraldElves.alcohollabelproject.data.search.StatusFilter;
 import com.emeraldElves.alcohollabelproject.ui.*;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.Storage;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -19,7 +23,7 @@ import java.util.*;
 /**
  * Created by Harry and Joe on 4/2/2017.
  */
-public class HomeController implements IController, Initializable {
+public class HomeController implements Initializable {
 
     // Alcohol 1
     @FXML
@@ -82,6 +86,12 @@ public class HomeController implements IController, Initializable {
 
     private List<COLA> alcohol;
 
+    private COLASearchHandler colaSearchHandler;
+
+    public HomeController(){
+        colaSearchHandler = new COLASearchHandler();
+    }
+
     public void aboutProject(){
         UIManager.getInstance().displayPage(searchbox.getScene(), UIManager.ABOUT_PAGE);
     }
@@ -112,13 +122,6 @@ public class HomeController implements IController, Initializable {
         UIManager.getInstance().displayPage(searchbox.getScene(), page);
     }
 
-    public void init(Bundle bundle){
-//        this.init(bundle.getMain("main"));
-    }
-
-    public void init(Main main) {
-
-    }
 
     private void populateRecentList(){
         for (int i = 0; i < alcohol.size(); i++) {
@@ -158,25 +161,28 @@ public class HomeController implements IController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        alcohol = Storage.getInstance().getAllCOLAs();
-        populateRecentList();
+        new Thread(() -> {
+            colaSearchHandler.receiveAllCOLAs();
+            alcohol = colaSearchHandler.filteredSearch(null);//new StatusFilter(ApplicationStatus.APPROVED));
 
-        AutoCompletionBinding<String> autoCompletionBinding;
-        Set<String> possibleSuggestions = new HashSet<>();
-        possibleSuggestions.clear();
-        alcohol.sort((lhs, rhs) -> lhs.getBrandName().compareToIgnoreCase(rhs.getBrandName()));
+            Platform.runLater(() -> {
+                populateRecentList();
+                AutoCompletionBinding<String> autoCompletionBinding;
+                Set<String> possibleSuggestions = new HashSet<>();
+                possibleSuggestions.clear();
 
-        for (COLA cola: alcohol){
+                for (COLA cola : alcohol) {
 //            if(cola.getStatus() == ApplicationStatus.APPROVED) {
-                possibleSuggestions.add(cola.getBrandName());
-                possibleSuggestions.add(cola.getFancifulName());
+                    possibleSuggestions.add(cola.getBrandName());
+                    possibleSuggestions.add(cola.getFancifulName());
 //            }
-        }
+                }
 
-        autoCompletionBinding = TextFields.bindAutoCompletion(searchbox, possibleSuggestions);
-        autoCompletionBinding.setPrefWidth(searchbox.getPrefWidth());
+                autoCompletionBinding = TextFields.bindAutoCompletion(searchbox, possibleSuggestions);
+                autoCompletionBinding.setPrefWidth(searchbox.getPrefWidth());
 
-        searchbox.setOnKeyPressed(ke -> autoCompletionBinding.setUserInput(searchbox.getText().trim()));
-
+                searchbox.setOnKeyPressed(ke -> autoCompletionBinding.setUserInput(searchbox.getText().trim()));
+            });
+        }).start();
     }
 }
