@@ -131,6 +131,11 @@ public class Storage {
         return getCOLA(resultSet);
     }
 
+    public List<COLA> getCOLAsByUser(User user){
+        ResultSet resultSet = database.query(COLA.DB_TABLE, null, COLA.DB_APPLICANT_ID + " = " + user.getId(), null, null);
+        return getCOLAs(resultSet);
+    }
+
     public User getUser(String username, String password) {
         ResultSet resultSet = database.query(User.DB_TABLE, null,
                 User.DB_NAME + " = ? AND " + User.DB_PASSWORD + " = ?",

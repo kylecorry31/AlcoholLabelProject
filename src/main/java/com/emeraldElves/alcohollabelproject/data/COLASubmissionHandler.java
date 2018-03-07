@@ -1,0 +1,51 @@
+package com.emeraldElves.alcohollabelproject.data;
+
+import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
+import com.emeraldElves.alcohollabelproject.IDGenerator.ApplicationIDGenerator;
+import com.emeraldElves.alcohollabelproject.IDGenerator.TTBIDGenerator;
+import com.emeraldElves.alcohollabelproject.database.Storage;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public class COLASubmissionHandler {
+
+    private Storage storage;
+    private ApplicationIDGenerator idGenerator;
+
+    public COLASubmissionHandler(){
+        storage = Storage.getInstance();
+        idGenerator = new TTBIDGenerator();
+    }
+
+    public void submitCOLA(COLA cola){
+        COLA inDBCOLA = storage.getCOLA(cola.getId());
+        cola.setStatus(ApplicationStatus.RECEIVED);
+        if(inDBCOLA == null){
+            storage.saveCOLA(cola);
+        } else {
+            storage.updateCOLA(cola);
+        }
+    }
+
+    public long getNextCOLAID(){
+        ApplicationIDGenerator idGenerator = new TTBIDGenerator();
+        return idGenerator.generateID();
+    }
+
+    public List<COLA> getSubmittedCOLAS(User user){
+        return storage.getCOLAsByUser(user);
+    }
+
+    public long getSubmittedCOLACount(User user){
+        return getSubmittedCOLAS(user).size();
+    }
+
+    public String getNextSerialNumber(User user){
+        long submittedCount = getSubmittedCOLACount(user);
+        long year = LocalDate.now().getYear() % 100;
+
+        return String.valueOf(year) + String.format("%04x", submittedCount).toUpperCase();
+    }
+
+}

@@ -1,16 +1,18 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
+import com.emeraldElves.alcohollabelproject.Authenticator;
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ProductSource;
 import com.emeraldElves.alcohollabelproject.Data.ProxyLabelImage;
-import com.emeraldElves.alcohollabelproject.IDGenerator.TTBIDGenerator;
+import com.emeraldElves.alcohollabelproject.Data.UserType;
+import com.emeraldElves.alcohollabelproject.data.COLASubmissionHandler;
+import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.ui.DialogFileSelector;
 import com.emeraldElves.alcohollabelproject.ui.validation.OptionalDoubleValidator;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.ui.validation.AlphaNumericValidator;
 import com.emeraldElves.alcohollabelproject.ui.validation.TextLengthValidator;
 import com.emeraldElves.alcohollabelproject.data.COLA;
-import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
@@ -84,8 +86,13 @@ public class ApplicationSubmissionController implements Initializable{
 
     private long applicantID;
 
+    private COLASubmissionHandler colaSubmissionHandler;
+
+    private User user;
+
     public ApplicationSubmissionController(){
         validators = new LinkedList<>();
+        colaSubmissionHandler = new COLASubmissionHandler();
     }
 
     public void setApplicantID(long applicantID){
@@ -149,8 +156,7 @@ public class ApplicationSubmissionController implements Initializable{
 
         }
 
-
-        Storage.getInstance().saveCOLA(cola); // TODO: replace this with higher up storage mechanism
+        colaSubmissionHandler.submitCOLA(cola);
 
         System.out.println("Saved " + cola.toString());
 
@@ -160,8 +166,16 @@ public class ApplicationSubmissionController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        serialNumber.setText(String.valueOf(LocalDate.now().getYear() % 100) + "XXXX");
-        id = new TTBIDGenerator().generateID();
+
+        user = Authenticator.getInstance().getUser();
+
+        if(user.getType() != UserType.APPLICANT){
+            UIManager.getInstance().displayPage(brandName.getScene(), UIManager.HOME_PAGE);
+        }
+
+        serialNumber.setText(colaSubmissionHandler.getNextSerialNumber(user));
+
+        id = colaSubmissionHandler.getNextCOLAID();
         ttbID.setText("TTB ID #" + String.valueOf(id));
 
         setRequired(brandName, "Brand name required");
@@ -259,10 +273,4 @@ public class ApplicationSubmissionController implements Initializable{
 
         validators.add(validator);
     }
-
-
-    private boolean isFilledOut(JFXTextField textField){
-        return !textField.getText().isEmpty();
-    }
-
 }
