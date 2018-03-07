@@ -37,7 +37,7 @@
                         <HBox alignment="CENTER_LEFT">
                            <children>
                               <Label text="Type:" />
-                              <JFXRadioButton fx:id="beerRadio" selected="true" styleClass="custom-jfx-radio-button" text="Beer">
+                              <JFXRadioButton fx:id="beerRadio" selected="true" styleClass="custom-jfx-radio-button" text="Malt Beverages">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="type" />
                                  </toggleGroup>
