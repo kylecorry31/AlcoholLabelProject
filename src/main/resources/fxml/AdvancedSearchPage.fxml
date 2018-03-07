@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="768.0" maxWidth="1028.0" minHeight="768.0" minWidth="1028.0" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.UserInterface.AdvancedSearch">
+<AnchorPane maxHeight="768.0" maxWidth="1028.0" minHeight="768.0" minWidth="1028.0" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.AdvancedSearch">
    <children>
       <fx:include source="toolbar.fxml" />
       <TextField fx:id="brand" layoutX="40.0" layoutY="119.0" promptText="Brand Name" />

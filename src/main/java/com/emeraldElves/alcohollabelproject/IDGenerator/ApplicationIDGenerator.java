@@ -21,7 +21,7 @@ public class ApplicationIDGenerator {
      *
      * @return The ID as a {@link String}
      */
-    public String generateID() {
+    public synchronized long generateID() {
         return generator.generateID();
     }
 }

@@ -3,8 +3,8 @@ package com.emeraldElves.alcohollabelproject;
 import com.emeraldElves.alcohollabelproject.Data.SavedApplication;
 import com.emeraldElves.alcohollabelproject.Data.Storage;
 import com.emeraldElves.alcohollabelproject.Data.SubmittedApplication;
-import com.emeraldElves.alcohollabelproject.UserInterface.Bundle;
-import com.emeraldElves.alcohollabelproject.UserInterface.IController;
+import com.emeraldElves.alcohollabelproject.ui.Bundle;
+import com.emeraldElves.alcohollabelproject.ui.IController;
 
 import java.util.List;
 

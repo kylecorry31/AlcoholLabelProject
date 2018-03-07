@@ -1,7 +1,7 @@
 package com.emeraldElves.alcohollabelproject;
 
 import com.emeraldElves.alcohollabelproject.Data.SubmittedApplication;
-import com.emeraldElves.alcohollabelproject.UserInterface.Main;
+import com.emeraldElves.alcohollabelproject.ui.Main;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 

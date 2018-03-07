@@ -1,7 +1,7 @@
 package com.emeraldElves.alcohollabelproject.database;
 
 import com.emeraldElves.alcohollabelproject.Data.*;
-import com.emeraldElves.alcohollabelproject.IDGenerator2.IDGenerator.IDCounter;
+import com.emeraldElves.alcohollabelproject.IDGenerator.IDCounter;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 

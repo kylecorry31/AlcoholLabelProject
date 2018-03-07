@@ -8,11 +8,11 @@ public class TimeGenerator implements IDGenerator {
     /**
      * Generate an ID based on the current system time.
      */
-    public String generateID() {
-        return String.valueOf(getTime());
+    public long generateID() {
+        return getTime();
     }
 
-    private int getTime() {
-        return (int) (System.currentTimeMillis()/1000.0);
+    private long getTime() {
+        return System.currentTimeMillis();
     }
 }

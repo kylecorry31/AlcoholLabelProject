@@ -1,8 +1,8 @@
 package com.emeraldElves.alcohollabelproject.database;
 
 import com.emeraldElves.alcohollabelproject.Data.*;
-import com.emeraldElves.alcohollabelproject.IDGenerator2.IDGenerator.ApplicationIDGenerator;
-import com.emeraldElves.alcohollabelproject.IDGenerator2.IDGenerator.TTBIDGenerator;
+import com.emeraldElves.alcohollabelproject.IDGenerator.ApplicationIDGenerator;
+import com.emeraldElves.alcohollabelproject.IDGenerator.TTBIDGenerator;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 import org.junit.After;

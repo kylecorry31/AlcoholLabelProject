@@ -1,7 +1,7 @@
 package com.emeraldElves.alcohollabelproject.Data;
 
 import com.emeraldElves.alcohollabelproject.Authenticator;
-import com.emeraldElves.alcohollabelproject.UserInterface.Main;
+import com.emeraldElves.alcohollabelproject.ui.Main;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import javax.mail.*;

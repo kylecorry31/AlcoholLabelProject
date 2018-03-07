@@ -29,7 +29,7 @@ public class AlcoholDatabase {
     public AlcoholDatabase(Database db) {
         this.db = db;
         usersDatabase = new AuthenticatedUsersDatabase(db);
-        generator = new TTBIDGenerator(getAppCount());
+        generator = new TTBIDGenerator();
     }
 
     private int getAppCount() {

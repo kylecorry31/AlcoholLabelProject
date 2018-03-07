@@ -4,7 +4,7 @@ version '0.1'
 apply plugin: 'java'
 
 apply plugin: 'application'
-mainClassName = "com.emeraldElves.alcohollabelproject.UserInterface.Main"
+mainClassName = "com.emeraldElves.alcohollabelproject.ui.Main"
 
 
 sourceCompatibility = 1.8
