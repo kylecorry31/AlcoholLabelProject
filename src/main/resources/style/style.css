@@ -87,6 +87,7 @@
 
 .custom-jfx-text-field {
     -jfx-focus-color: -color-accent;
+    -jfx-label-float: true;
 }
 
 .label, .text-area, .text-field {
@@ -95,6 +96,7 @@
 
 .custom-jfx-text-area {
     -jfx-focus-color: -color-accent;
+    -jfx-label-float: true;
 }
 
 .custom-jfx-text-area .content {

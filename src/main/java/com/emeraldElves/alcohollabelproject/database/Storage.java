@@ -21,7 +21,12 @@ public class Storage {
             COLA.DB_SUBMISSION_DATE, COLA.DB_STATUS,
             COLA.DB_APPROVAL_DATE, COLA.DB_LABEL_IMAGE,
             COLA.DB_APPLICANT_ID);
-    private final String USER_VALUES = String.format("( %s, %s, %s )", User.DB_NAME, User.DB_PASSWORD, User.DB_USER_TYPE);
+    private final String USER_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
+            User.DB_NAME, User.DB_PASSWORD,
+            User.DB_USER_TYPE, User.DB_APPROVED,
+            User.DB_COMPANY, User.DB_ADDRESS,
+            User.DB_PHONE, User.DB_EMAIL,
+            User.DB_REP_ID, User.DB_PERMIT_NO);
     private final String COUNTER_VALUES = String.format("( %s, %s )", IDCounter.DB_COUNTER, IDCounter.DB_LAST_MODIFIED);
 
 
@@ -57,7 +62,14 @@ public class Storage {
         database.insert(User.DB_TABLE + USER_VALUES, new String[]{
                 ApacheDerbyDatabase.addQuotes(user.getName()),
                 ApacheDerbyDatabase.addQuotes(user.getPassword()),
-                ApacheDerbyDatabase.addQuotes(user.getType().toString())
+                ApacheDerbyDatabase.addQuotes(user.getType().toString()),
+                String.valueOf(user.isApproved()),
+                ApacheDerbyDatabase.addQuotes(user.getCompany()),
+                ApacheDerbyDatabase.addQuotes(user.getAddress()),
+                ApacheDerbyDatabase.addQuotes(user.getPhoneNumber().getPhoneNumber()),
+                ApacheDerbyDatabase.addQuotes(user.getEmail().getEmailAddress()),
+                String.valueOf(user.getRepID()),
+                String.valueOf(user.getPermitNo()),
         });
     }
 
@@ -93,6 +105,12 @@ public class Storage {
                 String.format("%s = '%s'", User.DB_NAME, user.getName()),
                 String.format("%s = '%s'", User.DB_PASSWORD, user.getPassword()),
                 String.format("%s = '%s'", User.DB_USER_TYPE, user.getType().toString()),
+                String.format("%s = '%s'", User.DB_COMPANY, user.getCompany()),
+                String.format("%s = '%s'", User.DB_ADDRESS, user.getAddress()),
+                String.format("%s = '%s'", User.DB_PHONE, user.getPhoneNumber().getPhoneNumber()),
+                String.format("%s = '%s'", User.DB_EMAIL, user.getEmail().getEmailAddress()),
+                String.format("%s = %d", User.DB_REP_ID, user.getRepID()),
+                String.format("%s = %d", User.DB_PERMIT_NO, user.getPermitNo()),
         };
 
         database.update(User.DB_TABLE, values, User.DB_ID + " = " + user.getId(), null);
@@ -147,7 +165,10 @@ public class Storage {
 
     public User getUser(long id) {
         ResultSet resultSet = database.query(User.DB_TABLE, null, User.DB_ID + " = " + id, null, null);
-        return getUser(resultSet);
+        User u = getUser(resultSet);
+        if(u != null)
+            u.setPassword("");
+        return u;
     }
 
     public List<User> getAllUsers() {
@@ -237,9 +258,23 @@ public class Storage {
             String password = resultSet.getString(User.DB_PASSWORD);
             UserType type = UserType.valueOf(resultSet.getString(User.DB_USER_TYPE));
             long id = resultSet.getLong(User.DB_ID);
+            boolean approved = resultSet.getBoolean(User.DB_APPROVED);
+            String company = resultSet.getString(User.DB_COMPANY);
+            String address = resultSet.getString(User.DB_ADDRESS);
+            PhoneNumber phoneNumber = new PhoneNumber(resultSet.getString(User.DB_PHONE));
+            EmailAddress emailAddress = new EmailAddress(resultSet.getString(User.DB_EMAIL));
+            long repID = resultSet.getLong(User.DB_REP_ID);
+            long permitNo = resultSet.getLong(User.DB_PERMIT_NO);
 
             User user = new User(name, password, type);
             user.setId(id);
+            user.setApproved(approved);
+            user.setCompany(company);
+            user.setAddress(address);
+            user.setPhoneNumber(phoneNumber);
+            user.setEmail(emailAddress);
+            user.setRepID(repID);
+            user.setPermitNo(permitNo);
 
             return user;
         } catch (SQLException e) {
@@ -292,6 +327,13 @@ public class Storage {
                     String.format("%s VARCHAR (128)", User.DB_NAME),
                     String.format("%s VARCHAR (128)", User.DB_PASSWORD),
                     String.format("%s VARCHAR (10)", User.DB_USER_TYPE),
+                    String.format("%s BOOLEAN", User.DB_APPROVED),
+                    String.format("%s VARCHAR (256)", User.DB_COMPANY),
+                    String.format("%s VARCHAR (512)", User.DB_ADDRESS),
+                    String.format("%s VARCHAR (11)", User.DB_PHONE),
+                    String.format("%s VARCHAR (128)", User.DB_EMAIL),
+                    String.format("%s BIGINT", User.DB_REP_ID),
+                    String.format("%s BIGINT", User.DB_PERMIT_NO),
             });
             System.out.println("Created table " + User.DB_TABLE);
         }

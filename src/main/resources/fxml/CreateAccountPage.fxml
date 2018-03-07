@@ -36,8 +36,14 @@
                         <JFXRadioButton fx:id="radioTTBAgent" styleClass="custom-jfx-radio-button" text="TTB Agent" toggleGroup="$accountType" />
                      </children>
                   </HBox>
-                  <JFXTextField fx:id="emailText" labelFloat="true" promptText="Email" styleClass="custom-jfx-text-field" />
+                  <JFXTextField fx:id="nameText" labelFloat="true" promptText="Name" styleClass="custom-jfx-text-field" />
                   <JFXPasswordField fx:id="passwordText" labelFloat="true" promptText="Password" styleClass="custom-jfx-text-field" />
+                  <JFXTextField fx:id="companyText" labelFloat="true" promptText="Company" styleClass="custom-jfx-text-field" />
+                  <JFXTextField fx:id="addressText" labelFloat="true" promptText="Address" styleClass="custom-jfx-text-field" />
+                  <JFXTextField fx:id="phoneText" labelFloat="true" promptText="Phone Number" styleClass="custom-jfx-text-field" />
+                  <JFXTextField fx:id="emailText" labelFloat="true" promptText="Email Address" styleClass="custom-jfx-text-field" />
+                  <JFXTextField fx:id="repText" labelFloat="true" promptText="Representive ID Number (If any)" styleClass="custom-jfx-text-field" />
+                  <JFXTextField fx:id="permitText" labelFloat="true" promptText="Permit Number" styleClass="custom-jfx-text-field" />
                </children>
                <padding>
                   <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />

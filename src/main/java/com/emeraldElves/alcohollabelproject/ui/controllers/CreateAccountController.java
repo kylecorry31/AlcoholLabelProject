@@ -1,5 +1,7 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
+import com.emeraldElves.alcohollabelproject.Data.EmailAddress;
+import com.emeraldElves.alcohollabelproject.Data.PhoneNumber;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.data.User;
@@ -17,7 +19,7 @@ import java.util.ResourceBundle;
 public class CreateAccountController implements Initializable {
 
     @FXML
-    private JFXTextField emailText;
+    private JFXTextField emailText, nameText, companyText, addressText, phoneText, repText, permitText;
 
     @FXML
     private JFXPasswordField passwordText;
@@ -37,9 +39,31 @@ public class CreateAccountController implements Initializable {
     private void submit(){
         String email = emailText.getText();
         String password = passwordText.getText();
+        String name = nameText.getText();
+        String phone = phoneText.getText();
+        String address = addressText.getText();
+        String company = companyText.getText();
+        long repId = -1;
+        try {
+            repId = Long.valueOf(repText.getText());
+        } catch (Exception e){
+            // Empty body
+        }
+        long permitNo = -1;
+        try {
+            permitNo = Long.valueOf(permitText.getText());
+        } catch (Exception e){
+            // Empty body
+        }
         UserType type = getUserType();
 
-        User user = new User(email, password, type);
+        User user = new User(name, password, type);
+        user.setEmail(new EmailAddress(email));
+        user.setPhoneNumber(new PhoneNumber(phone));
+        user.setAddress(address);
+        user.setCompany(company);
+        user.setRepID(repId);
+        user.setPermitNo(permitNo);
 
         Storage.getInstance().saveUser(user);
 

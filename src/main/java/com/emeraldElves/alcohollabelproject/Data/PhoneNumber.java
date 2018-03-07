@@ -1,5 +1,7 @@
 package com.emeraldElves.alcohollabelproject.Data;
 
+import java.util.Objects;
+
 /**
  * A representation of a phone number which is validated.
  */
@@ -64,4 +66,24 @@ public class PhoneNumber {
         return extractedNumber;
     }
 
+    @Override
+    public String toString() {
+        return "PhoneNumber{" +
+                "phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhoneNumber that = (PhoneNumber) o;
+        return Objects.equals(phoneNumber, that.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(phoneNumber);
+    }
 }
