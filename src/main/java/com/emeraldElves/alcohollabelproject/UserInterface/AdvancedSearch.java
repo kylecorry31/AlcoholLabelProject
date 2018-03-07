@@ -112,7 +112,7 @@ public class AdvancedSearch implements IController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     SubmittedApplication rowData = row.getItem();
-                    main.loadFXML("/fxml/DetailedSearchPage.fxml",rowData, this.brand.getText());
+//                    main.loadFXML("/fxml/DetailedSearchPage.fxml",rowData, this.brand.getText());
                 }
             });
             return row;

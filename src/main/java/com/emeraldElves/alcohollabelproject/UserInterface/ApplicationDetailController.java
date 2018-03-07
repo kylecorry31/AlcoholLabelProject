@@ -64,7 +64,7 @@ public class ApplicationDetailController {
         content.setText(String.format("%.1f%% (%.1f Proof)", alcohol.getAlcoholContent(), alcohol.getAlcoholContent() * 2));
         serialNum.setText(alcohol.getSerialNumber());
         origin.setText(alcohol.getOrigin().toString());
-        alcoholType.setText(alcohol.getType().toString());
+        alcoholType.setText(alcohol.getType().name());
         submissionDate.setText(alcohol.getApprovalDate().toString());
         ttbID.setText("TTB ID #" + String.valueOf(alcohol.getId()));
         labelView.setImage(alcohol.getLabelImage().display());

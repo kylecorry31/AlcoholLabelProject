@@ -44,21 +44,21 @@ public class SuperUserWorkflowController implements IController {
         Storage.getInstance().createUser(UserforApproval);
         SendEmail(UserforApproval.getEmail().getEmailAddress(), "Approved");
         Storage.getInstance().deleteUser(UserforApproval);
-        main.loadFXML("/fxml/SuperagentWorkflowPage.fxml");
+//        main.loadFXML("/fxml/SuperagentWorkflowPage.fxml");
         //main.loadNewUserApplicationDisplayController();
     }
 
     public void Reject() {
         SendEmail(UserforApproval.getEmail().getEmailAddress(), "Rejected");
         Storage.getInstance().deleteUser(UserforApproval);
-        main.loadFXML("/fxml/SuperagentWorkflowPage.fxml");
+//        main.loadFXML("/fxml/SuperagentWorkflowPage.fxml");
 
     }
 
   
 
     public void printPage(){
-        main.printPage();
+//        main.printPage();
     }
 
     //on click, load detailed user page
@@ -66,7 +66,7 @@ public class SuperUserWorkflowController implements IController {
     //on accept, add it the TTB agent / applicant table (method is in storage)
 
 
-    public void goHome(){ main.loadFXML("/fxml/HomePage.fxml");}
+//    public void goHome(){ main.loadFXML("/fxml/HomePage.fxml");}
 
     public static void SendEmail(String Email, String Status){
         Properties props = new Properties();

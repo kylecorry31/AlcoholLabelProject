@@ -3,6 +3,7 @@ package com.emeraldElves.alcohollabelproject;
 import com.emeraldElves.alcohollabelproject.Data.SubmittedApplication;
 import com.emeraldElves.alcohollabelproject.UserInterface.Main;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -28,7 +29,7 @@ public class ApplicationExporter {
         fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Delimiter-seperated Values", "*."+serializer.getFileExt()));
 
 
-        File file = fileChooser.showSaveDialog(Main.stage);
+        File file = fileChooser.showSaveDialog(new Stage());
         if (file == null) {
             return false;
         }

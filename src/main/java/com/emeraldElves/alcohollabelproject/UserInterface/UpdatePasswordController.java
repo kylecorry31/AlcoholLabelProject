@@ -33,7 +33,7 @@ public class UpdatePasswordController implements IController {
             if(checkPassword.isPasswordValid(NewPassword1.getText())) {
                 if (NewPassword1.getText().equals(NewPassword2.getText())) {
                     Storage.getInstance().updatePassword(currentUser, passwordEncryptor.encryptPassword(NewPassword1.getText()));
-                    main.loadFXML("/fxml/HomePage.fxml");
+//                    main.loadFXML("/fxml/HomePage.fxml");
 
                 } else {
                     errorMsg.setVisible(true);

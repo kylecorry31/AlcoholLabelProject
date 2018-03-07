@@ -94,14 +94,14 @@ public class ApplicantWorkflowController implements IController {
     }
 
     public void viewApplication() {
-        main.loadFXML("/fxml/DetailedSearchPage.fxml", getSelectedApplication(), "");
+//        main.loadFXML("/fxml/DetailedSearchPage.fxml", getSelectedApplication(), "");
     }
 
     public void reviseApplication() {
         if (list.getSelectionModel().getSelectedIndex() < numSavedApplications) {
-            main.loadFXML("/fxml/newApplication.fxml", getSelectedSavedApplication());
+//            main.loadFXML("/fxml/newApplication.fxml", getSelectedSavedApplication());
         } else {
-            main.loadFXML("/fxml/newApplication.fxml", getSelectedApplication());
+//            main.loadFXML("/fxml/newApplication.fxml", getSelectedApplication());
 
         }
     }
@@ -139,15 +139,15 @@ public class ApplicantWorkflowController implements IController {
 
     public void ApplicationWorkflow() {
         if (getSelectedApplication().getStatus() == ApplicationStatus.APPROVED) {
-            main.loadFXML("/fxml/updateOptions.fxml", getSelectedApplication());
+//            main.loadFXML("/fxml/updateOptions.fxml", getSelectedApplication());
         }
     }
 
     public void GoHome() {
-        main.loadHomepage();
+//        main.loadHomepage();
     }
 
     public void MakeNewApplication() {
-        main.loadFXML("/fxml/newApplication.fxml");
+//        main.loadFXML("/fxml/newApplication.fxml");
     }
 }

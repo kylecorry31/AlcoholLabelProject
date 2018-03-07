@@ -120,7 +120,7 @@ public class SearchController implements IController{
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     SubmittedApplication rowData = row.getItem();
-                    main.loadFXML("/fxml/DetailedSearchPage.fxml",rowData, searchTerm);
+//                    main.loadFXML("/fxml/DetailedSearchPage.fxml",rowData, searchTerm);
                 }
             });
             return row;
@@ -158,7 +158,7 @@ public class SearchController implements IController{
     }
 
     public void advancedSearch(){
-        main.loadFXML("/fxml/AdvancedSearchPage.fxml");
+//        main.loadFXML("/fxml/AdvancedSearchPage.fxml");
     }
 
     private int getNumberOfVisibleRows()

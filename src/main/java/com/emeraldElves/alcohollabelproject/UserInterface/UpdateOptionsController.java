@@ -119,13 +119,13 @@ public class UpdateOptionsController implements IController {
         application.setUpdatesSelected(updates);
 
         //go to page 2 of update app
-        main.loadFXML("/fxml/UpdateApplication.fxml", application);
+//        main.loadFXML("/fxml/UpdateApplication.fxml", application);
 
     }
 
     public void cancelApp() {
         //Go back to homepage
-        main.loadFXML("fxml/ApplicantWorkflowPage.fxml");
+//        main.loadFXML("fxml/ApplicantWorkflowPage.fxml");
     }
 
 

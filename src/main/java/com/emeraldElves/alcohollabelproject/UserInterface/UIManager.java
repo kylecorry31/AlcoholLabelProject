@@ -14,6 +14,8 @@ public class UIManager {
     public static final String NEW_APPLICATION_PAGE = "/fxml/ApplicationSubmissionPage.fxml";
     public static final String APPLICATION_DETAIL_PAGE = "/fxml/ApplicationDetailPage.fxml";
     public static final String SEARCH_PAGE = "/fxml/Search.fxml";
+    public static final String LOGIN_PAGE = "/fxml/Login.fxml";
+    public static final String CREATE_ACCOUNT_PAGE = "/fxml/CreateAccountPage.fxml";
 
 
     private static UIManager instance;

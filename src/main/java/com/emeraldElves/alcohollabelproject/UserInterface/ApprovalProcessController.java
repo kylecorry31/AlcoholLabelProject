@@ -150,7 +150,7 @@ public class ApprovalProcessController implements IController {
     }
 
     public void GoHome() {
-        main.loadFXML("/fxml/HomePage.fxml");
+//        main.loadFXML("/fxml/HomePage.fxml");
 
     }
 
@@ -169,11 +169,11 @@ public class ApprovalProcessController implements IController {
         //Log.console(application.getTtbAgentName());
         agent.addApplication(application);
         if (Authenticator.getInstance().isSuperAgentLoggedIn()) {
-            main.loadFXML("/fxml/SuperagentViewAllApplications.fxml");
+//            main.loadFXML("/fxml/SuperagentViewAllApplications.fxml");
 
         }
         else{
-            main.loadFXML("/fxml/TTBWorkflowPage.fxml");
+//            main.loadFXML("/fxml/TTBWorkflowPage.fxml");
         }
     }
 
@@ -186,7 +186,7 @@ public class ApprovalProcessController implements IController {
         changer.changeStatus(new ApproveCommand(application, true));
         changer.commitUpdates();
         //Storage.getInstance().submitApplication(application,);
-        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
+//        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
 
     }
 
@@ -195,36 +195,36 @@ public class ApprovalProcessController implements IController {
         changer.changeStatus(new RejectCommand(application, reason.getText(), true));
         changer.commitUpdates();
         //Storage.getInstance().rejectApplication(application, reason.getText());
-        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
+//        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
     }
 
     public void PendingReview() {
         application.setStatus(ApplicationStatus.RECEIVED);
         application.getApplication().setExpirationDate((DateHelper.getDate(ExpirationDate.getValue().getYear()+1, ExpirationDate.getValue().getMonthValue(), ExpirationDate.getValue().getDayOfMonth())));
         Storage.getInstance().submitApplication(application, Authenticator.getInstance().getUsername());
-        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
+//        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
     }
 
     public void ApprovedConditionally() {
         application.setStatus(ApplicationStatus.NEEDS_CORRECTION);
         Storage.getInstance().submitApplication(application, Authenticator.getInstance().getUsername());
-        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
+//        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
     }
 
     public void NeedsCorrections() {
         application.setStatus(ApplicationStatus.NEEDSCORRECTIONS);
         Storage.getInstance().submitApplication(application, Authenticator.getInstance().getUsername());
-        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
+//        main.loadFXML("/fxml/TTBWorkflowPage.fxml");
     }
 
     public void printPage(){
-        main.printPage();
+//        main.printPage();
     }
 
     public void MoveToNextApp() {
 
     }
     public void viewLabel(){
-        main.loadFXML("/fxml/DisplayLabel.fxml", application);
+//        main.loadFXML("/fxml/DisplayLabel.fxml", application);
     } //THIS DOESN'T CURRENTLY WORK
 }

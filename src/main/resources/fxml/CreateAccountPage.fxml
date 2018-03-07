@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.UserInterface.CreateAccountController">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="96.0" minHeight="96.0" percentHeight="0.0" prefHeight="96.0" />
+        <RowConstraints maxHeight="672.0" minHeight="672.0" percentHeight="0.0" prefHeight="672.0" />
+    </rowConstraints>
+    <children>
+        <Pane prefHeight="644.0" prefWidth="1024.0" GridPane.rowIndex="1">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1024.0" spacing="32.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="32.0">
+                     <children>
+                        <JFXRadioButton fx:id="radioAlcoholProducer" selected="true" styleClass="custom-jfx-radio-button" text="Alcohol Producer">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="accountType" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="radioTTBAgent" styleClass="custom-jfx-radio-button" text="TTB Agent" toggleGroup="$accountType" />
+                     </children>
+                  </HBox>
+                  <JFXTextField fx:id="emailText" labelFloat="true" promptText="Email" styleClass="custom-jfx-text-field" />
+                  <JFXPasswordField fx:id="passwordText" labelFloat="true" promptText="Password" styleClass="custom-jfx-text-field" />
+               </children>
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+            </VBox>
+            <JFXButton fx:id="createButton" layoutX="412.0" layoutY="620.0" styleClass="button-raised" text="Create Account" />
+         </children>
+        </Pane>
+        <Pane prefHeight="118.0" prefWidth="1024.0" />
+      <fx:include source="toolbar.fxml" />
+    </children>
+</GridPane>

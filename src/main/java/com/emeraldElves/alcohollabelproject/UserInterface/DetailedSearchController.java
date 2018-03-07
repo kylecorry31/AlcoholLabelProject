@@ -155,7 +155,7 @@ public class DetailedSearchController {
 
 
     public void printPage(){
-        main.printPage();
+//        main.printPage();
     }
 
     public void export(){

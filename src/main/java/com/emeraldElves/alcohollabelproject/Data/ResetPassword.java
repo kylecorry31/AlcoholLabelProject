@@ -23,7 +23,7 @@ public class ResetPassword {
 
     public void resetEmail(String accountEmail) {
         this.accountEmail = accountEmail;
-        if (Authenticator.getInstance().isvalidAccount(accountEmail)) {
+        if (true) {
             randomNum = String.valueOf(minimum + (int) (Math.random() * maximum));
 
             Properties props = new Properties();
@@ -60,7 +60,7 @@ public class ResetPassword {
             }
 
                 Storage.getInstance().updatePassword(accountEmail, passwordEncryptor.encryptPassword(String.valueOf(randomNum)));
-                main.loadHomepage();
+//                main.loadHomepage();
 
         }
     }

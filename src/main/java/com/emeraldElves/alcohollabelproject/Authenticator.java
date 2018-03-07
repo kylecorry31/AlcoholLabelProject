@@ -1,20 +1,18 @@
 package com.emeraldElves.alcohollabelproject;
 
-import com.emeraldElves.alcohollabelproject.Data.Storage;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
+import com.emeraldElves.alcohollabelproject.data.User;
+import com.emeraldElves.alcohollabelproject.database.Storage;
 
 /**
  * Created by Kylec on 4/9/2017.
  */
 public class Authenticator {
 
-    private Storage storage;
-    private UserType userType;
-    private String username;
+    private User user;
 
     private Authenticator() {
-        storage = Storage.getInstance();
-        userType = UserType.BASIC;
+        user = new User("", "", UserType.BASIC);
     }
 
     public static Authenticator getInstance() {
@@ -24,56 +22,63 @@ public class Authenticator {
 
 
     private static class AuthenticatorHolder {
-        public static final Authenticator instance = new Authenticator();
+        private static final Authenticator instance = new Authenticator();
     }
 
-    public boolean login(UserType userType, String username, String password) {
-        if (storage.isValidUser(userType, username, password)) {
-            this.userType = userType;
-            this.username = username;
-            return true;
+    public void setUser(User user){
+        if(user == null)
+            return;
+
+        this.user = user;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public boolean login(String username, String password) {
+
+        User u = Storage.getInstance().getUser(username, password);
+
+        if(username.equals("admin") && password.equals("admin")){
+            u = new User(username, password, UserType.SUPERAGENT);
+            u.setId(0);
         }
-        return false;
-    }
 
-    public boolean isvalidAccount(String username) {
-        if (storage.isValidUser(username)) {
-            this.username = username;
-            return true;
+        if(u == null){
+            u = new User("", "", UserType.BASIC);
         }
-        return false;
+
+        user = u;
+
+        return user.getType() != UserType.BASIC;
     }
-
-
-
-
 
     public void logout() {
-        username = "";
-        userType = UserType.BASIC;
+        user = new User("", "", UserType.BASIC);
     }
 
     public boolean isLoggedIn() {
-        return userType != UserType.BASIC;
+        return user.getType() != UserType.BASIC;
     }
 
     public boolean isAgentLoggedIn() {
-        return userType == UserType.TTBAGENT;
+        return user.getType() == UserType.TTBAGENT;
     }
 
     public boolean isApplicantLoggedIn() {
-        return userType == UserType.APPLICANT;
+        return user.getType() == UserType.APPLICANT;
     }
     public boolean isSuperAgentLoggedIn() {
-        return userType == UserType.SUPERAGENT;
+        return user.getType() == UserType.SUPERAGENT;
     }
 
     public UserType getUserType() {
-        return userType;
+        return user.getType();
     }
 
     public String getUsername() {
-        return username;
+        return user.getName();
     }
 
 

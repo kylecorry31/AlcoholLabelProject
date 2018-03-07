@@ -1,222 +1,28 @@
 package com.emeraldElves.alcohollabelproject.UserInterface;
 
-import com.emeraldElves.alcohollabelproject.Data.*;
-import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.ApacheDerbyDatabase;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.print.PageLayout;
-import javafx.print.PrinterJob;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 public class Main extends Application {
 
-    public static Stage stage;
-    public static Storage storage;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        UISwitcher.getInstance().setMain(this);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ApplicationSubmissionPage.fxml"));
-        Parent root = loader.load();
-//        UISwitcher.getInstance().setStage(primaryStage);
-//        UISwitcher.getInstance().switchToPage(UISwitcher.HOME_PAGE);
-//        primaryStage.setResizable(false);
-
-
-//        ApplicationDetailController controller = loader.getController();
-
-//        COLA cola = new COLA("Hollow Creek Moonshine", AlcoholType.DISTILLEDSPIRITS, "180001", ProductSource.DOMESTIC);
-//        cola.setAlcoholContent(35);
-//        cola.setFancifulName("Apple Pie");
-//        cola.setId(1);
-//        cola.setFormula("Nothing cool here");
-//        cola.setSubmissionDate(LocalDate.now());
-//        cola.setApprovalDate(LocalDate.now().plusDays(2));
-//        cola.setLabelImage(new ProxyLabelImage("labeltest.jpg"));
-//        cola.setStatus(ApplicationStatus.APPROVED);
-//
-//        storage.updateCOLA(cola);
-
-//        controller.setAlcohol(storage.getCOLA(1));
-
-        ApplicationSubmissionController controller = loader.getController();
-        controller.setApplicantID(10);
         primaryStage.setTitle("Alcohol Label Project");
         primaryStage.getIcons().add(new Image(("images/logo.png")));
+        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.HOME_PAGE);
+        Parent root = page.getRoot();
         root.getStylesheets().add("/style/style.css");
         primaryStage.setScene(new Scene(root,1024,768));
         primaryStage.show();
-        stage = primaryStage;
-    }
-
-
-    public void printPage(){
-        PrinterJob job = PrinterJob.createPrinterJob();
-        if(job != null){
-            job.showPrintDialog(stage);
-            PageLayout pageLayout = job.getPrinter().getDefaultPageLayout();
-            double scaleX = pageLayout.getPrintableWidth() / stage.getWidth();
-            double scaleY = pageLayout.getPrintableHeight() / stage.getHeight();
-            double minimumScale = Math.min(scaleX, scaleY);
-            Scale scale = new Scale(minimumScale, minimumScale);
-            stage.getScene().getRoot().getTransforms().add(scale);
-            job.printPage(stage.getScene().getRoot());
-            job.endJob();
-            stage.getScene().getRoot().getTransforms().add(new Scale(1/minimumScale, 1/minimumScale));
-        }
-    }
-
-    /**
-     * Loads the given fxml file, and inits the controller of the file
-     * @param fxml File to load
-     */
-
-    public void loadFXML(String fxml){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        try {
-            Parent root = loader.load();
-            root.getStylesheets().add("/style/material.css");
-
-            //Log.console(loader.getController());
-
-            IController controller = loader.getController();
-            Bundle bundle = new Bundle();
-            bundle.putMain("main",this);
-            controller.init(bundle);
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void loadFXML(String fxml, String searchTerm){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        try {
-            Parent root = loader.load();
-            root.getStylesheets().add("/style/material.css");
-            IController controller = loader.getController();
-            Bundle bundle = new Bundle();
-            bundle.putMain("main",this);
-            bundle.putString("searchTerm", searchTerm);
-            controller.init(bundle);
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * Loads the given fxml file, and inits the controller of the file with a bundle of the
-     * application
-     * @param fxml File to be loaded
-     * @param application Application to be bundled
-     */
-    public void loadFXML(String fxml, SubmittedApplication application){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        try {
-            Parent root = loader.load();
-            root.getStylesheets().add("/style/material.css");
-            IController controller = loader.getController();
-            Bundle bundle = new Bundle();
-            bundle.putApplication("app",application);
-            bundle.putMain("main",this);
-            controller.init(bundle);
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * loads fxml that needs a saved application
-     * @param fxml The fxml file to load
-     * @param application The saved application to load
-     */
-    public void loadFXML(String fxml, SavedApplication application){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        try {
-            Parent root = loader.load();
-            root.getStylesheets().add("/style/material.css");
-            IController controller = loader.getController();
-            Bundle bundle = new Bundle();
-            bundle.putSavedApplication("saved",application);
-            bundle.putMain("main",this);
-            controller.init(bundle);
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Loads the given fxml file, and inits the controller of the file
-     * @param fxml The fxml file to be loaded
-     * @param potentialUser The potential user to be bundled
-     */
-    public void loadFXML(String fxml, PotentialUser potentialUser){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        try {
-            Parent root = loader.load();
-            root.getStylesheets().add("/style/material.css");
-            IController controller = loader.getController();
-            Bundle bundle = new Bundle();
-            bundle.putPotentialUser("user",potentialUser);
-            bundle.putMain("main",this);
-            controller.init(bundle);
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Loads the fxml file when looking at detailed search
-     * @param fxml File to be loaded
-     * @param application Application to be looked at
-     * @param searchTerm Search term to look at
-     */
-    public void loadFXML(String fxml, SubmittedApplication application, String searchTerm){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        try {
-            Parent root = loader.load();
-            root.getStylesheets().add("/style/material.css");
-            DetailedSearchController controller = loader.getController();
-            //only one instance of this
-            controller.init(this, application, searchTerm);
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loadHomepage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage.fxml"));
-        try {
-            ToolbarController.onLoginPage=false;
-            Parent root = loader.load();
-            root.getStylesheets().add("/style/material.css");
-            HomeController controller = loader.getController();
-            controller.init(this);
-            stage.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void main(String[] args) {
-        storage = Storage.getInstance();
-        storage.setDatabase(new ApacheDerbyDatabase("cola.db"));
+        Storage.getInstance().setDatabase(new ApacheDerbyDatabase("cola.db"));
         launch(args);
     }
 

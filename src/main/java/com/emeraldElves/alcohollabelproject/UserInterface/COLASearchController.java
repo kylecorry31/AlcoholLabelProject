@@ -121,10 +121,13 @@ public class COLASearchController implements Initializable {
 
     private void filterList(List<COLA> appList) {
 //        appList.removeIf(p -> (p.getStatus() != ApplicationStatus.APPROVED));
-        appList.removeIf(p -> (!p.getBrandName().toLowerCase().contains(searchTerm.toLowerCase()) && !p.getFancifulName().toLowerCase().contains(searchTerm.toLowerCase())));
-        appList.removeIf(p -> (filterBeers.isSelected() && p.getType() == AlcoholType.BEER));
-        appList.removeIf(p -> (filterWine.isSelected() && p.getType() == AlcoholType.WINE));
-        appList.removeIf(p -> (filterSpirits.isSelected() && p.getType() == AlcoholType.DISTILLEDSPIRITS));
+        appList.removeIf(p -> {
+            boolean remove = !p.getBrandName().toLowerCase().contains(searchTerm.toLowerCase()) && !p.getFancifulName().toLowerCase().contains(searchTerm.toLowerCase());
+            remove = remove || filterBeers.isSelected() && p.getType() == AlcoholType.BEER;
+            remove = remove || filterWine.isSelected() && p.getType() == AlcoholType.WINE;
+            remove = remove || filterSpirits.isSelected() && p.getType() == AlcoholType.DISTILLEDSPIRITS;
+            return remove;
+        });
     }
 
     public void saveTSV(ActionEvent e) {

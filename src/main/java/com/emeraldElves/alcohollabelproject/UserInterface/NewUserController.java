@@ -176,7 +176,7 @@ public class NewUserController implements IController {
         if (Storage.getInstance().applyForUser(new PotentialUser(FullName, repID, Email, PhoneNumber, userType,
                 password, newDate, permitNum, address, company))){
             //errorMsg.setVisible(false);
-            main.loadHomepage();
+//            main.loadHomepage();
         } else {
             errorMsg.setVisible(true);
         }
@@ -197,6 +197,6 @@ public class NewUserController implements IController {
     }
 
     public void GoHome(){
-        main.loadHomepage();
+//        main.loadHomepage();
     }
 }

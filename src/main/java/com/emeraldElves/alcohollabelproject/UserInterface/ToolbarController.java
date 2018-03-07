@@ -47,12 +47,26 @@ public class ToolbarController implements Initializable {
                 goHome();
                 break;
             case BASIC:
-//                main.loadFXML("/fxml/Login.fxml");
+                UIManager.getInstance().displayPage(logButton.getScene(), UIManager.LOGIN_PAGE);
                 break;
         }
     }
 
     public void utilityButton() {
+
+        switch (Authenticator.getInstance().getUserType()) {
+            case BASIC:
+                utility.setVisible(true);
+                UIManager.getInstance().displayPage(utility.getScene(), UIManager.CREATE_ACCOUNT_PAGE);
+                break;
+            case APPLICANT:
+                UIManager.Page page = UIManager.getInstance().loadPage(UIManager.NEW_APPLICATION_PAGE);
+                ApplicationSubmissionController controller = page.getController();
+                controller.setApplicantID(Authenticator.getInstance().getUser().getId());
+                UIManager.getInstance().displayPage(utility.getScene(), page);
+                break;
+        }
+
 //        switch (Authenticator.getInstance().getUserType()) {
 //            case TTBAGENT:
 //                main.loadFXML("/fxml/TTBWorkflowPage.fxml");
@@ -84,28 +98,29 @@ public class ToolbarController implements Initializable {
         switch (Authenticator.getInstance().getUserType()) {
             case SUPERAGENT:
                 extraButton.setVisible(true);
-                extraButton.setText("REVIEW ALL APPLICATIONS");
+                extraButton.setText("Review all Applications");
                 utility.setVisible(true);
-                utility.setText("REVIEW POTENTIAL USERS");
-                logButton.setText("LOG OUT");
+                utility.setText("Review New Users");
+                logButton.setText("Log Out");
                 break;
             case TTBAGENT:
                 extraButton.setVisible(false);
                 utility.setVisible(true);
-                utility.setText("APPLICATIONS");
-                logButton.setText("LOG OUT");
+                utility.setText("Applications");
+                logButton.setText("Log Out");
                 break;
             case APPLICANT:
                 extraButton.setVisible(true);
+                extraButton.setText("My Applications");
                 utility.setVisible(true);
-                utility.setText("MY APPLICATIONS");
-                logButton.setText("LOG OUT");
+                utility.setText("Create Application");
+                logButton.setText("Log Out");
                 break;
             default:
                 extraButton.setVisible(false);
                 utility.setVisible(true);
-                utility.setText("APPLY FOR ACCOUNT");
-                logButton.setText("LOGIN");
+                utility.setText("Apply for Account");
+                logButton.setText("Login");
                 break;
         }
         if (onLoginPage) {

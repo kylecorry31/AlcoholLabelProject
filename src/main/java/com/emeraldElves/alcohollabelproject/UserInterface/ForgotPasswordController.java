@@ -26,7 +26,7 @@ public class ForgotPasswordController implements IController {
             Log.console(usernameField.getText());
             return;
         }
-        main.loadHomepage();
+//        main.loadHomepage();
 
 
     }

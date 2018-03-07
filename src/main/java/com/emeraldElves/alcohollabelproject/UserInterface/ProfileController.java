@@ -91,7 +91,7 @@ public class ProfileController implements IController {
     }
 
     public void updatePassword(){
-        main.loadFXML("/fxml/ChangeUserPassword.fxml");
+//        main.loadFXML("/fxml/ChangeUserPassword.fxml");
     }
 
     public void returnHome() {
@@ -100,6 +100,6 @@ public class ProfileController implements IController {
         modifyAddress();
         modifyPhoneNum();
         modifyCompany();
-        main.loadHomepage();
+//        main.loadHomepage();
     }
 }

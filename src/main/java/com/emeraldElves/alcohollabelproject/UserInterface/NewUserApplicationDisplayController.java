@@ -94,7 +94,7 @@ public class NewUserApplicationDisplayController implements IController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     PotentialUser rowData = row.getItem();
-                    main.loadFXML("/fxml/AccountApplicationPage.fxml",rowData);
+//                    main.loadFXML("/fxml/AccountApplicationPage.fxml",rowData);
                 }
             });
             return row;
@@ -104,7 +104,7 @@ public class NewUserApplicationDisplayController implements IController {
 
 
     public void goHome() {
-        main.loadFXML("/fxml/HomePage.fxml");
+//        main.loadFXML("/fxml/HomePage.fxml");
     }
 
 }
