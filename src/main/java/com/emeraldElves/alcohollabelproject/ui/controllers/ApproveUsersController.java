@@ -2,6 +2,7 @@ package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
+import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,32 +53,15 @@ public class ApproveUsersController implements Initializable {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     User rowData = row.getItem();
                     // Detail view for user
+                    UIManager.Page page = UIManager.getInstance().loadPage(UIManager.APPROVE_USER_PAGE);
+                    ApproveUserController controller = page.getController();
+                    controller.setUser(rowData);
+                    UIManager.getInstance().displayPage(resultsTable.getScene(), page);
                 }
             });
             return row;
         });
 
-    }
-
-
-    public void approveUser(){
-        User user = resultsTable.getSelectionModel().getSelectedItem();
-        if(user != null){
-            user.setApproved(true);
-            // Send email
-            Storage.getInstance().updateUser(user);
-            System.out.println("Approved user");
-            data.remove(user);
-        }
-    }
-
-    public void rejectUser(){
-        User user = resultsTable.getSelectionModel().getSelectedItem();
-        if(user != null){
-            // Send email
-            Storage.getInstance().deleteUser(user);
-            data.remove(user);
-        }
     }
 
 }

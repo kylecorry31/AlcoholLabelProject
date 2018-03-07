@@ -1,6 +1,7 @@
 package com.emeraldElves.alcohollabelproject.ui;
 
 import com.emeraldElves.alcohollabelproject.database.ApacheDerbyDatabase;
+import com.emeraldElves.alcohollabelproject.database.IDatabase;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -9,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
+    private static IDatabase database;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -19,10 +22,17 @@ public class Main extends Application {
         root.getStylesheets().add("/style/style.css");
         primaryStage.setScene(new Scene(root,1024,768));
         primaryStage.show();
+
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            if(database != null)
+                database.disconnect();
+            System.out.println("Shut down database");
+        });
     }
 
     public static void main(String[] args) {
-        Storage.getInstance().setDatabase(new ApacheDerbyDatabase("cola.db"));
+        database = new ApacheDerbyDatabase("cola.db");
+        Storage.getInstance().setDatabase(database);
         
         launch(args);
     }

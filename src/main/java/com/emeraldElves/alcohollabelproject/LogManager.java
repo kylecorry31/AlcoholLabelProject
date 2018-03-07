@@ -16,26 +16,30 @@ public class LogManager {
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy.HH.mm.ss");
 
     private LogManager() {}
-    private static class logSingleton{
-        public static final LogManager instance = new LogManager();
+    private static class LogManagerHolder {
+        private static final LogManager instance = new LogManager();
     }
     public static LogManager getInstance(){
-        return logSingleton.instance;
+        return LogManagerHolder.instance;
     }
 
-    public void writeFile (String path) {
+    private void writeFile (String text) {
         try {
-            FileUtils.writeStringToFile(new File("Log.txt"), path, true);
+            FileUtils.writeStringToFile(new File("Log.txt"), text, true);
         }
         catch (IOException e) {
-            System.out.println("unable to create file");
+            System.err.println("Unable to create log file");
         }
     }
-    public void logAction(String classTag, String specialMessage) {
+    public void log(String classTag, String specialMessage) {
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String newTime = sdf.format(timestamp);
-        writeFile(newTime + " " + classTag + " " + specialMessage + "\n");
+
+        String line = String.format("[%s] %s: %s", timestamp.toString(), classTag, specialMessage);
+
+        System.out.println(line);
+
+        writeFile(line + "\n");
     }
 
 }

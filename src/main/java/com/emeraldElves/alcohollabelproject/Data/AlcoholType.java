@@ -4,18 +4,24 @@ package com.emeraldElves.alcohollabelproject.Data;
  * Created by keionbis on 4/3/17.
  */
 public enum AlcoholType {
-    BEER(0),
-    WINE(1),
-    DISTILLEDSPIRITS(2);
+    BEER(0, "Malt Beverages"),
+    WINE(1, "Wine"),
+    DISTILLEDSPIRITS(2, "Distilled Spirits");
 
     private int value;
+    private String displayName;
 
-    AlcoholType(int value) {
+    AlcoholType(int value, String displayName) {
         this.value = value;
+        this.displayName = displayName;
     }
 
     public int getValue() {
         return value;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public static AlcoholType fromInt(int val) {

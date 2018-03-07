@@ -40,9 +40,9 @@ public class Database {
             connection.setAutoCommit(false);
             statement = connection.createStatement();
             connected = true;
-            LogManager.getInstance().logAction(TAG, "Connected to database: " + dbName);
+            LogManager.getInstance().log(TAG, "Connected to database: " + dbName);
         } catch (SQLException e) {
-            LogManager.getInstance().logAction(TAG, "Could not connect to databaase: " + dbName + "\n" +
+            LogManager.getInstance().log(TAG, "Could not connect to databaase: " + dbName + "\n" +
                     e.getMessage());
             e.printStackTrace();
             return false;

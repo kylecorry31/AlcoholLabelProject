@@ -2,6 +2,7 @@ package com.emeraldElves.alcohollabelproject.database;
 
 import com.emeraldElves.alcohollabelproject.Data.*;
 import com.emeraldElves.alcohollabelproject.IDGenerator.IDCounter;
+import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 
@@ -319,7 +320,7 @@ public class Storage {
                     String.format("%s VARCHAR (256)", COLA.DB_LABEL_IMAGE),
                     String.format("%s BIGINT", COLA.DB_APPLICANT_ID),
             });
-            System.out.println("Created table " + COLA.DB_TABLE);
+            LogManager.getInstance().log("Storage", "Created table " + COLA.DB_TABLE);
         }
 
         if (!database.doesTableExist(User.DB_TABLE)) {
@@ -336,7 +337,7 @@ public class Storage {
                     String.format("%s BIGINT", User.DB_REP_ID),
                     String.format("%s BIGINT", User.DB_PERMIT_NO),
             });
-            System.out.println("Created table " + User.DB_TABLE);
+            LogManager.getInstance().log("Storage", "Created table " + User.DB_TABLE);
         }
 
         if (!database.doesTableExist(IDCounter.DB_TABLE)) {
@@ -346,7 +347,7 @@ public class Storage {
                     String.format("%s DATE", IDCounter.DB_LAST_MODIFIED),
             });
             saveCounter(new IDCounter(-1, LocalDate.now()));
-            System.out.println("Created table " + IDCounter.DB_TABLE);
+            LogManager.getInstance().log("Storage", "Created table " + IDCounter.DB_TABLE);
         }
     }
 
