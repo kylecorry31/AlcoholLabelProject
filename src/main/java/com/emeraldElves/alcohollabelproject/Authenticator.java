@@ -42,10 +42,11 @@ public class Authenticator {
 
         if(username.equals("admin") && password.equals("admin")){
             u = new User(username, password, UserType.SUPERAGENT);
+            u.setApproved(true);
             u.setId(0);
         }
 
-        if(u == null){
+        if(u == null || !u.isApproved()){
             u = new User("", "", UserType.BASIC);
         }
 

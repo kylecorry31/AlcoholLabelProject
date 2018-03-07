@@ -105,6 +105,7 @@ public class Storage {
                 String.format("%s = '%s'", User.DB_NAME, user.getName()),
                 String.format("%s = '%s'", User.DB_PASSWORD, user.getPassword()),
                 String.format("%s = '%s'", User.DB_USER_TYPE, user.getType().toString()),
+                String.format("%s = %b", User.DB_APPROVED, user.isApproved()),
                 String.format("%s = '%s'", User.DB_COMPANY, user.getCompany()),
                 String.format("%s = '%s'", User.DB_ADDRESS, user.getAddress()),
                 String.format("%s = '%s'", User.DB_PHONE, user.getPhoneNumber().getPhoneNumber()),

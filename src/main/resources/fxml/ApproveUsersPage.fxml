@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.ApproveUsersController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="96.0" minHeight="96.0" prefHeight="96.0" />
+        <RowConstraints maxHeight="672.0" minHeight="672.0" prefHeight="672.0" />
+    </rowConstraints>
+    <children>
+        <Pane fx:id="resultsPane" maxHeight="700.0" prefHeight="700.0" prefWidth="815.0" GridPane.rowIndex="1">
+            <children>
+                <TableView fx:id="resultsTable" layoutX="36.0" prefHeight="672.0">
+                    <columns>
+                        <TableColumn fx:id="idNumberCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="ID" />
+                        <TableColumn fx:id="nameCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Name" />
+                        <TableColumn fx:id="emailCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Email" />
+                        <TableColumn fx:id="repCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Rep. ID / Permit ID" />
+                        <TableColumn fx:id="userTypeCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Account Privileges" />
+                    </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#approveUser" text="Approve" />
+                        <MenuItem mnemonicParsing="false" onAction="#rejectUser" text="Reject" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+                </TableView>
+            </children>
+        </Pane>
+      <fx:include source="toolbar.fxml" />
+      <fx:include source="toolbar.fxml" />
+    </children>
+</GridPane>

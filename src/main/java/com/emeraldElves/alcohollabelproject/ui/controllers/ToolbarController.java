@@ -63,6 +63,9 @@ public class ToolbarController implements Initializable {
                 controller.setApplicantID(Authenticator.getInstance().getUser().getId());
                 UIManager.getInstance().displayPage(utility.getScene(), page);
                 break;
+            case SUPERAGENT:
+                UIManager.getInstance().displayPage(utility.getScene(), UIManager.APPROVE_USERS_PAGE);
+                break;
         }
 
 //        switch (Authenticator.getInstance().getUserType()) {

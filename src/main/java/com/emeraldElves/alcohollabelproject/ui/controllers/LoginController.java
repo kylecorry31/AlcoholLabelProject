@@ -35,22 +35,13 @@ public class LoginController implements Initializable{
     public void login(ActionEvent e) throws UnsupportedEncodingException {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        if (password == null || password.isEmpty() || password.length() == 1){
+        if (password == null || password.isEmpty()){
             errorMsg.setVisible(true);
             return;
         }
-//        Log.console(Authenticator.getInstance().login(UserType.TTBAGENT, username, password));
-//        Log.console(Storage.getInstance().getAgentPassword(username));
-//        Log.console(EncryptPassword.checkPassword(password,Storage.getInstance().getAgentPassword(username)));
+        boolean login = Authenticator.getInstance().login(username, password);
 
-        User user = Storage.getInstance().getUser(username, password);
-
-        if(username.equals("admin") && password.equals("admin")){
-            user = new User(username, password, UserType.SUPERAGENT);
-        }
-
-        if (user != null) {
-            Authenticator.getInstance().setUser(user);
+        if (login) {
             errorMsg.setVisible(false);
             ToolbarController.onLoginPage = false;
             UIManager.getInstance().displayPage(usernameField.getScene(), UIManager.HOME_PAGE);
