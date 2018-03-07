@@ -43,7 +43,6 @@ public class LoginController implements Initializable{
 
         if (login) {
             errorMsg.setVisible(false);
-            ToolbarController.onLoginPage = false;
             UIManager.getInstance().displayPage(usernameField.getScene(), UIManager.HOME_PAGE);
         } else {
             errorMsg.setVisible(true);
@@ -58,6 +57,5 @@ public class LoginController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ToolbarController.onLoginPage = true;
     }
 }

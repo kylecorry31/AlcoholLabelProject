@@ -26,7 +26,6 @@ public class ToolbarController implements Initializable {
     public static boolean onLoginPage = false;
 
     public void goHome() {
-        onLoginPage = false;
         UIManager.getInstance().displayPage(logButton.getScene(), UIManager.HOME_PAGE);
     }
 
@@ -124,8 +123,6 @@ public class ToolbarController implements Initializable {
                 logButton.setText("Login");
                 break;
         }
-        if (onLoginPage) {
-            logButton.setVisible(false);
-        }
+        logButton.setVisible(!onLoginPage);
     }
 }

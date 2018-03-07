@@ -1,5 +1,6 @@
 package com.emeraldElves.alcohollabelproject.ui;
 
+import com.emeraldElves.alcohollabelproject.ui.controllers.ToolbarController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,10 +34,11 @@ public class UIManager {
 
 
     public Page loadPage(String page){
+        ToolbarController.onLoginPage = page.equals(LOGIN_PAGE);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
         try {
             Parent root = loader.load();
-            return new Page(loader, root);
+            return new Page(loader, root, page);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,6 +50,7 @@ public class UIManager {
     }
 
     public void displayPage(Scene scene, Page page){
+        ToolbarController.onLoginPage = page.getUrl().equals(LOGIN_PAGE);
         loadStylesheets(scene);
         scene.setRoot(page.getRoot());
     }
@@ -60,10 +63,12 @@ public class UIManager {
     public class Page {
         private FXMLLoader loader;
         private Parent root;
+        private String url;
 
-        public Page(FXMLLoader loader, Parent root) {
+        public Page(FXMLLoader loader, Parent root, String url) {
             this.loader = loader;
             this.root = root;
+            this.url = url;
         }
 
         public Parent getRoot() {
@@ -72,6 +77,10 @@ public class UIManager {
 
         public <T> T getController(){
             return loader.getController();
+        }
+
+        public String getUrl() {
+            return url;
         }
     }
 
