@@ -75,7 +75,7 @@ public class ApplicationSubmissionController implements Initializable{
     private ScrollPane scrollPane;
 
     @FXML
-    private JFXTextArea formulaText;
+    private JFXTextField formulaText;
 
     @FXML
     private JFXButton uploadButton;
