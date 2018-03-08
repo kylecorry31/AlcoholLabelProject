@@ -1,0 +1,28 @@
+Accounts
+--------
+* Improve log in (unique emails, log in via email rather than name)
+* Improve password strength requirements
+* Allow user to see their password when typing it (little eye icon)
+* Confirm password field
+
+TTB Agent
+---------
+* Max application limit
+* Prefer type of application
+* Transfer application to another agent
+* Attach message to application
+
+Super Agent
+-----------
+* See all applications
+
+Applicants
+----------
+* Edit applications
+* Withdraw application
+* Add ability to remove image from submission form
+* Add all other fields
+
+Other
+-----
+* Send email when application or account status changes
