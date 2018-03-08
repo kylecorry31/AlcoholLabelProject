@@ -243,7 +243,6 @@
 
 .list-item {
     -fx-padding: 16;
-    -fx-pref-width: 300;
     -fx-spacing: 8;
     -fx-alignment: CENTER_LEFT;
     -fx-border-width: 0 0 1 0;
@@ -273,6 +272,10 @@
 
 .list-item-empty * {
    -fx-text-fill: grey;
+}
+
+.list {
+    -fx-padding: 0;
 }
 
 .subhead {

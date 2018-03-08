@@ -8,6 +8,7 @@ import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.ui.controllers.ApplicationDetailController;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.Storage;
+import com.jfoenix.controls.JFXScrollPane;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -15,7 +16,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -34,30 +40,18 @@ public class COLASearchController implements Initializable {
     private Set<String> possibleSuggestions = new HashSet<>();
     @FXML
     private TextField searchField;
+
     @FXML
-    private TableView<COLA> resultsTable;
+    private VBox searchList;
+
     @FXML
-    private TableColumn<COLA, String> dateCol;
-    @FXML
-    private TableColumn<COLA, String> manufacturerCol;
-    @FXML
-    private TableColumn<COLA, String> brandCol;
-    @FXML
-    private TableColumn<COLA, String> typeCol;
-    @FXML
-    private TableColumn<COLA, String> contentCol;
+    private ScrollPane scrollPane;
+
     @FXML
     private Button saveBtn;
-    @FXML
-    private MenuItem contextSaveBtn;
+
     @FXML
     private Label descriptionLabel;
-    @FXML
-    private CheckMenuItem filterBeers;
-    @FXML
-    private CheckMenuItem filterWine;
-    @FXML
-    private CheckMenuItem filterSpirits;
 
     private ObservableList<COLA> data = FXCollections.observableArrayList();
 
@@ -87,15 +81,73 @@ public class COLASearchController implements Initializable {
 
         this.searchTerm = searchTerm;
 
-        SearchFilter filter = genFilter();
-
-        data.addAll(colaSearchHandler.filteredSearch(filter));
+        populateList();
 
         //Find & add matching applications
         descriptionLabel.setText("Showing top " + data.size() + " results for \"" + searchTerm + "\"");
         descriptionLabel.setVisible(true);
         saveBtn.setDisable(data.size() == 0);
-        contextSaveBtn.setDisable(data.size() == 0);
+    }
+
+    private void populateList(){
+        List<COLA> colas = colaSearchHandler.filteredSearch(genFilter());
+
+        searchList.getChildren().clear();
+
+        if(colas.isEmpty()){
+            VBox userListItem = new VBox();
+            Label emptyLabel = new Label();
+            emptyLabel.setText("No applications");
+            userListItem.getChildren().add(emptyLabel);
+            userListItem.getStyleClass().add("list-item-empty");
+            searchList.getChildren().add(userListItem);
+        }
+
+        for(COLA c: colas){
+            HBox applicationListItem = new HBox();
+            VBox itemName = new VBox();
+            itemName.setAlignment(Pos.CENTER_LEFT);
+            itemName.setSpacing(16);
+            Label brandLabel = new Label(c.getBrandName());
+            Label fancifulLabel = new Label(c.getFancifulName());
+            fancifulLabel.getStyleClass().add("subhead");
+            itemName.getChildren().addAll(brandLabel, fancifulLabel);
+            itemName.setPrefWidth(512);
+
+            VBox itemDesc = new VBox();
+            itemDesc.setAlignment(Pos.CENTER_RIGHT);
+            itemDesc.setSpacing(8);
+            itemDesc.setPadding(new Insets(0, 16, 0, 0));
+            Label serialLabel = new Label(String.format("Serial No. %s", c.getSerialNumber()));
+            serialLabel.setFont(new Font(10));
+            serialLabel.getStyleClass().add("subhead");
+
+            Label dateLabel = new Label(String.format("Completed on %s", c.getApprovalDate().toString()));
+            dateLabel.setFont(new Font(10));
+            dateLabel.getStyleClass().add("subhead");
+
+            Label idLabel = new Label(String.format("TTB ID #%d", c.getId()));
+            idLabel.setFont(new Font(10));
+            idLabel.getStyleClass().add("subhead");
+
+            itemDesc.getChildren().addAll(serialLabel, dateLabel, idLabel);
+            itemDesc.setPrefWidth(512);
+
+
+            applicationListItem.getChildren().addAll(itemName, itemDesc);
+            applicationListItem.getStyleClass().add("list-item");
+
+            applicationListItem.setOnMouseClicked(mouseEvent -> {
+                UIManager.Page page = UIManager.getInstance().loadPage(UIManager.APPLICATION_DETAIL_PAGE);
+                ApplicationDetailController controller = page.getController();
+                controller.setSearchTerm(searchTerm);
+                controller.setAlcohol(c);
+                UIManager.getInstance().displayPage(searchList.getScene(), page);
+            });
+
+            searchList.getChildren().add(applicationListItem);
+        }
+
     }
 
     private SearchFilter genFilter(){
@@ -104,17 +156,17 @@ public class COLASearchController implements Initializable {
 
         filter = filter.or(new StatusFilter(ApplicationStatus.APPROVED));
 
-        if (filterBeers.isSelected()){
-            filter = filter.or(new TypeFilter(AlcoholType.BEER));
-        }
-
-        if(filterWine.isSelected()){
-            filter = filter.or(new TypeFilter(AlcoholType.WINE));
-        }
-
-        if(filterSpirits.isSelected()){
-            filter = filter.or(new TypeFilter(AlcoholType.DISTILLEDSPIRITS));
-        }
+//        if (filterBeers.isSelected()){
+//            filter = filter.or(new TypeFilter(AlcoholType.BEER));
+//        }
+//
+//        if(filterWine.isSelected()){
+//            filter = filter.or(new TypeFilter(AlcoholType.WINE));
+//        }
+//
+//        if(filterSpirits.isSelected()){
+//            filter = filter.or(new TypeFilter(AlcoholType.DISTILLEDSPIRITS));
+//        }
 
         return filter;
     }
@@ -174,34 +226,7 @@ public class COLASearchController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        dateCol.setCellValueFactory(p -> {
-            LocalDate date = p.getValue().getApprovalDate();
-            return new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(date.toString()));
-        });
-
-        manufacturerCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(p.getValue().getFancifulName())));
-
-        brandCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(p.getValue().getBrandName())));
-
-        typeCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(p.getValue().getType().getDisplayName())));
-
-        contentCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(String.format("%.1f%%", p.getValue().getAlcoholContent()))));
-
-        resultsTable.setItems(data);
-        resultsTable.setRowFactory(tv -> {
-            TableRow<COLA> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    COLA rowData = row.getItem();
-                    UIManager.Page page = UIManager.getInstance().loadPage(UIManager.APPLICATION_DETAIL_PAGE);
-                    ApplicationDetailController controller = page.getController();
-                    controller.setAlcohol(rowData);
-                    controller.setSearchTerm(searchTerm);
-                    UIManager.getInstance().displayPage(resultsTable.getScene(), page);
-                }
-            });
-            return row;
-        });
+        JFXScrollPane.smoothScrolling(scrollPane);
 
         descriptionLabel.setVisible(false);
 
@@ -210,7 +235,6 @@ public class COLASearchController implements Initializable {
         });
 
         Platform.runLater(() -> {
-//            allApps = Storage.getInstance().getAllCOLAs();
             colaSearchHandler.receiveAllCOLAs();
             search(searchTerm);
             refreshSuggestions();

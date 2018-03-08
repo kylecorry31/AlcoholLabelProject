@@ -87,7 +87,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <ImageView fx:id="labelImage" fitWidth="512.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="labelImage" fitWidth="480.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <Label alignment="CENTER" prefWidth="1024.0" style="-fx-text-fill: -color-accent; -fx-font-weight: bold;" text="Applicant Information" textAlignment="CENTER">

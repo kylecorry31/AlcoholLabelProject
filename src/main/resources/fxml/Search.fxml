@@ -2,20 +2,17 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.CheckMenuItem?>
-<?import javafx.scene.control.ContextMenu?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <GridPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" pickOnBounds="false" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.COLASearchController">
     <columnConstraints>
@@ -23,8 +20,7 @@
     </columnConstraints>
     <rowConstraints>
         <RowConstraints percentHeight="0.0" />
-        <RowConstraints percentHeight="0.0" />
-        <RowConstraints percentHeight="0.0" />
+        <RowConstraints percentHeight="0.0" prefHeight="672.0" />
     </rowConstraints>
     <children>
         <Pane prefHeight="96.0" prefWidth="1024.0">
@@ -34,7 +30,6 @@
         </Pane>
         <Pane prefHeight="115.0" prefWidth="1024.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
             <children>
-                <Group layoutX="260.0" layoutY="36.0" />
                 <Label fx:id="descriptionLabel" alignment="CENTER" layoutY="81.0" prefHeight="20.0" prefWidth="1024.0" text="N/A" />
             <Hyperlink layoutX="105.0" layoutY="77.0" onMouseClicked="#advancedSearch" text="Advanced Search" />
             <HBox alignment="CENTER" layoutX="183.0" layoutY="-9.0" prefHeight="100.0" prefWidth="715.0" spacing="32.0">
@@ -44,39 +39,104 @@
                   <JFXButton fx:id="saveBtn" onAction="#saveCSV" styleClass="button-raised" text="Export Results" />
                </children>
             </HBox>
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="150.0" prefHeight="522.0" prefWidth="1024.0">
+               <content>
+                  <VBox fx:id="searchList" prefWidth="1024.0" styleClass="list">
+                     <children>
+                        <HBox prefWidth="1024.0" styleClass="list-item" VBox.vgrow="NEVER">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefWidth="512.0" spacing="16.0">
+                                 <children>
+                                    <Label text="Brand Name" />
+                                    <Label styleClass="subhead" text="Fanciful Name" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_RIGHT" prefWidth="512.0" spacing="8.0">
+                                 <children>
+                                    <Label styleClass="subhead" text="Serial No. 180001">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="subhead" text="Completed on 2018-03-08">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="subhead" text="TTB ID #18067001000001">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets right="16.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefWidth="1024.0" styleClass="list-item">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefWidth="512.0" spacing="16.0">
+                                 <children>
+                                    <Label text="Brand Name" />
+                                    <Label styleClass="subhead" text="Fanciful Name" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_RIGHT" prefWidth="512.0" spacing="8.0">
+                                 <children>
+                                    <Label styleClass="subhead" text="Serial No. 180001">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="subhead" text="Completed on 2018-03-08">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="subhead" text="TTB ID #18067001000001">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefWidth="1024.0" styleClass="list-item">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefWidth="512.0" spacing="16.0">
+                                 <children>
+                                    <Label text="Brand Name" />
+                                    <Label styleClass="subhead" text="Fanciful Name" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_RIGHT" prefWidth="512.0" spacing="8.0">
+                                 <children>
+                                    <Label styleClass="subhead" text="Serial No. 180001">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="subhead" text="Completed on 2018-03-08">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="subhead" text="TTB ID #18067001000001">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
             </children></Pane>
-        <Pane fx:id="resultsPane" GridPane.rowIndex="2">
-            <children>
-                <TableView fx:id="resultsTable" prefHeight="557.0" prefWidth="1024.0">
-                    <columns>
-                        <TableColumn fx:id="dateCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Date" />
-                        <TableColumn fx:id="brandCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Brand" />
-                        <TableColumn fx:id="manufacturerCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Fanciful" />
-                        <TableColumn fx:id="typeCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Type" />
-                        <TableColumn fx:id="contentCol" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" resizable="false" text="Alcohol Content" />
-                    </columns>
-                    <contextMenu>
-                        <ContextMenu>
-                            <items>
-                                <Menu mnemonicParsing="false" text="Filter">
-                                    <items>
-                                        <CheckMenuItem fx:id="filterBeers" mnemonicParsing="false" onAction="#filter" text="Hide Beers" />
-                                        <CheckMenuItem fx:id="filterWine" mnemonicParsing="false" onAction="#filter" text="Hide Wine" />
-                                        <CheckMenuItem fx:id="filterSpirits" mnemonicParsing="false" onAction="#filter" text="Hide Distilled Spirits" />
-                                    </items>
-                                </Menu>
-                                <Menu mnemonicParsing="false" text="Export">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#saveTSV" text="TSV" />
-                                        <MenuItem fx:id="contextSaveBtn" mnemonicParsing="false" onAction="#saveCSV" text="CSV" />
-                              <MenuItem mnemonicParsing="false" onAction="#saveUserChar" text="Custom Separator" />
-                                    </items>
-                                </Menu>
-                            </items>
-                        </ContextMenu>
-                    </contextMenu>
-                </TableView>
-            </children>
-        </Pane>
     </children>
 </GridPane>
