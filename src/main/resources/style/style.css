@@ -3,7 +3,7 @@
     -color-primary-dark: #233d66;
     -color-primary-light: #3c6ab2;
     -color-accent: #008000;
-    -color-background: whitesmoke;
+    -color-background: #f2f2f2;
     -color-text: BLACK;
     -color-button-text: WHITE;
 }
@@ -234,4 +234,47 @@
 
 .list-cell {
 	-fx-cell-size: 40;
+}
+
+.label-header {
+    -fx-text-fill: grey;
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.list-item {
+    -fx-padding: 16;
+    -fx-pref-width: 300;
+    -fx-spacing: 8;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: lightgrey;
+    -fx-background-color: -color-background;
+}
+
+.list-holder {
+    -fx-padding: 0;
+    -fx-pref-width: 300;
+    -fx-border-width: 0 2 0 0;
+    -fx-border-color: lightgrey;
+}
+
+.list-item-selected {
+    -fx-background-color: #e0e0e0;
+}
+
+
+.list-item-empty {
+    -fx-padding: 16;
+    -fx-pref-width: 300;
+    -fx-spacing: 8;
+    -fx-alignment: CENTER;
+    -fx-background-color: -color-background;
+}
+
+.list-item-empty * {
+   -fx-text-fill: grey;
+}
+
+.subhead {
+    -fx-text-fill: grey;
 }

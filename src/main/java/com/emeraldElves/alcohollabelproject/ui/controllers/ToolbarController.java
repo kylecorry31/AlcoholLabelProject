@@ -63,7 +63,7 @@ public class ToolbarController implements Initializable {
                 UIManager.getInstance().displayPage(utility.getScene(), page);
                 break;
             case SUPERAGENT:
-                UIManager.getInstance().displayPage(utility.getScene(), UIManager.APPROVE_USERS_PAGE);
+                UIManager.getInstance().displayPage(utility.getScene(), UIManager.APPROVE_USER_PAGE);
                 break;
         }
 
@@ -95,6 +95,11 @@ public class ToolbarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        extraButton.managedProperty().bind(extraButton.visibleProperty());
+        utility.managedProperty().bind(utility.visibleProperty());
+        logButton.managedProperty().bind(logButton.visibleProperty());
+
         switch (Authenticator.getInstance().getUserType()) {
             case SUPERAGENT:
                 extraButton.setVisible(true);

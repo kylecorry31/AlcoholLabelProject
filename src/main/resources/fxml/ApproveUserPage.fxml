@@ -22,70 +22,100 @@
     <children>
         <Pane prefHeight="644.0" prefWidth="1024.0" GridPane.rowIndex="1">
          <children>
-            <ScrollPane id="custom-scroll-pane" fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1024.0">
-               <content>
-                  <VBox prefWidth="1024.0" spacing="48.0" styleClass="custom-vbox">
-                     <padding>
-                        <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
-                     </padding>
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label prefWidth="150.0" style="-fx-font-weight: bold;" text="Name:" />
-                              <Label fx:id="nameText" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label prefWidth="150.0" style="-fx-font-weight: bold;" text="Privilege Level:" />
-                              <Label fx:id="privilegeText" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label prefWidth="150.0" style="-fx-font-weight: bold;" text="Phone Number:" />
-                              <Label fx:id="phoneText" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label prefWidth="150.0" style="-fx-font-weight: bold;" text="Email Address:" />
-                              <Label fx:id="emailText" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label prefWidth="150.0" style="-fx-font-weight: bold;" text="Representative ID:" />
-                              <Label fx:id="repText" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label prefWidth="150.0" style="-fx-font-weight: bold;" text="Permit Number:" />
-                              <Label fx:id="permitText" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label prefWidth="150.0" style="-fx-font-weight: bold;" text="Company:" />
-                              <Label fx:id="companyText" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="32.0">
-                           <children>
-                              <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" style="-fx-font-weight: bold;" text="Address:" />
-                              <Label fx:id="addressText" text="Label" wrapText="true" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </content>
-            </ScrollPane>
-            <Label id="ttbID" fx:id="dbID" layoutX="32.0" layoutY="600.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="72.0" text="ID #1" />
-            <HBox alignment="CENTER" layoutX="296.0" layoutY="600.0" prefHeight="72.0" spacing="32.0">
+            <HBox prefHeight="672.0" prefWidth="1024.0">
                <children>
-                  <JFXButton fx:id="rejectBtn" style="-fx-background-color: #800000;" styleClass="button-raised" text="Reject" />
-                  <JFXButton fx:id="approveBtn" styleClass="button-raised" text="Approve" />
+                  <ScrollPane id="custom-scroll-pane" fx:id="scrollPaneUsers" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="672.0" styleClass="list-holder">
+                     <content>
+                        <VBox fx:id="userList" prefWidth="300.0">
+                           <children>
+                              <VBox spacing="8.0" styleClass="list-item">
+                                 <children>
+                                    <Label text="First Last" />
+                                    <Label styleClass="subhead" text="Alcohol Provider" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="8.0" styleClass="list-item">
+                                 <children>
+                                    <Label text="First Last" />
+                                    <Label styleClass="subhead" text="Alcohol Provider" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane id="custom-scroll-pane" fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="672.0">
+                     <content>
+                        <VBox prefWidth="724.0" spacing="32.0" styleClass="custom-vbox">
+                           <padding>
+                              <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                           </padding>
+                           <children>
+                              <Label fx:id="noUser" alignment="CENTER" prefWidth="680.0" style="-fx-text-fill: grey;" text="No user selected" />
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="name" prefWidth="150.0" styleClass="label-header" text="Name" />
+                                    <Label fx:id="nameText" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="privilege" prefWidth="150.0" styleClass="label-header" text="Privilege Level" />
+                                    <Label fx:id="privilegeText" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="phone" prefWidth="150.0" styleClass="label-header" text="Phone Number" />
+                                    <Label fx:id="phoneText" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="email" prefWidth="150.0" styleClass="label-header" text="Email Address" />
+                                    <Label fx:id="emailText" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="repID" prefWidth="150.0" styleClass="label-header" text="Representative ID" />
+                                    <Label fx:id="repText" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="permit" prefWidth="150.0" styleClass="label-header" text="Permit Number" />
+                                    <Label fx:id="permitText" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="company" prefWidth="150.0" styleClass="label-header" text="Company" />
+                                    <Label fx:id="companyText" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                 <children>
+                                    <Label fx:id="address" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Address" />
+                                    <Label fx:id="addressText" text="Label" wrapText="true" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="72.0" spacing="32.0">
+                                 <children>
+                                    <JFXButton fx:id="rejectBtn" style="-fx-background-color: #800000;" styleClass="button-raised" text="Reject" />
+                                    <JFXButton fx:id="approveBtn" styleClass="button-raised" text="Approve" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
                </children>
             </HBox>
          </children>
