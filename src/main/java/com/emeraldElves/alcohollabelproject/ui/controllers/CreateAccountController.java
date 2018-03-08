@@ -6,10 +6,7 @@ import com.emeraldElves.alcohollabelproject.Data.UserType;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
-import com.emeraldElves.alcohollabelproject.ui.validation.EmailAddressValidator;
-import com.emeraldElves.alcohollabelproject.ui.validation.OptionalNumberValidator;
-import com.emeraldElves.alcohollabelproject.ui.validation.PhoneNumberValidator;
-import com.emeraldElves.alcohollabelproject.ui.validation.TextLengthValidator;
+import com.emeraldElves.alcohollabelproject.ui.validation.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -54,6 +51,7 @@ public class CreateAccountController implements Initializable {
         addValidator(passwordText, new RequiredFieldValidator(), "Password required");
         addValidator(repText, new OptionalNumberValidator(), "Representative ID must be a number");
         addValidator(permitText, new OptionalNumberValidator(), "Permit No. must be a number");
+        addValidator(emailText, new UniqueUserValidator(), "Email address taken");
 
     }
 
@@ -95,8 +93,7 @@ public class CreateAccountController implements Initializable {
         }
         UserType type = getUserType();
 
-        User user = new User(name, password, type);
-        user.setEmail(new EmailAddress(email));
+        User user = new User(email, name, password, type);
         user.setPhoneNumber(new PhoneNumber(phone));
         user.setAddress(address);
         user.setCompany(company);

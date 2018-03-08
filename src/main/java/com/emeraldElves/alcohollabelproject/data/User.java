@@ -34,7 +34,7 @@ public class User {
     private long repID;
     private long permitNo;
 
-    public User(String name, String password, UserType type) {
+    public User(String email, String name, String password, UserType type) {
         this.name = name;
         this.password = password;
         this.type = type;
@@ -43,7 +43,7 @@ public class User {
         company = "";
         address = "";
         phoneNumber = new PhoneNumber("");
-        email = new EmailAddress("");
+        this.email = new EmailAddress(email);
         repID = -1;
         permitNo = -1;
     }
@@ -74,10 +74,6 @@ public class User {
 
     public EmailAddress getEmail() {
         return email;
-    }
-
-    public void setEmail(EmailAddress email) {
-        this.email = email;
     }
 
     public long getRepID() {

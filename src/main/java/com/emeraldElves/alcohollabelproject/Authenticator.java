@@ -12,7 +12,7 @@ public class Authenticator {
     private User user;
 
     private Authenticator() {
-        user = new User("", "", UserType.BASIC);
+        user = new User("", "", "", UserType.BASIC);
     }
 
     public static Authenticator getInstance() {
@@ -36,18 +36,18 @@ public class Authenticator {
         return user;
     }
 
-    public boolean login(String username, String password) {
+    public boolean login(String email, String password) {
 
-        User u = Storage.getInstance().getUser(username, password);
+        User u = Storage.getInstance().getUser(email, password);
 
-        if(username.equals("admin") && password.equals("admin")){
-            u = new User(username, password, UserType.SUPERAGENT);
+        if(email.equals("admin@ttb.gov") || email.equals("admin") && password.equals("admin")){
+            u = new User("admin@fakettb.gov", email, password, UserType.SUPERAGENT);
             u.setApproved(true);
             u.setId(0);
         }
 
         if(u == null || !u.isApproved()){
-            u = new User("", "", UserType.BASIC);
+            u = new User("", "", "", UserType.BASIC);
         }
 
         user = u;
@@ -55,8 +55,12 @@ public class Authenticator {
         return user.getType() != UserType.BASIC;
     }
 
+    public boolean isEmailTaken(String email){
+        return Storage.getInstance().getUser(email) != null;
+    }
+
     public void logout() {
-        user = new User("", "", UserType.BASIC);
+        user = new User("", "", "", UserType.BASIC);
     }
 
     public boolean isLoggedIn() {

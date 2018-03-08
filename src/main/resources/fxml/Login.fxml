@@ -28,7 +28,7 @@
                <top>
                   <VBox fx:id="errorMsg" alignment="CENTER" prefHeight="50.0" translateY="-10.0" visible="false" BorderPane.alignment="CENTER">
                      <children>
-                        <Label text="Incorrect username or password." VBox.vgrow="ALWAYS">
+                        <Label text="Incorrect email or password." VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -39,7 +39,7 @@
                <center>
                   <VBox alignment="CENTER" prefHeight="115.0" prefWidth="250.0" spacing="32.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXTextField fx:id="usernameField" labelFloat="true" onAction="#login" promptText="Username" styleClass="custom-jfx-text-field" />
+                        <JFXTextField fx:id="usernameField" labelFloat="true" onAction="#login" promptText="Email address" styleClass="custom-jfx-text-field" />
                         <JFXPasswordField fx:id="passwordField" labelFloat="true" onAction="#login" promptText="Password" styleClass="custom-jfx-text-field" />
                         <JFXButton onAction="#login" styleClass="button-raised" text="Login" />
                         <Text fill="#85c5eb" onMouseClicked="#loadForgotPasswordController" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot Password?" />

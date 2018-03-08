@@ -1,6 +1,5 @@
 Accounts
 --------
-* Improve log in (unique emails, log in via email rather than name)
 * Improve password strength requirements
 * Allow user to see their password when typing it (little eye icon)
 * Confirm password field

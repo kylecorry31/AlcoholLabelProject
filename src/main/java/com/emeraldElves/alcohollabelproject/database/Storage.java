@@ -166,13 +166,21 @@ public class Storage {
         return getCOLAs(resultSet);
     }
 
-    public User getUser(String username, String password) {
+    public User getUser(String email, String password) {
         ResultSet resultSet = database.query(User.DB_TABLE, null,
-                User.DB_NAME + " = ? AND " + User.DB_PASSWORD + " = ?",
-                new String[]{username, password},
+                User.DB_EMAIL + " = ? AND " + User.DB_PASSWORD + " = ?",
+                new String[]{email, password},
                 null
         );
         return getUser(resultSet);
+    }
+
+    public User getUser(String email) {
+        ResultSet resultSet = database.query(User.DB_TABLE, null, User.DB_EMAIL + " = ?", new String[]{email}, null);
+        User u = getUser(resultSet);
+        if(u != null)
+            u.setPassword("");
+        return u;
     }
 
     public User getUser(long id) {
@@ -278,17 +286,16 @@ public class Storage {
             String company = resultSet.getString(User.DB_COMPANY);
             String address = resultSet.getString(User.DB_ADDRESS);
             PhoneNumber phoneNumber = new PhoneNumber(resultSet.getString(User.DB_PHONE));
-            EmailAddress emailAddress = new EmailAddress(resultSet.getString(User.DB_EMAIL));
+            String emailAddress = resultSet.getString(User.DB_EMAIL);
             long repID = resultSet.getLong(User.DB_REP_ID);
             long permitNo = resultSet.getLong(User.DB_PERMIT_NO);
 
-            User user = new User(name, password, type);
+            User user = new User(emailAddress, name, password, type);
             user.setId(id);
             user.setApproved(approved);
             user.setCompany(company);
             user.setAddress(address);
             user.setPhoneNumber(phoneNumber);
-            user.setEmail(emailAddress);
             user.setRepID(repID);
             user.setPermitNo(permitNo);
 

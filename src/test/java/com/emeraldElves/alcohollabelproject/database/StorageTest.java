@@ -91,8 +91,8 @@ public class StorageTest {
 
     @Test
     public void testUsers(){
-        User u1 = new User("test", "password", UserType.APPLICANT);
-        User u2 = new User("test2", "pword", UserType.TTBAGENT);
+        User u1 = new User("mail@mail.com","test", "password", UserType.APPLICANT);
+        User u2 = new User("test@gmail.com","test2", "pword", UserType.TTBAGENT);
 
         List<User> users = storage.getAllUsers();
         assertTrue(users.isEmpty());
@@ -113,16 +113,16 @@ public class StorageTest {
         assertTrue(users.contains(u1));
         assertTrue(users.contains(u2));
 
-        User u = storage.getUser("test2", "pword");
+        User u = storage.getUser("test@gmail.com", "pword");
         assertEquals(u, u2);
 
-        u = storage.getUser("testing2", "pword");
+        u = storage.getUser("testing@gmail.com", "pword");
         assertNull(u);
 
-        u = storage.getUser("test2", "paword");
+        u = storage.getUser("test@gmail.com", "paword");
         assertNull(u);
 
-        u2 = new User("test3", "paword", UserType.SUPERAGENT);
+        u2 = new User("test3@gmail.com","test3", "paword", UserType.SUPERAGENT);
         u2.setId(2);
 
 

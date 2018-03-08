@@ -20,7 +20,7 @@ public class COLAApprovalHandler {
     }
 
     public synchronized List<COLA> assignCOLAs(User user, int count){
-        User nullUser = new User("", "", UserType.TTBAGENT);
+        User nullUser = new User("", "", "", UserType.TTBAGENT);
         nullUser.setId(-1);
 
         List<COLA> unassigned = getAssignedApplications(nullUser);
