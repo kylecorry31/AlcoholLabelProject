@@ -33,7 +33,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         database = new ApacheDerbyDatabase("cola.db");
         Storage.getInstance().setDatabase(database);
-        
+
         launch(args);
     }
 

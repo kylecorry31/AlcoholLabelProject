@@ -68,6 +68,8 @@ public class ApplicationApprovalController implements Initializable {
         rejectBtn.setOnMouseClicked(mouseEvent -> reject());
         fetchBtn.setOnMouseClicked(mouseEvent -> fetchMoreApplications());
 
+        applicationList.getChildren().clear();
+
         noApplication.managedProperty().bind(noApplication.visibleProperty());
         alcInfoVbox.managedProperty().bind(alcInfoVbox.visibleProperty());
         actionButtons.managedProperty().bind(actionButtons.visibleProperty());
@@ -158,7 +160,13 @@ public class ApplicationApprovalController implements Initializable {
             applicationList.getChildren().add(applicationListItem);
         }
 
-        noApplicationSelected();
+        if(colas.isEmpty()) {
+            noApplicationSelected();
+        } else {
+            scrollPane.setVvalue(0);
+            applicationList.getChildren().get(0).getStyleClass().add("list-item-selected");
+            setApplication(colas.get(0));
+        }
     }
 
     private void approve(){

@@ -36,8 +36,7 @@ import java.util.*;
 public class COLASearchController implements Initializable {
 
     private String searchTerm;
-    private AutoCompletionBinding<String> autoCompletionBinding;
-    private Set<String> possibleSuggestions = new HashSet<>();
+
     @FXML
     private TextField searchField;
 
@@ -52,8 +51,6 @@ public class COLASearchController implements Initializable {
 
     @FXML
     private Label descriptionLabel;
-
-    private ObservableList<COLA> data = FXCollections.observableArrayList();
 
     private COLASearchHandler colaSearchHandler;
 
@@ -76,17 +73,9 @@ public class COLASearchController implements Initializable {
     }
 
     public void search(String searchTerm) {
-        //Remove previous results
-        data.clear();
-
         this.searchTerm = searchTerm;
 
         populateList();
-
-        //Find & add matching applications
-        descriptionLabel.setText("Showing top " + data.size() + " results for \"" + searchTerm + "\"");
-        descriptionLabel.setVisible(true);
-        saveBtn.setDisable(data.size() == 0);
     }
 
     private void populateList(){
@@ -109,7 +98,13 @@ public class COLASearchController implements Initializable {
             itemName.setAlignment(Pos.CENTER_LEFT);
             itemName.setSpacing(16);
             Label brandLabel = new Label(c.getBrandName());
-            Label fancifulLabel = new Label(c.getFancifulName());
+            Label fancifulLabel = new Label();
+            String labeltext = c.getFancifulName().trim();
+            if(!labeltext.isEmpty()){
+              labeltext += " ";
+            }
+            labeltext += String.format("(%s)", c.getType().getDisplayName());
+            fancifulLabel.setText(labeltext);
             fancifulLabel.getStyleClass().add("subhead");
             itemName.getChildren().addAll(brandLabel, fancifulLabel);
             itemName.setPrefWidth(512);
@@ -148,6 +143,10 @@ public class COLASearchController implements Initializable {
             searchList.getChildren().add(applicationListItem);
         }
 
+        descriptionLabel.setText("Showing top " + colas.size() + " results for \"" + searchTerm + "\"");
+        descriptionLabel.setVisible(true);
+        saveBtn.setDisable(colas.size() == 0);
+
     }
 
     private SearchFilter genFilter(){
@@ -171,26 +170,8 @@ public class COLASearchController implements Initializable {
         return filter;
     }
 
-    private void refreshSuggestions() {
-        possibleSuggestions.clear();
-
-        for(COLA app: colaSearchHandler.filteredSearch(null)){//new StatusFilter(ApplicationStatus.APPROVED))){
-            possibleSuggestions.add(app.getBrandName());
-            possibleSuggestions.add(app.getFancifulName());
-        }
-
-        if(autoCompletionBinding != null){
-            autoCompletionBinding.dispose();
-        }
-
-        autoCompletionBinding = TextFields.bindAutoCompletion(searchField, possibleSuggestions);
-        autoCompletionBinding.setPrefWidth(searchField.getPrefWidth() - 32);
-
-    }
-
     public void filter(ActionEvent e) {
         Platform.runLater(() -> {
-            refreshSuggestions();
             search(e);
         });
 
@@ -237,7 +218,6 @@ public class COLASearchController implements Initializable {
         Platform.runLater(() -> {
             colaSearchHandler.receiveAllCOLAs();
             search(searchTerm);
-            refreshSuggestions();
         });
     }
 }
