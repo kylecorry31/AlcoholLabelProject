@@ -356,7 +356,7 @@ public class Storage {
                     String.format("%s VARCHAR (256)", User.DB_COMPANY),
                     String.format("%s VARCHAR (512)", User.DB_ADDRESS),
                     String.format("%s VARCHAR (11)", User.DB_PHONE),
-                    String.format("%s VARCHAR (128)", User.DB_EMAIL),
+                    String.format("%s VARCHAR (128) UNIQUE", User.DB_EMAIL),
                     String.format("%s BIGINT", User.DB_REP_ID),
                     String.format("%s BIGINT", User.DB_PERMIT_NO),
             });
