@@ -21,6 +21,8 @@ public class COLA {
     public static final String DB_LABEL_IMAGE = "label_image";
     public static final String DB_APPLICANT_ID = "applicant_id";
     public static final String DB_ASSIGNED_TO = "assigned_to";
+    public static final String DB_WINE_PH = "wine_ph";
+    public static final String DB_WINE_VINTAGE_YEAR = "wine_vintage_year";
     public static final String DB_ID = "id";
 
     public static final String DEFAULT_LABEL_IMAGE = "/images/noImage.png";
@@ -41,6 +43,9 @@ public class COLA {
     private long applicantID;
     private long assignedTo;
 
+    private int vintageYear;
+    private double winePH;
+
     public COLA(long id, String brandName, AlcoholType type, String serialNumber, ProductSource origin) {
         this.brandName = brandName;
         this.type = type;
@@ -56,6 +61,24 @@ public class COLA {
         approvalDate = LocalDate.of(1990, 1, 1);
         status = ApplicationStatus.RECEIVED;
         labelImage = new ProxyLabelImage(DEFAULT_LABEL_IMAGE);
+        vintageYear = -1;
+        winePH = -1;
+    }
+
+    public int getVintageYear() {
+        return vintageYear;
+    }
+
+    public void setVintageYear(int vintageYear) {
+        this.vintageYear = vintageYear;
+    }
+
+    public double getWinePH() {
+        return winePH;
+    }
+
+    public void setWinePH(double winePH) {
+        this.winePH = winePH;
     }
 
     public long getAssignedTo() {
@@ -179,6 +202,8 @@ public class COLA {
                 ", labelImage=" + labelImage +
                 ", applicantID=" + applicantID +
                 ", assignedTo=" + assignedTo +
+                ", vintageYear=" + vintageYear +
+                ", winePH=" + winePH +
                 '}';
     }
 
@@ -191,6 +216,7 @@ public class COLA {
                 Double.compare(cola.alcoholContent, alcoholContent) == 0 &&
                 applicantID == cola.applicantID &&
                 assignedTo == cola.assignedTo &&
+                Double.compare(cola.winePH, winePH) == 0 &&
                 Objects.equals(brandName, cola.brandName) &&
                 type == cola.type &&
                 Objects.equals(serialNumber, cola.serialNumber) &&
@@ -200,13 +226,14 @@ public class COLA {
                 Objects.equals(submissionDate, cola.submissionDate) &&
                 Objects.equals(approvalDate, cola.approvalDate) &&
                 status == cola.status &&
-                Objects.equals(labelImage, cola.labelImage);
+                Objects.equals(labelImage, cola.labelImage) &&
+                Objects.equals(vintageYear, cola.vintageYear);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage, applicantID, assignedTo);
+        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage, applicantID, assignedTo, vintageYear, winePH);
     }
 
 }

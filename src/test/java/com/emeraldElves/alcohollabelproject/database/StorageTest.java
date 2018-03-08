@@ -53,11 +53,12 @@ public class StorageTest {
         List<COLA> infos = storage.getAllCOLAs();
 
         assertEquals(1, infos.size());
-        System.out.println(infos);
         assertTrue(infos.contains(test));
 
         COLA test2 = new COLA(idGenerator.generateID(),"Brand2", AlcoholType.WINE, "654321", ProductSource.IMPORTED);
         test2.setAlcoholContent(5);
+        test2.setWinePH(10);
+        test2.setVintageYear(2018);
         storage.saveCOLA(test2);
 
         infos = storage.getAllCOLAs();

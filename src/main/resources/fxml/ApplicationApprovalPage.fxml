@@ -127,6 +127,18 @@
                                                       <Label fx:id="submissionDateText" text="Label" wrapText="true" />
                                                    </children>
                                                 </HBox>
+                                                <HBox fx:id="winePHHbox" alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Wine PH" />
+                                                      <Label fx:id="winePHText" text="Label" wrapText="true" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="vintageYearHbox" alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Vintage Year" />
+                                                      <Label fx:id="vintageYearText" text="Label" wrapText="true" />
+                                                   </children>
+                                                </HBox>
                                              </children>
                                           </VBox>
                                           <ImageView fx:id="labelImage" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />

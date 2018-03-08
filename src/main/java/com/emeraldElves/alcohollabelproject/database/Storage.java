@@ -15,14 +15,15 @@ import java.util.List;
 public class Storage {
 
     private IDatabase database;
-    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
+    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
             COLA.DB_ID, COLA.DB_BRAND_NAME, COLA.DB_ALCOHOL_TYPE,
             COLA.DB_SERIAL_NUMBER, COLA.DB_ORIGIN,
             COLA.DB_ALCOHOL_CONTENT, COLA.DB_FANCIFUL_NAME,
             COLA.DB_SUBMISSION_DATE, COLA.DB_STATUS,
             COLA.DB_APPROVAL_DATE, COLA.DB_LABEL_IMAGE,
             COLA.DB_APPLICANT_ID, COLA.DB_ASSIGNED_TO,
-            COLA.DB_FORMULA);
+            COLA.DB_FORMULA, COLA.DB_WINE_PH,
+            COLA.DB_WINE_VINTAGE_YEAR);
     private final String USER_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
             User.DB_NAME, User.DB_PASSWORD,
             User.DB_USER_TYPE, User.DB_APPROVED,
@@ -59,6 +60,8 @@ public class Storage {
                 String.valueOf(info.getApplicantID()),
                 String.valueOf(info.getAssignedTo()),
                 ApacheDerbyDatabase.addQuotes(info.getFormula()),
+                String.valueOf(info.getWinePH()),
+                String.valueOf(info.getVintageYear()),
         });
     }
 
@@ -101,6 +104,8 @@ public class Storage {
                 String.format("%s = %d", COLA.DB_APPLICANT_ID, info.getApplicantID()),
                 String.format("%s = %d", COLA.DB_ASSIGNED_TO, info.getAssignedTo()),
                 String.format("%s = '%s'", COLA.DB_FORMULA, info.getFormula().replaceAll("'", "''")),
+                String.format("%s = %f", COLA.DB_WINE_PH, info.getWinePH()),
+                String.format("%s = %d", COLA.DB_WINE_VINTAGE_YEAR, info.getVintageYear()),
         };
 
         database.update(COLA.DB_TABLE, values, COLA.DB_ID + " = " + info.getId(), null);
@@ -237,6 +242,8 @@ public class Storage {
             long applicantID = resultSet.getLong(COLA.DB_APPLICANT_ID);
             long assignedTo = resultSet.getLong(COLA.DB_ASSIGNED_TO);
             String formula = resultSet.getString(COLA.DB_FORMULA);
+            int vintageYear = resultSet.getInt(COLA.DB_WINE_VINTAGE_YEAR);
+            double winePH = resultSet.getDouble(COLA.DB_WINE_PH);
 
             COLA cola = new COLA(id, brandName, type, serialNumber, origin);
             cola.setAlcoholContent(alcoholContent);
@@ -248,6 +255,8 @@ public class Storage {
             cola.setApplicantID(applicantID);
             cola.setAssignedTo(assignedTo);
             cola.setFormula(formula);
+            cola.setVintageYear(vintageYear);
+            cola.setWinePH(winePH);
 
             return cola;
         } catch (SQLException e) {
@@ -342,6 +351,8 @@ public class Storage {
                     String.format("%s BIGINT", COLA.DB_APPLICANT_ID),
                     String.format("%s BIGINT", COLA.DB_ASSIGNED_TO),
                     String.format("%s VARCHAR (512)", COLA.DB_FORMULA),
+                    String.format("%s DOUBLE", COLA.DB_WINE_PH),
+                    String.format("%s INT", COLA.DB_WINE_VINTAGE_YEAR),
             });
             LogManager.getInstance().log("Storage", "Created table " + COLA.DB_TABLE);
         }

@@ -13,6 +13,7 @@ import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.ui.validation.AlphaNumericValidator;
 import com.emeraldElves.alcohollabelproject.ui.validation.TextLengthValidator;
 import com.emeraldElves.alcohollabelproject.data.COLA;
+import com.emeraldElves.alcohollabelproject.ui.validation.OptionalYearValidator;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
@@ -20,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
@@ -44,6 +46,9 @@ public class ApplicationSubmissionController implements Initializable{
 
     @FXML
     private JFXTextField alcoholContent;
+
+    @FXML
+    private JFXTextField winePH, wineVintageYear;
 
     @FXML
     private Label ttbID;
@@ -137,6 +142,22 @@ public class ApplicationSubmissionController implements Initializable{
         cola.setFormula(formula);
         cola.setApplicantID(applicantID);
 
+        if(alcoholType == AlcoholType.WINE){
+            try {
+                double winePh = Double.valueOf(winePH.getText());
+                cola.setWinePH(winePh);
+            } catch (Exception e){
+                // EMPTY
+            }
+
+            try {
+                int year = Integer.valueOf(wineVintageYear.getText());
+                cola.setVintageYear(year);
+            } catch (Exception e){
+                // EMPTY
+            }
+        }
+
         if(labelFile != null) {
             Path imageSrc = Paths.get((labelFile.getPath()));
             Path targetDir = Paths.get("Labels");
@@ -173,15 +194,28 @@ public class ApplicationSubmissionController implements Initializable{
             UIManager.getInstance().displayPage(brandName.getScene(), UIManager.HOME_PAGE);
         }
 
+        winePH.managedProperty().bind(winePH.visibleProperty());
+        wineVintageYear.managedProperty().bind(wineVintageYear.visibleProperty());
+
+        winePH.visibleProperty().bind(wineRadio.selectedProperty());
+        wineVintageYear.visibleProperty().bind(wineRadio.selectedProperty());
+
+        wineRadio.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
+            winePH.clear();
+            wineVintageYear.clear();
+        });
+
         serialNumber.setText(colaSubmissionHandler.getNextSerialNumber(user));
 
         id = colaSubmissionHandler.getNextCOLAID();
         ttbID.setText("TTB ID #" + String.valueOf(id));
 
-        setRequired(brandName, "Brand name required");
-        setNumericOnly(alcoholContent, "Must be a percentage");
-        setRequiredLength(serialNumber, "Serial number must be 6 digits", 6);
-        setAlphaNumericOnly(serialNumber, "Serial number must be alpha-numeric");
+        addValidator(brandName, new RequiredFieldValidator(), "Brand name required");
+        addValidator(alcoholContent, new OptionalDoubleValidator(), "Must be a percentage");
+        addValidator(serialNumber, new TextLengthValidator(6), "Serial number must be 6 digits");
+        addValidator(serialNumber, new AlphaNumericValidator(), "Serial number must be alpha-numeric");
+        addValidator(winePH, new OptionalDoubleValidator(), "Must be a number");
+        addValidator(wineVintageYear, new OptionalYearValidator(), "Must be a valid year (YYYY)");
 
         JFXScrollPane.smoothScrolling(scrollPane);
 
@@ -214,53 +248,7 @@ public class ApplicationSubmissionController implements Initializable{
         return ProductSource.IMPORTED;
     }
 
-    private void setRequiredLength(JFXTextField textField, String message, int length){
-        TextLengthValidator validator = new TextLengthValidator(length);
-        validator.setMessage(message);
-
-        textField.getValidators().add(validator);
-
-        textField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                textField.validate();
-            }
-        });
-
-        validators.add(validator);
-    }
-
-    private void setRequired(JFXTextField textField, String message){
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage(message);
-
-        textField.getValidators().add(validator);
-
-        textField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                textField.validate();
-            }
-        });
-
-        validators.add(validator);
-    }
-
-    private void setAlphaNumericOnly(JFXTextField textField, String message){
-        AlphaNumericValidator validator = new AlphaNumericValidator();
-        validator.setMessage(message);
-
-        textField.getValidators().add(validator);
-
-        textField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                textField.validate();
-            }
-        });
-
-        validators.add(validator);
-    }
-
-    private void setNumericOnly(JFXTextField textField, String message){
-        OptionalDoubleValidator validator = new OptionalDoubleValidator();
+    private <T extends TextField & IFXTextInputControl> void addValidator(T textField, ValidatorBase validator, String message){
         validator.setMessage(message);
 
         textField.getValidators().add(validator);

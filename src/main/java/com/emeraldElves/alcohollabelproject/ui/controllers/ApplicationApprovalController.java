@@ -1,6 +1,7 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.Authenticator;
+import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.COLAApprovalHandler;
@@ -49,6 +50,12 @@ public class ApplicationApprovalController implements Initializable {
     @FXML
     private Label noApplication;
 
+    @FXML
+    private Label winePHText, vintageYearText;
+
+    @FXML
+    private HBox winePHHbox, vintageYearHbox;
+
     private COLAApprovalHandler colaApprovalHandler;
 
     private List<COLA> assignedApplications;
@@ -73,6 +80,8 @@ public class ApplicationApprovalController implements Initializable {
         noApplication.managedProperty().bind(noApplication.visibleProperty());
         alcInfoVbox.managedProperty().bind(alcInfoVbox.visibleProperty());
         actionButtons.managedProperty().bind(actionButtons.visibleProperty());
+        winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
+        vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
 
         noApplicationSelected();
 
@@ -90,6 +99,26 @@ public class ApplicationApprovalController implements Initializable {
 
     private void setApplication(COLA cola){
         this.cola = cola;
+
+        if(cola.getType() == AlcoholType.WINE){
+            winePHHbox.setVisible(true);
+            vintageYearHbox.setVisible(true);
+
+            if(cola.getWinePH() != -1.0){
+                winePHText.setText(String.format("%.1f", cola.getWinePH()));
+            } else {
+                winePHHbox.setVisible(false);
+            }
+
+            if(cola.getVintageYear() != -1){
+                vintageYearText.setText(String.format("%d", cola.getVintageYear()));
+            } else {
+                vintageYearHbox.setVisible(false);
+            }
+        } else {
+            winePHHbox.setVisible(false);
+            vintageYearHbox.setVisible(false);
+        }
 
         noApplication.setVisible(false);
 
