@@ -8,12 +8,9 @@ import com.emeraldElves.alcohollabelproject.Data.UserType;
 import com.emeraldElves.alcohollabelproject.data.COLASubmissionHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.ui.DialogFileSelector;
-import com.emeraldElves.alcohollabelproject.ui.validation.OptionalDoubleValidator;
+import com.emeraldElves.alcohollabelproject.ui.validation.*;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
-import com.emeraldElves.alcohollabelproject.ui.validation.AlphaNumericValidator;
-import com.emeraldElves.alcohollabelproject.ui.validation.TextLengthValidator;
 import com.emeraldElves.alcohollabelproject.data.COLA;
-import com.emeraldElves.alcohollabelproject.ui.validation.OptionalYearValidator;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
@@ -127,7 +124,6 @@ public class ApplicationSubmissionController implements Initializable{
         String fanciful_name = fancifulName.getText();
         AlcoholType alcoholType = getAlcoholType();
         ProductSource source = getProductSource();
-        String formula = formulaText.getText();
 
         double alcoholContentPercent = 0;
         try {
@@ -139,7 +135,12 @@ public class ApplicationSubmissionController implements Initializable{
         COLA cola = new COLA(id, brand_name, alcoholType, serial_number, source);
         cola.setFancifulName(fanciful_name);
         cola.setAlcoholContent(alcoholContentPercent);
-        cola.setFormula(formula);
+        try {
+            long formula = Long.valueOf(formulaText.getText());
+            cola.setFormula(formula);
+        } catch (Exception e){
+            // EMPTY
+        }
         cola.setApplicantID(applicantID);
 
         if(alcoholType == AlcoholType.WINE){
@@ -216,6 +217,7 @@ public class ApplicationSubmissionController implements Initializable{
         addValidator(serialNumber, new AlphaNumericValidator(), "Serial number must be alpha-numeric");
         addValidator(winePH, new OptionalDoubleValidator(), "Must be a number");
         addValidator(wineVintageYear, new OptionalYearValidator(), "Must be a valid year (YYYY)");
+        addValidator(formulaText, new OptionalNumberValidator(), "Must be a number");
 
         JFXScrollPane.smoothScrolling(scrollPane);
 

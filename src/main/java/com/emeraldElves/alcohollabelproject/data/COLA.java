@@ -35,7 +35,7 @@ public class COLA {
     private long id;
     private String fancifulName;
     private double alcoholContent;
-    private String formula;
+    private long formula;
     private LocalDate submissionDate;
     private LocalDate approvalDate;
     private ApplicationStatus status;
@@ -53,7 +53,7 @@ public class COLA {
         this.origin = origin;
         this.id = id;
         fancifulName = "";
-        formula = "";
+        formula = -1;
         alcoholContent = 0;
         applicantID = -1;
         assignedTo = -1;
@@ -117,11 +117,11 @@ public class COLA {
         return alcoholContent;
     }
 
-    public String getFormula() {
+    public long getFormula() {
         return formula;
     }
 
-    public void setFormula(String formula) {
+    public void setFormula(long formula) {
         this.formula = formula;
     }
 
@@ -195,7 +195,7 @@ public class COLA {
                 ", id=" + id +
                 ", fancifulName='" + fancifulName + '\'' +
                 ", alcoholContent=" + alcoholContent +
-                ", formula='" + formula + '\'' +
+                ", formula=" + formula +
                 ", submissionDate=" + submissionDate +
                 ", approvalDate=" + approvalDate +
                 ", status=" + status +
@@ -214,20 +214,20 @@ public class COLA {
         COLA cola = (COLA) o;
         return id == cola.id &&
                 Double.compare(cola.alcoholContent, alcoholContent) == 0 &&
+                formula == cola.formula &&
                 applicantID == cola.applicantID &&
                 assignedTo == cola.assignedTo &&
+                vintageYear == cola.vintageYear &&
                 Double.compare(cola.winePH, winePH) == 0 &&
                 Objects.equals(brandName, cola.brandName) &&
                 type == cola.type &&
                 Objects.equals(serialNumber, cola.serialNumber) &&
                 origin == cola.origin &&
                 Objects.equals(fancifulName, cola.fancifulName) &&
-                Objects.equals(formula, cola.formula) &&
                 Objects.equals(submissionDate, cola.submissionDate) &&
                 Objects.equals(approvalDate, cola.approvalDate) &&
                 status == cola.status &&
-                Objects.equals(labelImage, cola.labelImage) &&
-                Objects.equals(vintageYear, cola.vintageYear);
+                Objects.equals(labelImage, cola.labelImage);
     }
 
     @Override

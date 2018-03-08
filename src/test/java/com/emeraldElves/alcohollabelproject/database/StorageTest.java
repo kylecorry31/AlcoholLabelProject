@@ -47,7 +47,7 @@ public class StorageTest {
         test.setSubmissionDate(LocalDate.of(2018, 2, 24));
         test.setApprovalDate(LocalDate.of(2018, 3, 2));
         test.setApplicantID(10);
-        test.setFormula("wow");
+        test.setFormula(1798);
         storage.saveCOLA(test);
 
         List<COLA> infos = storage.getAllCOLAs();

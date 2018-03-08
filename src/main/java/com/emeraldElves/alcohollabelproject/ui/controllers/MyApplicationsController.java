@@ -130,7 +130,11 @@ public class MyApplicationsController implements Initializable {
         originText.setText(cola.getOrigin().getDisplayName());
         fancifulText.setText(cola.getFancifulName());
         alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", cola.getAlcoholContent(), cola.getAlcoholContent() * 2));
-        formulaText.setText(cola.getFormula());
+        if(cola.getFormula() == -1){
+            formulaText.setText("N/A");
+        } else {
+            formulaText.setText(String.valueOf(cola.getFormula()));
+        }
         submissionDateText.setText(cola.getSubmissionDate().toString());
         statusText.setText(cola.getStatus().getMessage());
 

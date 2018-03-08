@@ -93,7 +93,11 @@ public class ApplicationDetailController implements Initializable {
         approvalDateText.setText(alcohol.getApprovalDate().toString());
         ttbID.setText("TTB ID #" + String.valueOf(alcohol.getId()));
         labelImage.setImage(alcohol.getLabelImage().display());
-        formulaText.setText(alcohol.getFormula());
+        if(alcohol.getFormula() == -1){
+            formulaText.setText("N/A");
+        } else {
+            formulaText.setText(String.valueOf(alcohol.getFormula()));
+        }
         ImageUtils.centerImage(labelImage);
 
         User user = Storage.getInstance().getUser(alcohol.getApplicantID());

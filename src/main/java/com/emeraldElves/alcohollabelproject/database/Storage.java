@@ -59,7 +59,7 @@ public class Storage {
                 ApacheDerbyDatabase.addQuotes(info.getLabelImageFilename()),
                 String.valueOf(info.getApplicantID()),
                 String.valueOf(info.getAssignedTo()),
-                ApacheDerbyDatabase.addQuotes(info.getFormula()),
+                String.valueOf(info.getFormula()),
                 String.valueOf(info.getWinePH()),
                 String.valueOf(info.getVintageYear()),
         });
@@ -103,7 +103,7 @@ public class Storage {
                 String.format("%s = '%s'", COLA.DB_LABEL_IMAGE, info.getLabelImageFilename()),
                 String.format("%s = %d", COLA.DB_APPLICANT_ID, info.getApplicantID()),
                 String.format("%s = %d", COLA.DB_ASSIGNED_TO, info.getAssignedTo()),
-                String.format("%s = '%s'", COLA.DB_FORMULA, info.getFormula().replaceAll("'", "''")),
+                String.format("%s = %d", COLA.DB_FORMULA, info.getFormula()),
                 String.format("%s = %f", COLA.DB_WINE_PH, info.getWinePH()),
                 String.format("%s = %d", COLA.DB_WINE_VINTAGE_YEAR, info.getVintageYear()),
         };
@@ -241,7 +241,7 @@ public class Storage {
             ILabelImage labelImage = new ProxyLabelImage(resultSet.getString(COLA.DB_LABEL_IMAGE));
             long applicantID = resultSet.getLong(COLA.DB_APPLICANT_ID);
             long assignedTo = resultSet.getLong(COLA.DB_ASSIGNED_TO);
-            String formula = resultSet.getString(COLA.DB_FORMULA);
+            long formula = resultSet.getLong(COLA.DB_FORMULA);
             int vintageYear = resultSet.getInt(COLA.DB_WINE_VINTAGE_YEAR);
             double winePH = resultSet.getDouble(COLA.DB_WINE_PH);
 
@@ -350,7 +350,7 @@ public class Storage {
                     String.format("%s VARCHAR (256)", COLA.DB_LABEL_IMAGE),
                     String.format("%s BIGINT", COLA.DB_APPLICANT_ID),
                     String.format("%s BIGINT", COLA.DB_ASSIGNED_TO),
-                    String.format("%s VARCHAR (512)", COLA.DB_FORMULA),
+                    String.format("%s BIGINT", COLA.DB_FORMULA),
                     String.format("%s DOUBLE", COLA.DB_WINE_PH),
                     String.format("%s INT", COLA.DB_WINE_VINTAGE_YEAR),
             });

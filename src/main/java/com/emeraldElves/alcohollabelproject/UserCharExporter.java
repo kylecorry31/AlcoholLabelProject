@@ -31,7 +31,7 @@ public class UserCharExporter implements IExporter {
             encoded_str += escapeStr(app.getApplication().getAlcohol().getBrandName()) + delim; //brandname
             encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getOrigin())) + delim; //origin
             encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getType())) + delim; //type
-            encoded_str += escapeStr(app.getApplication().getAlcohol().getFormula()) + delim; //formula
+//            encoded_str += escapeStr(app.getApplication().getAlcohol().getFormula()) + delim; //formula
             encoded_str += escapeStr(app.getApplication().getAlcohol().getSerialNumber()) + delim; //serial
             if (app.getApplication().getAlcohol().getType() == AlcoholType.WINE) {
 //                encoded_str += escapeStr(String.valueOf(app.getApplication().getAlcohol().getWineInfo().pH)) + delim; //ph
