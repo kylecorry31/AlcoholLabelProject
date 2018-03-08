@@ -183,7 +183,7 @@ public class COLASearchController implements Initializable {
 
         brandCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(p.getValue().getBrandName())));
 
-        typeCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(p.getValue().getType().name())));
+        typeCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(p.getValue().getType().getDisplayName())));
 
         contentCol.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(StringEscapeUtils.escapeJava(String.format("%.1f%%", p.getValue().getAlcoholContent()))));
 
@@ -196,6 +196,7 @@ public class COLASearchController implements Initializable {
                     UIManager.Page page = UIManager.getInstance().loadPage(UIManager.APPLICATION_DETAIL_PAGE);
                     ApplicationDetailController controller = page.getController();
                     controller.setAlcohol(rowData);
+                    controller.setSearchTerm(searchTerm);
                     UIManager.getInstance().displayPage(resultsTable.getScene(), page);
                 }
             });
