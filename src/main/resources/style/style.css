@@ -21,7 +21,7 @@
     -jfx-checked-color: -color-accent;
     -jfx-unchecked-color: -color-accent;
     -fx-text-fill: -color-text;
-    -fx-font-size: 16px;
+    -fx-font-size: 13px;
 }
 
 .custom-jfx-combo-box {

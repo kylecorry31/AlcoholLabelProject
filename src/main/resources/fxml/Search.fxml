@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
@@ -31,7 +32,7 @@
         <Pane prefHeight="115.0" prefWidth="1024.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
             <children>
                 <Label fx:id="descriptionLabel" alignment="CENTER" layoutY="81.0" prefHeight="20.0" prefWidth="1024.0" text="N/A" />
-            <Hyperlink layoutX="105.0" layoutY="77.0" onMouseClicked="#advancedSearch" text="Advanced Search" />
+            <Hyperlink layoutX="25.0" layoutY="29.0" onMouseClicked="#advancedSearch" text="Advanced Search" />
             <HBox alignment="CENTER" layoutX="183.0" layoutY="-9.0" prefHeight="100.0" prefWidth="715.0" spacing="32.0">
                <children>
                   <JFXTextField fx:id="searchField" labelFloat="true" prefHeight="26.0" prefWidth="339.0" promptText="Search" styleClass="custom-jfx-text-field" />
@@ -137,6 +138,13 @@
                   </VBox>
                </content>
             </ScrollPane>
+            <HBox alignment="CENTER" layoutX="341.0" layoutY="120.0" spacing="16.0">
+               <children>
+                  <JFXCheckBox fx:id="showBeer" selected="true" styleClass="custom-jfx-check-box" text="Malt Beverages" />
+                  <JFXCheckBox fx:id="showWine" selected="true" styleClass="custom-jfx-check-box" text="Wine" />
+                  <JFXCheckBox fx:id="showSpirits" selected="true" styleClass="custom-jfx-check-box" text="Distilled Spirits" />
+               </children>
+            </HBox>
             </children></Pane>
     </children>
 </GridPane>

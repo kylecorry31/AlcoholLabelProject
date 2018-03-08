@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.MyApplicationsController">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="96.0" minHeight="96.0" percentHeight="0.0" prefHeight="96.0" />
+        <RowConstraints maxHeight="672.0" minHeight="672.0" percentHeight="0.0" prefHeight="672.0" />
+    </rowConstraints>
+    <children>
+        <Pane prefHeight="644.0" prefWidth="1024.0" GridPane.rowIndex="1">
+         <children>
+            <HBox prefHeight="672.0" prefWidth="1024.0">
+               <children>
+                  <VBox prefHeight="672.0" prefWidth="300.0">
+                     <children>
+                        <ScrollPane id="custom-scroll-pane" fx:id="scrollPaneApplications" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="572.0" styleClass="list-holder">
+                           <content>
+                              <VBox fx:id="applicationList" prefWidth="300.0">
+                                 <children>
+                                    <VBox spacing="8.0" styleClass="list-item">
+                                       <children>
+                                          <Label text="Brand Name" />
+                                          <Label styleClass="subhead" text="TTB ID #18067001000003" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" spacing="8.0" styleClass="list-item">
+                                       <children>
+                                          <Label text="First Last" />
+                                          <Label styleClass="subhead" text="Alcohol Provider" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" style="-fx-border-color: lightgrey; -fx-border-width: 0 2 0 0;">
+                           <children>
+                              <JFXButton fx:id="createBtn" styleClass="button-raised" text="New Application" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <ScrollPane id="custom-scroll-pane" fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="672.0">
+                     <content>
+                        <VBox prefWidth="724.0" spacing="32.0" styleClass="custom-vbox">
+                           <padding>
+                              <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                           </padding>
+                           <children>
+                              <Label fx:id="noApplication" alignment="CENTER" prefWidth="680.0" style="-fx-text-fill: grey;" text="No application selected" />
+                              <VBox fx:id="alcInfoVbox" prefWidth="724.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefWidth="724.0" style="-fx-text-fill: -color-accent; -fx-font-weight: bold;" text="Alcohol Information" textAlignment="CENTER">
+                                       <VBox.margin>
+                                          <Insets bottom="16.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox prefWidth="724.0">
+                                       <children>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="424.0" spacing="32.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label prefWidth="150.0" styleClass="label-header" text="Brand Name" />
+                                                      <Label fx:id="brandNameText" text="Label" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label prefWidth="150.0" styleClass="label-header" text="Status" />
+                                                      <Label fx:id="statusText" text="Label" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label prefWidth="150.0" styleClass="label-header" text="Type" />
+                                                      <Label fx:id="typeText" text="Label" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label prefWidth="150.0" styleClass="label-header" text="Serial Number" />
+                                                      <Label fx:id="serialText" text="Label" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label prefWidth="150.0" styleClass="label-header" text="Origin" />
+                                                      <Label fx:id="originText" text="Label" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label prefWidth="150.0" styleClass="label-header" text="Fanciful Name" />
+                                                      <Label fx:id="fancifulText" text="Label" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label prefWidth="150.0" styleClass="label-header" text="Alcohol Content" />
+                                                      <Label fx:id="alcoholContentText" text="Label" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" styleClass="label-header" text="Formula" />
+                                                      <Label fx:id="formulaText" text="Label" wrapText="true" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Submission Date" />
+                                                      <Label fx:id="submissionDateText" text="Label" wrapText="true" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <ImageView fx:id="labelImage" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <HBox fx:id="actionButtons" alignment="CENTER" prefHeight="72.0" spacing="32.0">
+                                 <children>
+                                    <JFXButton fx:id="editBtn" styleClass="button-raised" text="Edit" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+        </Pane>
+        <Pane prefHeight="118.0" prefWidth="1024.0" />
+      <fx:include source="toolbar.fxml" />
+    </children>
+</GridPane>

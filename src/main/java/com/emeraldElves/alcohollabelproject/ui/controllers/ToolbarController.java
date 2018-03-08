@@ -1,6 +1,7 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.Authenticator;
+import com.emeraldElves.alcohollabelproject.Data.UserType;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.ui.controllers.ApplicationSubmissionController;
 import javafx.fxml.FXML;
@@ -72,9 +73,9 @@ public class ToolbarController implements Initializable {
     }
 
     public void extraFunction() {
-//        if (Authenticator.getInstance().getUserType() == UserType.APPLICANT) {
-//            main.loadFXML("/fxml/ProfilePage.fxml");
-//        }
+        if (Authenticator.getInstance().getUserType() == UserType.APPLICANT) {
+            UIManager.getInstance().displayPage(extraButton.getScene(), UIManager.MY_APPLICATIONS_PAGE);
+        }
 //        if (Authenticator.getInstance().getUserType() == UserType.SUPERAGENT){
 //            main.loadFXML("/fxml/SuperagentViewAllApplications.fxml");
 //        }

@@ -23,7 +23,7 @@ public class COLA {
     public static final String DB_ASSIGNED_TO = "assigned_to";
     public static final String DB_ID = "id";
 
-    public static final String DEFAULT_LABEL_IMAGE = "/images/noLabel.png";
+    public static final String DEFAULT_LABEL_IMAGE = "/images/noImage.png";
 
     private String brandName;
     private AlcoholType type;

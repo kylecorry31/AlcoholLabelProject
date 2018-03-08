@@ -8,6 +8,7 @@ import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.ui.controllers.ApplicationDetailController;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.Storage;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -52,6 +53,10 @@ public class COLASearchController implements Initializable {
     @FXML
     private Label descriptionLabel;
 
+    @FXML
+    private JFXCheckBox showBeer, showWine, showSpirits;
+
+
     private COLASearchHandler colaSearchHandler;
 
     public COLASearchController(){
@@ -61,7 +66,6 @@ public class COLASearchController implements Initializable {
     public void setSearchTerm(String searchTerm){
         this.searchTerm = searchTerm;
         searchField.setText(searchTerm);
-//        search(searchTerm);
     }
 
     public void search(ActionEvent e) {
@@ -69,7 +73,6 @@ public class COLASearchController implements Initializable {
     }
 
     public void advancedSearch(){
-//        main.loadFXML("/fxml/AdvancedSearchPage.fxml");
     }
 
     public void search(String searchTerm) {
@@ -155,17 +158,17 @@ public class COLASearchController implements Initializable {
 
         filter = filter.or(new StatusFilter(ApplicationStatus.APPROVED));
 
-//        if (filterBeers.isSelected()){
-//            filter = filter.or(new TypeFilter(AlcoholType.BEER));
-//        }
-//
-//        if(filterWine.isSelected()){
-//            filter = filter.or(new TypeFilter(AlcoholType.WINE));
-//        }
-//
-//        if(filterSpirits.isSelected()){
-//            filter = filter.or(new TypeFilter(AlcoholType.DISTILLEDSPIRITS));
-//        }
+        if (!showBeer.isSelected()){
+            filter = filter.or(new TypeFilter(AlcoholType.BEER));
+        }
+
+        if(!showWine.isSelected()){
+            filter = filter.or(new TypeFilter(AlcoholType.WINE));
+        }
+
+        if(!showSpirits.isSelected()){
+            filter = filter.or(new TypeFilter(AlcoholType.DISTILLEDSPIRITS));
+        }
 
         return filter;
     }
@@ -210,6 +213,18 @@ public class COLASearchController implements Initializable {
         JFXScrollPane.smoothScrolling(scrollPane);
 
         descriptionLabel.setVisible(false);
+
+        showBeer.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
+            Platform.runLater(() -> search(searchTerm));
+        });
+
+        showWine.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
+            Platform.runLater(() -> search(searchTerm));
+        });
+
+        showSpirits.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
+            Platform.runLater(() -> search(searchTerm));
+        });
 
         searchField.textProperty().addListener((observableValue, s, t1) -> {
             Platform.runLater(() -> search(t1));
