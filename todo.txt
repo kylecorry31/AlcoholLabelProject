@@ -26,3 +26,4 @@ Applicants
 Other
 -----
 * Send email when application or account status changes
+* Improve advanced search features

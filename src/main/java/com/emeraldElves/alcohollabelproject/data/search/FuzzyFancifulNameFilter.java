@@ -1,6 +1,7 @@
 package com.emeraldElves.alcohollabelproject.data.search;
 
 import com.emeraldElves.alcohollabelproject.data.COLA;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 public class FuzzyFancifulNameFilter implements SearchFilter {
 
@@ -12,6 +13,8 @@ public class FuzzyFancifulNameFilter implements SearchFilter {
 
     @Override
     public boolean shouldRemove(COLA cola) {
-        return !cola.getFancifulName().toLowerCase().contains(targetFanciful);
+        if(targetFanciful.isEmpty())
+            return false;
+        return FuzzySearch.partialRatio(cola.getFancifulName().toLowerCase(), targetFanciful) < 80;
     }
 }
