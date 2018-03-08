@@ -6,6 +6,8 @@
     -color-background: #f2f2f2;
     -color-text: BLACK;
     -color-button-text: WHITE;
+    -color-approved: #008000;
+    -color-rejected: #800000;
 }
 
 .button-raised {
@@ -280,4 +282,14 @@
 
 .subhead {
     -fx-text-fill: grey;
+}
+
+.approved {
+    -fx-text-fill: -color-approved;
+    -fx-font-weight: bold;
+}
+
+.rejected {
+    -fx-text-fill: -color-rejected;
+    -fx-font-weight: bold;
 }

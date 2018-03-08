@@ -19,6 +19,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -160,6 +161,12 @@ public class MyApplicationsController implements Initializable {
             VBox applicationListItem = new VBox();
             Label nameLabel = new Label();
             nameLabel.setText(c.getBrandName());
+            if(c.getStatus() == ApplicationStatus.APPROVED){
+                nameLabel.getStyleClass().add("approved");
+            } else if (c.getStatus() == ApplicationStatus.REJECTED){
+                nameLabel.getStyleClass().add("rejected");
+            }
+
             Label idLabel = new Label();
             idLabel.setText(String.format("TTB ID #%d", c.getId()));
             idLabel.getStyleClass().add("subhead");

@@ -88,7 +88,13 @@ public class ApproveUserController implements Initializable {
             userList.getChildren().add(userListItem);
         }
 
-        noUserSelected();
+        if(users.isEmpty()) {
+            noUserSelected();
+        } else {
+            scrollPane.setVvalue(0);
+            userList.getChildren().get(0).getStyleClass().add("list-item-selected");
+            setUser(users.get(0));
+        }
     }
 
 
