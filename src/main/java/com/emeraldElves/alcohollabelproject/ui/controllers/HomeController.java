@@ -98,8 +98,6 @@ public class HomeController implements Initializable {
 
 
     public void searchDatabase() {
-//        main.loadFXML("/fxml/Search.fxml",searchbox.getText());
-
         UIManager.Page page = UIManager.getInstance().loadPage(UIManager.SEARCH_PAGE);
         COLASearchController controller = page.getController();
         controller.setSearchTerm(searchbox.getText());
@@ -163,7 +161,7 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new Thread(() -> {
             colaSearchHandler.receiveAllCOLAs();
-            alcohol = colaSearchHandler.filteredSearch(null);//new StatusFilter(ApplicationStatus.APPROVED));
+            alcohol = colaSearchHandler.filteredSearch(new StatusFilter(ApplicationStatus.APPROVED));
 
             Platform.runLater(() -> {
                 populateRecentList();
@@ -172,10 +170,8 @@ public class HomeController implements Initializable {
                 possibleSuggestions.clear();
 
                 for (COLA cola : alcohol) {
-//            if(cola.getStatus() == ApplicationStatus.APPROVED) {
                     possibleSuggestions.add(cola.getBrandName());
                     possibleSuggestions.add(cola.getFancifulName());
-//            }
                 }
 
                 autoCompletionBinding = TextFields.bindAutoCompletion(searchbox, possibleSuggestions);

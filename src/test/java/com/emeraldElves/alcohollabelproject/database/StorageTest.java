@@ -3,6 +3,7 @@ package com.emeraldElves.alcohollabelproject.database;
 import com.emeraldElves.alcohollabelproject.Data.*;
 import com.emeraldElves.alcohollabelproject.IDGenerator.ApplicationIDGenerator;
 import com.emeraldElves.alcohollabelproject.IDGenerator.TTBIDGenerator;
+import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 import org.junit.After;
@@ -24,6 +25,7 @@ public class StorageTest {
         database = new ApacheDerbyDatabase("colaTest.db");
         storage = Storage.getInstance();
         storage.setDatabase(database);
+        LogManager.getInstance().setShouldWrite(false);
     }
 
     @After
@@ -45,11 +47,13 @@ public class StorageTest {
         test.setSubmissionDate(LocalDate.of(2018, 2, 24));
         test.setApprovalDate(LocalDate.of(2018, 3, 2));
         test.setApplicantID(10);
+        test.setFormula("wow");
         storage.saveCOLA(test);
 
         List<COLA> infos = storage.getAllCOLAs();
 
         assertEquals(1, infos.size());
+        System.out.println(infos);
         assertTrue(infos.contains(test));
 
         COLA test2 = new COLA(idGenerator.generateID(),"Brand2", AlcoholType.WINE, "654321", ProductSource.IMPORTED);

@@ -264,7 +264,7 @@ public class ApacheDerbyDatabase implements IDatabase {
     }
 
     public static String addQuotes(String s){
-        return String.format("'%s'", s);
+        return String.format("'%s'", s.replaceAll("'", "''"));
     }
 
 }

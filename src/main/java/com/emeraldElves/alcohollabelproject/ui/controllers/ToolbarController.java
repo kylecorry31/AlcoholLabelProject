@@ -65,23 +65,10 @@ public class ToolbarController implements Initializable {
             case SUPERAGENT:
                 UIManager.getInstance().displayPage(utility.getScene(), UIManager.APPROVE_USER_PAGE);
                 break;
+            case TTBAGENT:
+                UIManager.getInstance().displayPage(utility.getScene(), UIManager.APPLICATION_APPROVAL_PAGE);
+                break;
         }
-
-//        switch (Authenticator.getInstance().getUserType()) {
-//            case TTBAGENT:
-//                main.loadFXML("/fxml/TTBWorkflowPage.fxml");
-//                break;
-//            case APPLICANT:
-//                main.loadFXML("/fxml/ApplicantWorkflowPage.fxml");
-//                break;
-//            case SUPERAGENT:
-//                main.loadFXML("/fxml/SuperagentWorkflowPage.fxml");
-//                break;
-//            case BASIC:
-//                utility.setVisible(true);
-//                main.loadFXML("/fxml/NewUser.fxml");
-//                break;
-//        }
     }
 
     public void extraFunction() {

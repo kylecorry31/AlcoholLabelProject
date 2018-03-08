@@ -204,3 +204,5 @@ src/main/resources/fxml/NewUser.fxml
 *.db/
 
 Labels/
+
+log.txt

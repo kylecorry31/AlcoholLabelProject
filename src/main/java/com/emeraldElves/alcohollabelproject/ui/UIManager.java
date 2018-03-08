@@ -18,6 +18,7 @@ public class UIManager {
     public static final String LOGIN_PAGE = "/fxml/Login.fxml";
     public static final String CREATE_ACCOUNT_PAGE = "/fxml/CreateAccountPage.fxml";
     public static final String APPROVE_USER_PAGE = "/fxml/ApproveUserPage.fxml";
+    public static final String APPLICATION_APPROVAL_PAGE = "/fxml/ApplicationApprovalPage.fxml";
 
 
     private static UIManager instance;

@@ -15,13 +15,14 @@ import java.util.List;
 public class Storage {
 
     private IDatabase database;
-    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
+    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
             COLA.DB_ID, COLA.DB_BRAND_NAME, COLA.DB_ALCOHOL_TYPE,
             COLA.DB_SERIAL_NUMBER, COLA.DB_ORIGIN,
             COLA.DB_ALCOHOL_CONTENT, COLA.DB_FANCIFUL_NAME,
             COLA.DB_SUBMISSION_DATE, COLA.DB_STATUS,
             COLA.DB_APPROVAL_DATE, COLA.DB_LABEL_IMAGE,
-            COLA.DB_APPLICANT_ID);
+            COLA.DB_APPLICANT_ID, COLA.DB_ASSIGNED_TO,
+            COLA.DB_FORMULA);
     private final String USER_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
             User.DB_NAME, User.DB_PASSWORD,
             User.DB_USER_TYPE, User.DB_APPROVED,
@@ -56,6 +57,8 @@ public class Storage {
                 ApacheDerbyDatabase.addQuotes(info.getApprovalDate().toString()),
                 ApacheDerbyDatabase.addQuotes(info.getLabelImageFilename()),
                 String.valueOf(info.getApplicantID()),
+                String.valueOf(info.getAssignedTo()),
+                ApacheDerbyDatabase.addQuotes(info.getFormula()),
         });
     }
 
@@ -85,17 +88,19 @@ public class Storage {
     public void updateCOLA(COLA info) {
         String values[] = new String[]{
                 String.format("%s = %d", COLA.DB_ID, info.getId()),
-                String.format("%s = '%s'", COLA.DB_BRAND_NAME, info.getBrandName()),
+                String.format("%s = '%s'", COLA.DB_BRAND_NAME, info.getBrandName().replaceAll("'", "''")),
                 String.format("%s = '%s'", COLA.DB_ALCOHOL_TYPE, info.getType().toString()),
                 String.format("%s = '%s'", COLA.DB_SERIAL_NUMBER, info.getSerialNumber()),
                 String.format("%s = '%s'", COLA.DB_ORIGIN, info.getOrigin().toString()),
                 String.format("%s = %f", COLA.DB_ALCOHOL_CONTENT, info.getAlcoholContent()),
-                String.format("%s = '%s'", COLA.DB_FANCIFUL_NAME, info.getFancifulName()),
+                String.format("%s = '%s'", COLA.DB_FANCIFUL_NAME, info.getFancifulName().replaceAll("'", "''")),
                 String.format("%s = '%s'", COLA.DB_SUBMISSION_DATE, info.getSubmissionDate().toString()),
                 String.format("%s = '%s'", COLA.DB_STATUS, info.getStatus().toString()),
                 String.format("%s = '%s'", COLA.DB_APPROVAL_DATE, info.getApprovalDate().toString()),
                 String.format("%s = '%s'", COLA.DB_LABEL_IMAGE, info.getLabelImageFilename()),
                 String.format("%s = %d", COLA.DB_APPLICANT_ID, info.getApplicantID()),
+                String.format("%s = %d", COLA.DB_ASSIGNED_TO, info.getAssignedTo()),
+                String.format("%s = '%s'", COLA.DB_FORMULA, info.getFormula().replaceAll("'", "''")),
         };
 
         database.update(COLA.DB_TABLE, values, COLA.DB_ID + " = " + info.getId(), null);
@@ -103,14 +108,14 @@ public class Storage {
 
     public void updateUser(User user){
         String values[] = new String[]{
-                String.format("%s = '%s'", User.DB_NAME, user.getName()),
-                String.format("%s = '%s'", User.DB_PASSWORD, user.getPassword()),
+                String.format("%s = '%s'", User.DB_NAME, user.getName().replaceAll("'", "''")),
+                String.format("%s = '%s'", User.DB_PASSWORD, user.getPassword().replaceAll("'", "''")),
                 String.format("%s = '%s'", User.DB_USER_TYPE, user.getType().toString()),
                 String.format("%s = %b", User.DB_APPROVED, user.isApproved()),
-                String.format("%s = '%s'", User.DB_COMPANY, user.getCompany()),
-                String.format("%s = '%s'", User.DB_ADDRESS, user.getAddress()),
+                String.format("%s = '%s'", User.DB_COMPANY, user.getCompany().replaceAll("'", "''")),
+                String.format("%s = '%s'", User.DB_ADDRESS, user.getAddress().replaceAll("'", "''")),
                 String.format("%s = '%s'", User.DB_PHONE, user.getPhoneNumber().getPhoneNumber()),
-                String.format("%s = '%s'", User.DB_EMAIL, user.getEmail().getEmailAddress()),
+                String.format("%s = '%s'", User.DB_EMAIL, user.getEmail().getEmailAddress().replaceAll("'", "''")),
                 String.format("%s = %d", User.DB_REP_ID, user.getRepID()),
                 String.format("%s = %d", User.DB_PERMIT_NO, user.getPermitNo()),
         };
@@ -153,6 +158,11 @@ public class Storage {
 
     public List<COLA> getCOLAsByUser(User user){
         ResultSet resultSet = database.query(COLA.DB_TABLE, null, COLA.DB_APPLICANT_ID + " = " + user.getId(), null, null);
+        return getCOLAs(resultSet);
+    }
+
+    public List<COLA> getAssignedCOLAs(User user){
+        ResultSet resultSet = database.query(COLA.DB_TABLE, null, COLA.DB_ASSIGNED_TO + " = " + user.getId(), null, null);
         return getCOLAs(resultSet);
     }
 
@@ -217,6 +227,8 @@ public class Storage {
             LocalDate approvalDate = resultSet.getDate(COLA.DB_APPROVAL_DATE).toLocalDate();
             ILabelImage labelImage = new ProxyLabelImage(resultSet.getString(COLA.DB_LABEL_IMAGE));
             long applicantID = resultSet.getLong(COLA.DB_APPLICANT_ID);
+            long assignedTo = resultSet.getLong(COLA.DB_ASSIGNED_TO);
+            String formula = resultSet.getString(COLA.DB_FORMULA);
 
             COLA cola = new COLA(id, brandName, type, serialNumber, origin);
             cola.setAlcoholContent(alcoholContent);
@@ -226,6 +238,8 @@ public class Storage {
             cola.setApprovalDate(approvalDate);
             cola.setLabelImage(labelImage);
             cola.setApplicantID(applicantID);
+            cola.setAssignedTo(assignedTo);
+            cola.setFormula(formula);
 
             return cola;
         } catch (SQLException e) {
@@ -319,6 +333,8 @@ public class Storage {
                     String.format("%s DATE", COLA.DB_APPROVAL_DATE),
                     String.format("%s VARCHAR (256)", COLA.DB_LABEL_IMAGE),
                     String.format("%s BIGINT", COLA.DB_APPLICANT_ID),
+                    String.format("%s BIGINT", COLA.DB_ASSIGNED_TO),
+                    String.format("%s VARCHAR (512)", COLA.DB_FORMULA),
             });
             LogManager.getInstance().log("Storage", "Created table " + COLA.DB_TABLE);
         }

@@ -12,34 +12,49 @@ import java.text.SimpleDateFormat;
  */
 public class LogManager {
 
-    private static LogManager _Log;
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy.HH.mm.ss");
+    private boolean shouldWrite = true;
+    private boolean shouldPrint = true;
+
+    private static final String LOG_FILE = "log.txt";
 
     private LogManager() {}
+
     private static class LogManagerHolder {
         private static final LogManager instance = new LogManager();
     }
+
     public static LogManager getInstance(){
         return LogManagerHolder.instance;
     }
 
     private void writeFile (String text) {
         try {
-            FileUtils.writeStringToFile(new File("Log.txt"), text, true);
+            FileUtils.writeStringToFile(new File(LOG_FILE), text, true);
         }
         catch (IOException e) {
             System.err.println("Unable to create log file");
         }
     }
+
+    public void setShouldWrite(boolean shouldWrite){
+        this.shouldWrite = shouldWrite;
+    }
+
+    public void setShouldPrint(boolean shouldPrint){
+        this.shouldPrint = shouldPrint;
+    }
+
     public void log(String classTag, String specialMessage) {
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         String line = String.format("[%s] %s: %s", timestamp.toString(), classTag, specialMessage);
 
-        System.out.println(line);
+        if(shouldPrint)
+            System.out.println(line);
 
-        writeFile(line + "\n");
+        if(shouldWrite)
+            writeFile(line + "\n");
     }
 
 }

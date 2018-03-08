@@ -16,9 +16,11 @@ public class COLA {
     public static final String DB_FANCIFUL_NAME = "fanciful_name";
     public static final String DB_SUBMISSION_DATE = "submission_date";
     public static final String DB_APPROVAL_DATE = "approval_date";
+    public static final String DB_FORMULA = "formula";
     public static final String DB_STATUS = "status";
     public static final String DB_LABEL_IMAGE = "label_image";
     public static final String DB_APPLICANT_ID = "applicant_id";
+    public static final String DB_ASSIGNED_TO = "assigned_to";
     public static final String DB_ID = "id";
 
     public static final String DEFAULT_LABEL_IMAGE = "/images/noLabel.png";
@@ -37,6 +39,7 @@ public class COLA {
     private ApplicationStatus status;
     private ILabelImage labelImage;
     private long applicantID;
+    private long assignedTo;
 
     public COLA(long id, String brandName, AlcoholType type, String serialNumber, ProductSource origin) {
         this.brandName = brandName;
@@ -48,10 +51,19 @@ public class COLA {
         formula = "";
         alcoholContent = 0;
         applicantID = -1;
+        assignedTo = -1;
         submissionDate = LocalDate.now();
         approvalDate = LocalDate.of(1990, 1, 1);
         status = ApplicationStatus.RECEIVED;
         labelImage = new ProxyLabelImage(DEFAULT_LABEL_IMAGE);
+    }
+
+    public long getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(long assignedTo) {
+        this.assignedTo = assignedTo;
     }
 
     public String getBrandName() {
@@ -151,32 +163,6 @@ public class COLA {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        COLA cola = (COLA) o;
-        return id == cola.id &&
-                Double.compare(cola.alcoholContent, alcoholContent) == 0 &&
-                applicantID == cola.applicantID &&
-                Objects.equals(brandName, cola.brandName) &&
-                type == cola.type &&
-                Objects.equals(serialNumber, cola.serialNumber) &&
-                origin == cola.origin &&
-                Objects.equals(fancifulName, cola.fancifulName) &&
-                Objects.equals(formula, cola.formula) &&
-                Objects.equals(submissionDate, cola.submissionDate) &&
-                Objects.equals(approvalDate, cola.approvalDate) &&
-                status == cola.status &&
-                Objects.equals(labelImage, cola.labelImage);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage, applicantID);
-    }
-
-    @Override
     public String toString() {
         return "COLA{" +
                 "brandName='" + brandName + '\'' +
@@ -192,6 +178,35 @@ public class COLA {
                 ", status=" + status +
                 ", labelImage=" + labelImage +
                 ", applicantID=" + applicantID +
+                ", assignedTo=" + assignedTo +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        COLA cola = (COLA) o;
+        return id == cola.id &&
+                Double.compare(cola.alcoholContent, alcoholContent) == 0 &&
+                applicantID == cola.applicantID &&
+                assignedTo == cola.assignedTo &&
+                Objects.equals(brandName, cola.brandName) &&
+                type == cola.type &&
+                Objects.equals(serialNumber, cola.serialNumber) &&
+                origin == cola.origin &&
+                Objects.equals(fancifulName, cola.fancifulName) &&
+                Objects.equals(formula, cola.formula) &&
+                Objects.equals(submissionDate, cola.submissionDate) &&
+                Objects.equals(approvalDate, cola.approvalDate) &&
+                status == cola.status &&
+                Objects.equals(labelImage, cola.labelImage);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage, applicantID, assignedTo);
+    }
+
 }
