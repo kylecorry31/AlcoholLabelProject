@@ -96,10 +96,6 @@ public class ApplicationSubmissionController implements Initializable{
         colaSubmissionHandler = new COLASubmissionHandler();
     }
 
-    public void setApplicantID(long applicantID){
-        this.applicantID = applicantID;
-    }
-
     public void submit(){
 
         boolean hasError = false;
@@ -134,14 +130,14 @@ public class ApplicationSubmissionController implements Initializable{
         COLA cola = new COLA(id, brand_name, alcoholType, serial_number, source);
         cola.setFancifulName(fanciful_name);
         cola.setAlcoholContent(alcoholContentPercent);
+        cola.setApplicantID(applicantID);
+
         try {
             long formula = Long.valueOf(formulaText.getText());
             cola.setFormula(formula);
         } catch (Exception e){
             // EMPTY
         }
-        cola.setApplicantID(applicantID);
-
         if(alcoholType == AlcoholType.WINE){
             try {
                 double winePh = Double.valueOf(winePH.getText());
@@ -179,8 +175,6 @@ public class ApplicationSubmissionController implements Initializable{
 
         colaSubmissionHandler.submitCOLA(cola);
 
-        System.out.println("Saved " + cola.toString());
-
         UIManager.getInstance().displayPage(brandName.getScene(), UIManager.HOME_PAGE);
 
     }
@@ -193,6 +187,8 @@ public class ApplicationSubmissionController implements Initializable{
         if(user.getType() != UserType.APPLICANT){
             UIManager.getInstance().displayPage(brandName.getScene(), UIManager.HOME_PAGE);
         }
+
+        applicantID = user.getId();
 
         winePH.managedProperty().bind(winePH.visibleProperty());
         wineVintageYear.managedProperty().bind(wineVintageYear.visibleProperty());

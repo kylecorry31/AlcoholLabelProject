@@ -99,12 +99,14 @@ public class ApplicationDetailController implements Initializable {
         ImageUtils.centerImage(labelImage);
 
         User user = Storage.getInstance().getUser(alcohol.getApplicantID());
-        userNameText.setText(user.getName());
-        emailText.setText(user.getEmail().getEmailAddress());
-        phoneText.setText(user.getPhoneNumber().getFormattedNumber());
-        companyText.setText(user.getCompany());
-        permitText.setText(String.valueOf(user.getPermitNo()));
-        addressText.setText(user.getAddress());
+        if(user != null) {
+            userNameText.setText(user.getName());
+            emailText.setText(user.getEmail().getEmailAddress());
+            phoneText.setText(user.getPhoneNumber().getFormattedNumber());
+            companyText.setText(user.getCompany());
+            permitText.setText(String.valueOf(user.getPermitNo()));
+            addressText.setText(user.getAddress());
+        }
 
     }
 

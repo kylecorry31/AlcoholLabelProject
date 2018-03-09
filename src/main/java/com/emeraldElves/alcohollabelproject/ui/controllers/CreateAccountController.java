@@ -2,6 +2,7 @@ package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.Data.PhoneNumber;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
+import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
@@ -99,6 +100,9 @@ public class CreateAccountController implements Initializable {
         user.setPermitNo(permitNo);
 
         Storage.getInstance().saveUser(user);
+
+        LogManager.getInstance().log(getClass().getSimpleName(), "New user " + user.getEmail().getEmailAddress());
+
 
         UIManager.getInstance().displayPage(emailText.getScene(), UIManager.HOME_PAGE);
     }

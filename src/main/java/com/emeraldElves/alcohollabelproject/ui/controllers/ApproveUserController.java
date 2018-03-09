@@ -163,15 +163,13 @@ public class ApproveUserController implements Initializable {
 
         user.setApproved(true);
         Storage.getInstance().updateUser(user);
-        LogManager.getInstance().log(ApproveUserController.class.getSimpleName(), "Approved user: " + user.getId());
-//        UIManager.getInstance().displayPage(nameText.getScene(), UIManager.APPROVE_USERS_PAGE);
+        LogManager.getInstance().log(ApproveUserController.class.getSimpleName(), "Approved user " + user.getEmail().getEmailAddress());
         populateUsers();
     }
 
     private void reject(){
         Storage.getInstance().deleteUser(user);
-        LogManager.getInstance().log(ApproveUserController.class.getSimpleName(), "Rejected user: " + user.getId());
-//        UIManager.getInstance().displayPage(nameText.getScene(), UIManager.APPROVE_USERS_PAGE);
+        LogManager.getInstance().log(ApproveUserController.class.getSimpleName(), "Rejected user " + user.getEmail().getEmailAddress());
         populateUsers();
     }
 

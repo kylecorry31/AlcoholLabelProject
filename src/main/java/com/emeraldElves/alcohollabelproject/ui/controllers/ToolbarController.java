@@ -60,7 +60,6 @@ public class ToolbarController implements Initializable {
             case APPLICANT:
                 UIManager.Page page = UIManager.getInstance().loadPage(UIManager.NEW_APPLICATION_PAGE);
                 ApplicationSubmissionController controller = page.getController();
-                controller.setApplicantID(Authenticator.getInstance().getUser().getId());
                 UIManager.getInstance().displayPage(utility.getScene(), page);
                 break;
             case SUPERAGENT:

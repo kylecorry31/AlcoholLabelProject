@@ -2,6 +2,7 @@ package com.emeraldElves.alcohollabelproject.data;
 
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
+import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 
 import java.time.LocalDate;
@@ -42,12 +43,14 @@ public class COLAApprovalHandler {
         cola.setStatus(ApplicationStatus.APPROVED);
         cola.setApprovalDate(LocalDate.now());
         // Email user
+        LogManager.getInstance().log(getClass().getSimpleName(), "Approved COLA " + cola.getId());
         storage.updateCOLA(cola);
     }
 
     public void rejectCOLA(COLA cola, String message){
         cola.setStatus(ApplicationStatus.REJECTED);
         // Email user
+        LogManager.getInstance().log(getClass().getSimpleName(), "Rejected COLA " + cola.getId());
         storage.updateCOLA(cola);
     }
 
