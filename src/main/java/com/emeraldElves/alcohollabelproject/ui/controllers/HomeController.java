@@ -6,7 +6,6 @@ import com.emeraldElves.alcohollabelproject.data.COLASearchHandler;
 import com.emeraldElves.alcohollabelproject.data.search.StatusFilter;
 import com.emeraldElves.alcohollabelproject.ui.*;
 import com.emeraldElves.alcohollabelproject.data.COLA;
-import com.emeraldElves.alcohollabelproject.database.Storage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

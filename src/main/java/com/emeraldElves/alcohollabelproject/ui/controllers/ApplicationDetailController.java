@@ -1,9 +1,7 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
-import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.data.User;
-import com.emeraldElves.alcohollabelproject.data.search.SearchFilter;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.emeraldElves.alcohollabelproject.ui.ImageUtils;
 import com.emeraldElves.alcohollabelproject.ui.PagePrinter;

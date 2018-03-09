@@ -1,7 +1,6 @@
 package com.emeraldElves.alcohollabelproject.ui.validation;
 
 import com.emeraldElves.alcohollabelproject.Authenticator;
-import com.emeraldElves.alcohollabelproject.Data.EmailAddress;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
 

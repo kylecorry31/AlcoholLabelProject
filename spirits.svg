@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="68.955482mm"
+   height="68.955482mm"
+   viewBox="0 0 68.955482 68.955482"
+   version="1.1"
+   id="svg1462"
+   inkscape:export-filename="/home/kyle/ExtraDrive/Development/AlcoholLabelProject/src/main/resources/images/spirits.png"
+   inkscape:export-xdpi="36.835361"
+   inkscape:export-ydpi="36.835361"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="spirits.svg">
+  <defs
+     id="defs1456" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="-214.30745"
+     inkscape:cy="131.78318"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="11.614878,43.83227"
+       orientation="1,0"
+       id="guide2007"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="126.00624,68.9556"
+       orientation="0,1"
+       id="guide2009"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="122.26446,6.4032859e-05"
+       orientation="0,1"
+       id="guide2011"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1459">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-54.133424,-144.12195)">
+    <path
+       style="fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.21871573px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 82.98898,144.12195 v 6.57376 h 1.604036 v 6.52208 h -6.026504 c -4.289229,0 -9.010526,4.85684 -10.593152,10.69082 -3.869941,14.26562 4.657598,45.16882 4.657598,45.16882 h 15.980418 15.980934 c 0,0 8.52651,-30.9032 4.65657,-45.16882 -1.58263,-5.83398 -6.30341,-10.69082 -10.592638,-10.69082 h -6.027023 v -6.52208 h 1.604552 v -6.57376 z"
+       id="path2017"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

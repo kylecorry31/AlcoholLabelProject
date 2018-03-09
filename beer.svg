@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="75.111183mm"
+   height="75.111183mm"
+   viewBox="0 0 75.111182 75.111184"
+   version="1.1"
+   id="svg859"
+   inkscape:export-filename="/home/kyle/ExtraDrive/Development/AlcoholLabelProject/src/main/resources/images/beer.png"
+   inkscape:export-xdpi="33.81654"
+   inkscape:export-ydpi="33.81654"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="beer.svg">
+  <defs
+     id="defs853" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="-282.46381"
+     inkscape:cy="182.53968"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="66.370849,94.087085"
+       orientation="0,1"
+       id="guide1406"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="29.754923,0.0082176441"
+       orientation="0,1"
+       inkscape:locked="false"
+       id="guide1408" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata856">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-42.140579,-105.90206)">
+    <path
+       style="fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.16405042px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 76.161246,105.90206 c -0.775602,0 -1.400432,0.53564 -1.400432,1.20045 v 0.99477 c 0,0.58974 0.492237,1.0756 1.144633,1.17822 v 8.18761 c 0,0 -7.215582,4.72369 -7.215582,13.24881 v 50.30132 h 11.006564 11.006047 v -50.30132 c 0,-8.52512 -7.215063,-13.24881 -7.215063,-13.24881 v -8.18813 c 0.652148,-0.10279 1.144116,-0.58811 1.144116,-1.1777 v -0.99477 c 0,-0.66481 -0.624316,-1.20045 -1.399915,-1.20045 z"
+       id="path1410"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

@@ -4,10 +4,8 @@ import com.emeraldElves.alcohollabelproject.Authenticator;
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.data.COLA;
-import com.emeraldElves.alcohollabelproject.data.COLAApprovalHandler;
 import com.emeraldElves.alcohollabelproject.data.COLASubmissionHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
-import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
@@ -19,7 +17,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.ArrayList;

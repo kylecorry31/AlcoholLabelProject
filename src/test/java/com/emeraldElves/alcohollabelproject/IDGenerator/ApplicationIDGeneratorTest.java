@@ -2,11 +2,6 @@ package com.emeraldElves.alcohollabelproject.IDGenerator;
 
 import org.junit.Test;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static org.junit.Assert.*;
-
 /**
  * Created by Kylec on 4/9/2017.
  */

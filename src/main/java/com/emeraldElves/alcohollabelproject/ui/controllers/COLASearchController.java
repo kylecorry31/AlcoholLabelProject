@@ -4,31 +4,25 @@ import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.data.COLASearchHandler;
 import com.emeraldElves.alcohollabelproject.data.search.*;
+import com.emeraldElves.alcohollabelproject.ui.ImageUtils;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
-import com.emeraldElves.alcohollabelproject.ui.controllers.ApplicationDetailController;
 import com.emeraldElves.alcohollabelproject.data.COLA;
-import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -100,17 +94,38 @@ public class COLASearchController implements Initializable {
             VBox itemName = new VBox();
             itemName.setAlignment(Pos.CENTER_LEFT);
             itemName.setSpacing(16);
+            ImageView typeImage = new ImageView();
+            typeImage.setFitHeight(40);
+            typeImage.setFitWidth(40);
+            typeImage.prefWidth(40);
+            typeImage.maxWidth(40);
+            typeImage.minWidth(40);
+            typeImage.setPreserveRatio(true);
+            ImageUtils.centerImage(typeImage);
+
+            String image = "";
+            switch (c.getType()){
+                case WINE:
+                    image = "/images/wine.png";
+                    break;
+                case BEER:
+                    image = "/images/beer.png";
+                    break;
+                case DISTILLEDSPIRITS:
+                    image = "/images/spirits.png";
+                    break;
+            }
+
+            typeImage.setImage(new Image(getClass().getResourceAsStream(image)));
+
             Label brandLabel = new Label(c.getBrandName());
             Label fancifulLabel = new Label();
             String labeltext = c.getFancifulName().trim();
-            if(!labeltext.isEmpty()){
-              labeltext += " ";
-            }
-            labeltext += String.format("(%s)", c.getType().getDisplayName());
             fancifulLabel.setText(labeltext);
             fancifulLabel.getStyleClass().add("subhead");
             itemName.getChildren().addAll(brandLabel, fancifulLabel);
             itemName.setPrefWidth(512);
+            itemName.setPadding(new Insets(0, 0, 0, 8));
 
             VBox itemDesc = new VBox();
             itemDesc.setAlignment(Pos.CENTER_RIGHT);
@@ -132,7 +147,7 @@ public class COLASearchController implements Initializable {
             itemDesc.setPrefWidth(512);
 
 
-            applicationListItem.getChildren().addAll(itemName, itemDesc);
+            applicationListItem.getChildren().addAll(typeImage, itemName, itemDesc);
             applicationListItem.getStyleClass().add("list-item");
 
             applicationListItem.setOnMouseClicked(mouseEvent -> {

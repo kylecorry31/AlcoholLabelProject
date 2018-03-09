@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class UpdateOptionsController implements IController {

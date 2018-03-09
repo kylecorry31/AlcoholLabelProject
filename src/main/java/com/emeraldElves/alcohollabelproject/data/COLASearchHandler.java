@@ -4,7 +4,6 @@ import com.emeraldElves.alcohollabelproject.data.search.SearchFilter;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class COLASearchHandler {

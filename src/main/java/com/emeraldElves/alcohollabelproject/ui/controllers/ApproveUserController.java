@@ -3,7 +3,6 @@ package com.emeraldElves.alcohollabelproject.ui.controllers;
 import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
-import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.application.Platform;

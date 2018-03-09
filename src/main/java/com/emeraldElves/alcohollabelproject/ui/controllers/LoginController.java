@@ -2,11 +2,7 @@ package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.Authenticator;
 import com.emeraldElves.alcohollabelproject.Data.PasswordStrengthChecker;
-import com.emeraldElves.alcohollabelproject.Data.UserType;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
-import com.emeraldElves.alcohollabelproject.ui.controllers.ToolbarController;
-import com.emeraldElves.alcohollabelproject.data.User;
-import com.emeraldElves.alcohollabelproject.database.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -1,6 +1,5 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
-import com.emeraldElves.alcohollabelproject.Data.EmailAddress;
 import com.emeraldElves.alcohollabelproject.Data.PhoneNumber;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
@@ -8,7 +7,6 @@ import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.emeraldElves.alcohollabelproject.ui.validation.*;
 import com.jfoenix.controls.*;
-import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.fxml.FXML;
