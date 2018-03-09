@@ -8,6 +8,10 @@ public enum ApplicationStatus {
     RECEIVED("Received", 1),
     REJECTED("Rejected", 2),
     NEEDS_CORRECTION("Needs corrections",3),
+    WITHDRAWN("Withdrawn", 5),
+    SAVED_NOT_SUBMITTED("Saved not submitted", 6),
+    SURRENDERED("Surrendered", 7),
+    REVOKED("Revoked", 8),
     NEEDSCORRECTIONS("Needs corrections",4);
     private String message;
     private int value;

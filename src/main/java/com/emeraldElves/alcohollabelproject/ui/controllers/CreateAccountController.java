@@ -49,7 +49,6 @@ public class CreateAccountController implements Initializable {
         addValidator(nameText, new RequiredFieldValidator(), "Name required");
         addValidator(passwordText, new RequiredFieldValidator(), "Password required");
         addValidator(repText, new OptionalNumberValidator(), "Representative ID must be a number");
-        addValidator(permitText, new OptionalNumberValidator(), "Permit No. must be a number");
         addValidator(emailText, new UniqueUserValidator(), "Email address taken");
 
     }
@@ -61,7 +60,6 @@ public class CreateAccountController implements Initializable {
         nameText.validate();
         passwordText.validate();
         repText.validate();
-        permitText.validate();
 
         boolean errors = false;
         for (ValidatorBase validator: validators){
@@ -84,12 +82,9 @@ public class CreateAccountController implements Initializable {
         } catch (Exception e){
             // Empty body
         }
-        long permitNo = -1;
-        try {
-            permitNo = Long.valueOf(permitText.getText());
-        } catch (Exception e){
-            // Empty body
-        }
+
+        String permitNo = permitText.getText();
+
         UserType type = getUserType();
 
         User user = new User(email, name, password, type);

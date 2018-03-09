@@ -76,7 +76,7 @@ public class Storage {
                 ApacheDerbyDatabase.addQuotes(user.getPhoneNumber().getPhoneNumber()),
                 ApacheDerbyDatabase.addQuotes(user.getEmail().getEmailAddress()),
                 String.valueOf(user.getRepID()),
-                String.valueOf(user.getPermitNo()),
+                ApacheDerbyDatabase.addQuotes(user.getPermitNo()),
         });
     }
 
@@ -122,7 +122,7 @@ public class Storage {
                 String.format("%s = '%s'", User.DB_PHONE, user.getPhoneNumber().getPhoneNumber()),
                 String.format("%s = '%s'", User.DB_EMAIL, user.getEmail().getEmailAddress().replaceAll("'", "''")),
                 String.format("%s = %d", User.DB_REP_ID, user.getRepID()),
-                String.format("%s = %d", User.DB_PERMIT_NO, user.getPermitNo()),
+                String.format("%s = '%s'", User.DB_PERMIT_NO, user.getPermitNo()),
         };
 
         database.update(User.DB_TABLE, values, User.DB_ID + " = " + user.getId(), null);
@@ -297,7 +297,7 @@ public class Storage {
             PhoneNumber phoneNumber = new PhoneNumber(resultSet.getString(User.DB_PHONE));
             String emailAddress = resultSet.getString(User.DB_EMAIL);
             long repID = resultSet.getLong(User.DB_REP_ID);
-            long permitNo = resultSet.getLong(User.DB_PERMIT_NO);
+            String permitNo = resultSet.getString(User.DB_PERMIT_NO);
 
             User user = new User(emailAddress, name, password, type);
             user.setId(id);
@@ -369,7 +369,7 @@ public class Storage {
                     String.format("%s VARCHAR (11)", User.DB_PHONE),
                     String.format("%s VARCHAR (128) UNIQUE", User.DB_EMAIL),
                     String.format("%s BIGINT", User.DB_REP_ID),
-                    String.format("%s BIGINT", User.DB_PERMIT_NO),
+                    String.format("%s VARCHAR (32)", User.DB_PERMIT_NO),
             });
             LogManager.getInstance().log("Storage", "Created table " + User.DB_TABLE);
         }

@@ -32,7 +32,7 @@ public class User {
     private PhoneNumber phoneNumber;
     private EmailAddress email;
     private long repID;
-    private long permitNo;
+    private String permitNo;
 
     public User(String email, String name, String password, UserType type) {
         this.name = name;
@@ -45,7 +45,7 @@ public class User {
         phoneNumber = new PhoneNumber("");
         this.email = new EmailAddress(email);
         repID = -1;
-        permitNo = -1;
+        permitNo = "";
     }
 
     public String getCompany() {
@@ -84,11 +84,11 @@ public class User {
         this.repID = repID;
     }
 
-    public long getPermitNo() {
+    public String getPermitNo() {
         return permitNo;
     }
 
-    public void setPermitNo(long permitNo) {
+    public void setPermitNo(String permitNo) {
         this.permitNo = permitNo;
     }
 
@@ -124,6 +124,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
+                ", password='" + password + '\'' +
                 ", type=" + type +
                 ", id=" + id +
                 ", approved=" + approved +
@@ -132,7 +133,7 @@ public class User {
                 ", phoneNumber=" + phoneNumber +
                 ", email=" + email +
                 ", repID=" + repID +
-                ", permitNo=" + permitNo +
+                ", permitNo='" + permitNo + '\'' +
                 '}';
     }
 
@@ -144,14 +145,14 @@ public class User {
         return id == user.id &&
                 approved == user.approved &&
                 repID == user.repID &&
-                permitNo == user.permitNo &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(password, user.password) &&
                 type == user.type &&
                 Objects.equals(company, user.company) &&
                 Objects.equals(address, user.address) &&
                 Objects.equals(phoneNumber, user.phoneNumber) &&
-                Objects.equals(email, user.email);
+                Objects.equals(email, user.email) &&
+                Objects.equals(permitNo, user.permitNo);
     }
 
     @Override

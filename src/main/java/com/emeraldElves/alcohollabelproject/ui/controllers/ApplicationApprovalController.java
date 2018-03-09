@@ -149,7 +149,7 @@ public class ApplicationApprovalController implements Initializable {
             companyText.setText(submitter.getCompany());
             addressText.setText(submitter.getAddress());
             repText.setText(String.valueOf(submitter.getRepID()));
-            permitText.setText(String.valueOf(submitter.getPermitNo()));
+            permitText.setText(submitter.getPermitNo());
         }
 
     }

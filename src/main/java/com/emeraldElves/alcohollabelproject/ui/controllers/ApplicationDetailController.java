@@ -86,7 +86,7 @@ public class ApplicationDetailController implements Initializable {
         fancifulText.setText(alcohol.getFancifulName());
         alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", alcohol.getAlcoholContent(), alcohol.getAlcoholContent() * 2));
         serialText.setText(alcohol.getSerialNumber());
-        originText.setText(alcohol.getOrigin().toString());
+        originText.setText(alcohol.getOrigin().getDisplayName());
         typeText.setText(alcohol.getType().getDisplayName());
         approvalDateText.setText(alcohol.getApprovalDate().toString());
         ttbID.setText("TTB ID #" + String.valueOf(alcohol.getId()));
@@ -104,7 +104,7 @@ public class ApplicationDetailController implements Initializable {
             emailText.setText(user.getEmail().getEmailAddress());
             phoneText.setText(user.getPhoneNumber().getFormattedNumber());
             companyText.setText(user.getCompany());
-            permitText.setText(String.valueOf(user.getPermitNo()));
+            permitText.setText(user.getPermitNo());
             addressText.setText(user.getAddress());
         }
 

@@ -11,6 +11,7 @@ TTB Agent
 * Transfer application to another agent
 * Attach message to application
 * Assign expiration date (or auto assign)
+* Agents don't need most of the create user fields
 
 Super Agent
 -----------
@@ -20,10 +21,18 @@ Applicants
 ----------
 * Edit applications
 * Withdraw application
-* Add ability to remove image from submission form
+* Add ability to remove or view an image from submission form
+* Allow multiple photos to be submitted
 * Add all other fields
+* Allow multiple permits / company locations / companies (maybe add a company database)
 
 Other
 -----
 * Send email when application or account status changes
 * Improve advanced search features
+* Ensure all these fields are accurate: https://www.ttbonline.gov/colasonline/defOfTerms.do
+* Assign TTB ID only after application is submitted
+* Add other application statuses
+* Make search filter method matches rather than remove
+* Date status last updated should be added
+* Make formula link to formula ttb site (optional)
