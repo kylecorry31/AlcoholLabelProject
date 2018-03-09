@@ -78,6 +78,11 @@ public class COLASearchController implements Initializable {
     private void populateList(){
         List<COLA> colas = colaSearchHandler.filteredSearch(genFilter());
 
+
+        SearchRanking maxRanking = new MaxSearchRanking(new FuzzyBrandNameRanking(searchTerm), new FuzzyFancifulNameRanking(searchTerm));
+
+        colas.sort(Comparator.comparingInt(maxRanking::rank).reversed());
+
         searchList.getChildren().clear();
 
         if(colas.isEmpty()){
