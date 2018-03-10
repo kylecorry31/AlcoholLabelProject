@@ -23,6 +23,8 @@ public class COLA {
     public static final String DB_ASSIGNED_TO = "assigned_to";
     public static final String DB_WINE_PH = "wine_ph";
     public static final String DB_WINE_VINTAGE_YEAR = "wine_vintage_year";
+    public static final String DB_LAST_UPDATED = "last_updated";
+    public static final String DB_EXPIRATION_DATE = "expiration_date";
     public static final String DB_ID = "id";
 
     public static final String DEFAULT_LABEL_IMAGE = "/images/noImage.png";
@@ -42,6 +44,9 @@ public class COLA {
     private ILabelImage labelImage;
     private long applicantID;
     private long assignedTo;
+
+    private LocalDate expirationDate;
+    private LocalDate lastUpdated;
 
     private int vintageYear;
     private double winePH;
@@ -63,6 +68,8 @@ public class COLA {
         labelImage = new ProxyLabelImage(DEFAULT_LABEL_IMAGE);
         vintageYear = -1;
         winePH = -1;
+        lastUpdated = submissionDate;
+        expirationDate = LocalDate.now().plusYears(1);
     }
 
     public int getVintageYear() {
@@ -185,6 +192,22 @@ public class COLA {
         this.applicantID = applicantID;
     }
 
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public LocalDate getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(LocalDate lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
     @Override
     public String toString() {
         return "COLA{" +
@@ -202,6 +225,8 @@ public class COLA {
                 ", labelImage=" + labelImage +
                 ", applicantID=" + applicantID +
                 ", assignedTo=" + assignedTo +
+                ", expirationDate=" + expirationDate +
+                ", lastUpdated=" + lastUpdated +
                 ", vintageYear=" + vintageYear +
                 ", winePH=" + winePH +
                 '}';
@@ -227,13 +252,14 @@ public class COLA {
                 Objects.equals(submissionDate, cola.submissionDate) &&
                 Objects.equals(approvalDate, cola.approvalDate) &&
                 status == cola.status &&
-                Objects.equals(labelImage, cola.labelImage);
+                Objects.equals(labelImage, cola.labelImage) &&
+                Objects.equals(expirationDate, cola.expirationDate) &&
+                Objects.equals(lastUpdated, cola.lastUpdated);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage, applicantID, assignedTo, vintageYear, winePH);
+        return Objects.hash(brandName, type, serialNumber, origin, id, fancifulName, alcoholContent, formula, submissionDate, approvalDate, status, labelImage, applicantID, assignedTo, expirationDate, lastUpdated, vintageYear, winePH);
     }
 
 }

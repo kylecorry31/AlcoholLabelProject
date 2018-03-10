@@ -42,6 +42,7 @@ public class COLAApprovalHandler {
     public void approveCOLA(COLA cola, String message){
         cola.setStatus(ApplicationStatus.APPROVED);
         cola.setApprovalDate(LocalDate.now());
+        cola.setLastUpdated(LocalDate.now());
         // Email user
         LogManager.getInstance().log(getClass().getSimpleName(), "Approved COLA " + cola.getId());
         storage.updateCOLA(cola);
@@ -49,6 +50,7 @@ public class COLAApprovalHandler {
 
     public void rejectCOLA(COLA cola, String message){
         cola.setStatus(ApplicationStatus.REJECTED);
+        cola.setLastUpdated(LocalDate.now());
         // Email user
         LogManager.getInstance().log(getClass().getSimpleName(), "Rejected COLA " + cola.getId());
         storage.updateCOLA(cola);
@@ -56,6 +58,7 @@ public class COLAApprovalHandler {
 
     public void setNeedsCorrections(COLA cola, String message){
         cola.setStatus(ApplicationStatus.NEEDS_CORRECTION);
+        cola.setLastUpdated(LocalDate.now());
         // Email user
         storage.updateCOLA(cola);
     }
