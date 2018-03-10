@@ -44,6 +44,25 @@ public class CreateAccountController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createButton.setOnMouseClicked(mouseEvent -> submit());
 
+        permitText.managedProperty().bind(permitText.visibleProperty());
+        companyText.managedProperty().bind(companyText.visibleProperty());
+        addressText.managedProperty().bind(addressText.visibleProperty());
+
+        radioTTBAgent.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
+            if(t1){
+                permitText.setVisible(false);
+                companyText.setVisible(false);
+                addressText.setVisible(false);
+                permitText.clear();
+                companyText.clear();
+                addressText.clear();
+            } else {
+                permitText.setVisible(true);
+                companyText.setVisible(true);
+                addressText.setVisible(true);
+            }
+        });
+
         addValidator(emailText, new EmailAddressValidator(), "Invalid email address");
         addValidator(phoneText, new PhoneNumberValidator(), "Invalid phone number");
         addValidator(nameText, new RequiredFieldValidator(), "Name required");
