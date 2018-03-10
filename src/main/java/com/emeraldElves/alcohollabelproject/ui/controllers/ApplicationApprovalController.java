@@ -155,7 +155,7 @@ public class ApplicationApprovalController implements Initializable {
     }
 
     private void fetchMoreApplications(){
-        assignedApplications = colaApprovalHandler.assignCOLAs(user, 10); // TODO: make count a setting
+        assignedApplications = colaApprovalHandler.assignCOLAs(user, 10 - assignedApplications.size()); // TODO: make count a setting
         populateApplications();
     }
 
