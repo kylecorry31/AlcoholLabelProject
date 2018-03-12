@@ -12,9 +12,9 @@ public class FuzzyFancifulNameFilter implements SearchFilter {
     }
 
     @Override
-    public boolean shouldRemove(COLA cola) {
+    public boolean matches(COLA cola) {
         if(targetFanciful.isEmpty())
-            return false;
-        return FuzzySearch.partialRatio(cola.getFancifulName().toLowerCase(), targetFanciful) < 80;
+            return true;
+        return FuzzySearch.partialRatio(cola.getFancifulName().toLowerCase(), targetFanciful) >= 80;
     }
 }

@@ -3,7 +3,7 @@ package com.emeraldElves.alcohollabelproject.data.search;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 
 public interface SearchFilter {
-    boolean shouldRemove(COLA cola);
+    boolean matches(COLA cola);
 
     /**
      * Removes only if both are true
@@ -11,14 +11,14 @@ public interface SearchFilter {
      * @return
      */
      default SearchFilter and(SearchFilter filter){
-        return cola -> (SearchFilter.this.shouldRemove(cola) && filter.shouldRemove(cola));
+        return cola -> (SearchFilter.this.matches(cola) && filter.matches(cola));
      }
 
      default SearchFilter or(SearchFilter filter){
-         return cola -> (SearchFilter.this.shouldRemove(cola) || filter.shouldRemove(cola));
+         return cola -> (SearchFilter.this.matches(cola) || filter.matches(cola));
      }
 
      default SearchFilter not(){
-         return cola -> !SearchFilter.this.shouldRemove(cola);
+         return cola -> !SearchFilter.this.matches(cola);
      }
 }

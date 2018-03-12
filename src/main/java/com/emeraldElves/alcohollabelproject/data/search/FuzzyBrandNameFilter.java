@@ -12,9 +12,9 @@ public class FuzzyBrandNameFilter implements SearchFilter {
     }
 
     @Override
-    public boolean shouldRemove(COLA cola) {
+    public boolean matches(COLA cola) {
         if(targetBrand.isEmpty())
-            return false;
-        return FuzzySearch.partialRatio(cola.getBrandName().toLowerCase(), targetBrand) < 80;
+            return true;
+        return FuzzySearch.partialRatio(cola.getBrandName().toLowerCase(), targetBrand) >= 80;
     }
 }

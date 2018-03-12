@@ -26,7 +26,7 @@ public class COLASearchHandler {
             return labels;
         }
 
-        labels.removeIf(filter::shouldRemove);
+        labels.removeIf(filter.not()::matches);
 
         return labels;
     }

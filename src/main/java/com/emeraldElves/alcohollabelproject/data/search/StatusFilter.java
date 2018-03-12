@@ -12,7 +12,7 @@ public class StatusFilter implements SearchFilter {
     }
 
     @Override
-    public boolean shouldRemove(COLA cola) {
-        return cola.getStatus() != status;
+    public boolean matches(COLA cola) {
+        return cola.getStatus() == status;
     }
 }

@@ -14,7 +14,7 @@ task makeJar(type: Jar) {
 
     manifest {
 
-        attributes 'Implementation-Title': "AlcoholProject",
+        attributes 'Implementation-Title': "COLAs",
 
                 'Implementation-Version': version,
 

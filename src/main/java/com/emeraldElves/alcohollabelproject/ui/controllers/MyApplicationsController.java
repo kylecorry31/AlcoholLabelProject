@@ -34,7 +34,7 @@ public class MyApplicationsController implements Initializable {
     private ImageView labelImage;
 
     @FXML
-    private JFXButton createBtn, editBtn;
+    private JFXButton createBtn, editBtn, withdrawBtn;
 
     @FXML
     private VBox applicationList, alcInfoVbox;
@@ -71,9 +71,11 @@ public class MyApplicationsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createBtn.setOnMouseClicked(mouseEvent -> createNew());
         editBtn.setOnMouseClicked(mouseEvent -> edit());
+        withdrawBtn.setOnMouseClicked(mouseEvent -> withdraw());
 
         applicationList.getChildren().clear();
 
+        withdrawBtn.managedProperty().bind(withdrawBtn.visibleProperty());
         noApplication.managedProperty().bind(noApplication.visibleProperty());
         alcInfoVbox.managedProperty().bind(alcInfoVbox.visibleProperty());
         actionButtons.managedProperty().bind(actionButtons.visibleProperty());
@@ -91,6 +93,15 @@ public class MyApplicationsController implements Initializable {
             assignedApplications = colaSubmissionHandler.getSubmittedCOLAS(user);
             populateApplications();
         });
+    }
+
+    private void withdraw() {
+        if(cola != null){
+            cola.setStatus(ApplicationStatus.WITHDRAWN);
+            colaSubmissionHandler.submitCOLA(cola);
+            withdrawBtn.setVisible(false);
+            statusText.setText(cola.getStatus().getMessage());
+        }
     }
 
 
@@ -137,6 +148,12 @@ public class MyApplicationsController implements Initializable {
         statusText.setText(cola.getStatus().getMessage());
 
         labelImage.setImage(cola.getLabelImage().display());
+
+        if(cola.getStatus() == ApplicationStatus.WITHDRAWN){
+            withdrawBtn.setVisible(false);
+        } else {
+            withdrawBtn.setVisible(true);
+        }
 
     }
 

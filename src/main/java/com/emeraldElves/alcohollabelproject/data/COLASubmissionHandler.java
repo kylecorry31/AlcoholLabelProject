@@ -21,7 +21,9 @@ public class COLASubmissionHandler {
 
     public synchronized void submitCOLA(COLA cola){
         COLA inDBCOLA = storage.getCOLA(cola.getId());
-        cola.setStatus(ApplicationStatus.RECEIVED);
+        if(cola.getStatus() != ApplicationStatus.WITHDRAWN) {
+            cola.setStatus(ApplicationStatus.RECEIVED);
+        }
         if(inDBCOLA == null){
             LogManager.getInstance().log(getClass().getSimpleName(), "Submitted COLA " + cola.getId());
             storage.saveCOLA(cola);

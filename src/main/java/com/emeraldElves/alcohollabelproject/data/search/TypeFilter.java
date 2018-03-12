@@ -12,7 +12,7 @@ public class TypeFilter implements SearchFilter {
     }
 
     @Override
-    public boolean shouldRemove(COLA cola) {
+    public boolean matches(COLA cola) {
         return cola.getType() == type;
     }
 }

@@ -154,6 +154,7 @@
                               </VBox>
                               <HBox fx:id="actionButtons" alignment="CENTER" prefHeight="72.0" spacing="32.0">
                                  <children>
+                                    <JFXButton fx:id="withdrawBtn" style="-fx-background-color: -color-rejected;" styleClass="button-raised" text="Withdraw" />
                                     <JFXButton fx:id="editBtn" styleClass="button-raised" text="Edit" />
                                  </children>
                               </HBox>

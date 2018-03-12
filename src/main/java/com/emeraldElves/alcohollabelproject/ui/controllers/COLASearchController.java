@@ -174,20 +174,20 @@ public class COLASearchController implements Initializable {
 
     private SearchFilter genFilter(){
 
-        SearchFilter filter = new FuzzyBrandNameFilter(searchTerm).and(new FuzzyFancifulNameFilter(searchTerm));
+        SearchFilter filter = new FuzzyBrandNameFilter(searchTerm).or(new FuzzyFancifulNameFilter(searchTerm));
 
-        filter = filter.or(new StatusFilter(ApplicationStatus.APPROVED));
+        filter = filter.and(new StatusFilter(ApplicationStatus.APPROVED));
 
         if (!showBeer.isSelected()){
-            filter = filter.or(new TypeFilter(AlcoholType.BEER));
+            filter = filter.and(new TypeFilter(AlcoholType.BEER).not());
         }
 
         if(!showWine.isSelected()){
-            filter = filter.or(new TypeFilter(AlcoholType.WINE));
+            filter = filter.and(new TypeFilter(AlcoholType.WINE).not());
         }
 
         if(!showSpirits.isSelected()){
-            filter = filter.or(new TypeFilter(AlcoholType.DISTILLEDSPIRITS));
+            filter = filter.and(new TypeFilter(AlcoholType.DISTILLEDSPIRITS).not());
         }
 
         return filter;
