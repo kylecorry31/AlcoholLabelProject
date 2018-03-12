@@ -33,5 +33,4 @@ Other
 * Ensure all these fields are accurate: https://www.ttbonline.gov/colasonline/defOfTerms.do
 * Assign TTB ID only after application is submitted
 * Add other application statuses
-* Make search filter method matches rather than remove
 * Make formula link to formula ttb site (optional)
