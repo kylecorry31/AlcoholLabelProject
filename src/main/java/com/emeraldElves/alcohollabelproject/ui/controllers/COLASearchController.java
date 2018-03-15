@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -49,6 +50,9 @@ public class COLASearchController implements Initializable {
 
     @FXML
     private JFXCheckBox showBeer, showWine, showSpirits;
+
+    @FXML
+    private GridPane pane;
 
 
     private COLASearchHandler colaSearchHandler;
@@ -233,6 +237,14 @@ public class COLASearchController implements Initializable {
         JFXScrollPane.smoothScrolling(scrollPane);
 
         descriptionLabel.setVisible(false);
+
+        pane.setOnKeyPressed(keyEvent -> {
+            searchField.requestFocus();
+        });
+
+        searchField.onActionProperty().addListener(observable -> {
+            Platform.runLater(() -> search(searchTerm));
+        });
 
         showBeer.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
             Platform.runLater(() -> search(searchTerm));
