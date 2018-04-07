@@ -144,6 +144,10 @@ public class COLA {
         this.alcoholContent = alcoholContent;
     }
 
+    public void setProof(double proof){
+        setAlcoholContent(proof / 2);
+    }
+
     public LocalDate getSubmissionDate() {
         return submissionDate;
     }
