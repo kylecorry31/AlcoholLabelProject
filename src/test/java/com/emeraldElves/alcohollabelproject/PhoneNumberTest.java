@@ -12,21 +12,21 @@ public class PhoneNumberTest {
 
     @Test
     public void testPhoneNumber() {
-        PhoneNumber number = new PhoneNumber("4014477334");
-        assertEquals(number.getPhoneNumber(), "4014477334");
+        PhoneNumber number = new PhoneNumber("5555555555");
+        assertEquals(number.getPhoneNumber(), "5555555555");
         assertTrue(number.isValid());
 
-        PhoneNumber number1 = new PhoneNumber("1-401-447-7334");
-        assertEquals(number1.getPhoneNumber(), "14014477334");
+        PhoneNumber number1 = new PhoneNumber("1-555-555-5555");
+        assertEquals(number1.getPhoneNumber(), "15555555555");
         assertTrue(number1.isValid());
 
-        PhoneNumber number2 = new PhoneNumber("401.447.7334");
-        assertEquals(number2.getPhoneNumber(), "4014477334");
+        PhoneNumber number2 = new PhoneNumber("555.555.5555");
+        assertEquals(number2.getPhoneNumber(), "5555555555");
         assertTrue(number2.isValid());
 
 
-        PhoneNumber number3 = new PhoneNumber("40.447.7334");
-        assertEquals(number3.getPhoneNumber(), "404477334");
+        PhoneNumber number3 = new PhoneNumber("55.555.5555");
+        assertEquals(number3.getPhoneNumber(), "555555555");
         assertFalse(number3.isValid());
     }
 }

@@ -12,11 +12,11 @@ public class EmailAddressTest {
 
     @Test
     public void testEmailAddress() {
-        EmailAddress address = new EmailAddress("kylecorry31@gmail.com");
+        EmailAddress address = new EmailAddress("test@gmail.com");
         assertTrue(address.isValid());
 
 
-        EmailAddress address1 = new EmailAddress("kncorry@wpi.edu");
+        EmailAddress address1 = new EmailAddress("test@wpi.edu");
         assertTrue(address1.isValid());
 
 
