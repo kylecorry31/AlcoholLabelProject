@@ -349,7 +349,7 @@ public class Storage {
                     String.format("%s BIGINT PRIMARY KEY NOT NULL", COLA.DB_ID),
                     String.format("%s VARCHAR (128)", COLA.DB_BRAND_NAME),
                     String.format("%s VARCHAR (16)", COLA.DB_ALCOHOL_TYPE),
-                    String.format("%s VARCHAR (6)", COLA.DB_SERIAL_NUMBER),
+                    String.format("%s VARCHAR (8)", COLA.DB_SERIAL_NUMBER),
                     String.format("%s VARCHAR (8)", COLA.DB_ORIGIN),
                     String.format("%s DOUBLE", COLA.DB_ALCOHOL_CONTENT),
                     String.format("%s VARCHAR (128)", COLA.DB_FANCIFUL_NAME),

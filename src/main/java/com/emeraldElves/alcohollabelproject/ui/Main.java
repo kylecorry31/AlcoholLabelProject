@@ -1,20 +1,21 @@
 package com.emeraldElves.alcohollabelproject.ui;
 
-import com.emeraldElves.alcohollabelproject.database.ApacheDerbyDatabase;
-import com.emeraldElves.alcohollabelproject.database.IDatabase;
-import com.emeraldElves.alcohollabelproject.database.Storage;
+import com.emeraldElves.alcohollabelproject.database.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
+import java.util.Scanner;
+
 public class Main extends Application {
 
     private static IDatabase database;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Alcohol Label Project");
         primaryStage.getIcons().add(new Image(("images/logo.png")));
         UIManager.Page page = UIManager.getInstance().loadPage(UIManager.HOME_PAGE);

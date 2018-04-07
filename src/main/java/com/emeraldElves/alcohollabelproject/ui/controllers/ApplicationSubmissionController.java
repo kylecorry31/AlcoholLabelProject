@@ -5,7 +5,7 @@ import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ProductSource;
 import com.emeraldElves.alcohollabelproject.Data.ProxyLabelImage;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
-import com.emeraldElves.alcohollabelproject.data.COLASubmissionHandler;
+import com.emeraldElves.alcohollabelproject.COLASubmissionHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.ui.DialogFileSelector;
 import com.emeraldElves.alcohollabelproject.ui.validation.*;

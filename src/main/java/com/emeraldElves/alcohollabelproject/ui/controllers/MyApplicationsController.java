@@ -4,7 +4,7 @@ import com.emeraldElves.alcohollabelproject.Authenticator;
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.data.COLA;
-import com.emeraldElves.alcohollabelproject.data.COLASubmissionHandler;
+import com.emeraldElves.alcohollabelproject.COLASubmissionHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;

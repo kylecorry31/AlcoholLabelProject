@@ -2,7 +2,7 @@ package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
-import com.emeraldElves.alcohollabelproject.data.COLASearchHandler;
+import com.emeraldElves.alcohollabelproject.COLASearchHandler;
 import com.emeraldElves.alcohollabelproject.data.search.StatusFilter;
 import com.emeraldElves.alcohollabelproject.ui.*;
 import com.emeraldElves.alcohollabelproject.data.COLA;
