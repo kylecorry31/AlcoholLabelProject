@@ -84,7 +84,7 @@ public class ApplicationDetailController implements Initializable {
 
         brandNameText.setText(alcohol.getBrandName());
         fancifulText.setText(alcohol.getFancifulName());
-        alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", alcohol.getAlcoholContent(), alcohol.getAlcoholContent() * 2));
+        alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", alcohol.getAlcoholContent(), alcohol.getProof()));
         serialText.setText(alcohol.getSerialNumber());
         originText.setText(alcohol.getOrigin().getDisplayName());
         typeText.setText(alcohol.getType().getDisplayName());

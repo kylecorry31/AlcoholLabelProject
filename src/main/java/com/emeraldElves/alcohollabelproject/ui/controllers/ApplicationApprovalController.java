@@ -130,7 +130,7 @@ public class ApplicationApprovalController implements Initializable {
         serialText.setText(cola.getSerialNumber());
         originText.setText(cola.getOrigin().getDisplayName());
         fancifulText.setText(cola.getFancifulName());
-        alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", cola.getAlcoholContent(), cola.getAlcoholContent() * 2));
+        alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", cola.getAlcoholContent(), cola.getProof()));
         if(cola.getFormula() == -1){
             formulaText.setText("N/A");
         } else {

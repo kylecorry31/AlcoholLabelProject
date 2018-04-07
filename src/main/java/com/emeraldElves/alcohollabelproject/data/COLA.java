@@ -148,6 +148,10 @@ public class COLA {
         setAlcoholContent(proof / 2);
     }
 
+    public double getProof(){
+        return 2 * alcoholContent;
+    }
+
     public LocalDate getSubmissionDate() {
         return submissionDate;
     }
