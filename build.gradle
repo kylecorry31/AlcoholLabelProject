@@ -10,29 +10,30 @@ mainClassName = "com.emeraldElves.alcohollabelproject.ui.Main"
 sourceCompatibility = 1.8
 
 
-task makeJar(type: Jar) {
-
-    manifest {
-
-        attributes 'Implementation-Title': "COLAs",
-
-                'Implementation-Version': version,
-
-                'Main-Class': mainClassName
-
-    }
-
-    baseName = project.name + '-all'
-
-    from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
-
-    with jar
-
-}
-
-
 repositories {
     mavenCentral()
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
 }
 
 dependencies {
@@ -45,3 +46,16 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
+test {
+    outputs.upToDateWhen { false }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    from configurations.runtime.collect { zipTree(it) }
+}
