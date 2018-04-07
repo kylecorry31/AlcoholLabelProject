@@ -20,6 +20,9 @@ public class COLASearchHandler {
     }
 
     public List<COLA> filteredSearch(SearchFilter filter){
+        if(availableLabels == null){
+            receiveAllCOLAs();
+        }
         List<COLA> labels = new ArrayList<>(availableLabels);
 
         if(filter == null){

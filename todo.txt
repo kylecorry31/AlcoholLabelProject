@@ -34,3 +34,4 @@ Other
 * Assign TTB ID only after application is submitted
 * Add other application statuses
 * Make formula link to formula ttb site (optional)
+* Allow exporting of applications
