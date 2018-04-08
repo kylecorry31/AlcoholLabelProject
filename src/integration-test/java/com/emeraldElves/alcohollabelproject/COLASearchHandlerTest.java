@@ -33,7 +33,7 @@ public class COLASearchHandlerTest {
         database = new ApacheDerbyDatabase("colaTest.db");
         storage = Storage.getInstance();
         storage.setDatabase(database);
-        COLA c1 = new COLA(1, "TestBrand", AlcoholType.BEER, "180001", ProductSource.DOMESTIC);
+        COLA c1 = new COLA(1, "Test'Brand", AlcoholType.BEER, "180001", ProductSource.DOMESTIC);
         c1.setAlcoholContent(10);
         c1.setFancifulName("TestFanciful");
         c1.setStatus(ApplicationStatus.APPROVED);
