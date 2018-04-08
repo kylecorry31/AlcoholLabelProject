@@ -11,7 +11,7 @@ public class ApplicationExporter {
         this.writer = writer;
     }
 
-    static String[] getCOLAHeader(){
+    public static String[] getCOLAHeader(){
         return new String[]{
                 "ttb_id",
                 "brand_name",
