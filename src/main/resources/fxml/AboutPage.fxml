@@ -30,7 +30,7 @@
                         <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
                      </padding>
                      <children>
-                        <Label text="Credits">
+                        <Label fx:id="credits" text="Credits">
                            <font>
                               <Font size="24.0" />
                            </font>

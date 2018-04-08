@@ -95,7 +95,7 @@
                   <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
                </padding>
             </VBox>
-            <JFXButton layoutX="801.0" layoutY="620.0" onMouseClicked="#aboutProject" styleClass="button-raised" text="About" />
+            <JFXButton fx:id="about" layoutX="801.0" layoutY="620.0" onMouseClicked="#aboutProject" styleClass="button-raised" text="About" />
 
             </children>
         </Pane>
