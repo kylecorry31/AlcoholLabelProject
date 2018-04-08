@@ -114,7 +114,7 @@ public class ApacheDerbyDatabase implements IDatabase {
 
     @Override
     public void dropTable(String tableName) {
-        if(!isOpen){
+        if(!isOpen || !doesTableExist(tableName)){
             return;
         }
         try {

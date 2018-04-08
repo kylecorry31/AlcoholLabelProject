@@ -33,7 +33,7 @@ public class HomePageTest extends ApplicationTest {
 
     private IDatabase database;
 
-    private long screenLoadWaitTime = 500;
+    private long screenLoadWaitTime = 2000;
 
 
     @Override
