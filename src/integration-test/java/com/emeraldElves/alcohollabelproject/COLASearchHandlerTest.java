@@ -1,10 +1,8 @@
 package com.emeraldElves.alcohollabelproject;
 
-import com.emeraldElves.alcohollabelproject.COLASearchHandler;
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.Data.ProductSource;
-import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.data.search.*;
@@ -31,6 +29,9 @@ public class COLASearchHandlerTest {
     @Before
     public void setup(){
         database = new ApacheDerbyDatabase("colaTest.db");
+        database.connect();
+        database.dropTable(COLA.DB_TABLE);
+        database.dropTable(User.DB_TABLE);
         storage = Storage.getInstance();
         storage.setDatabase(database);
         COLA c1 = new COLA(1, "Test'Brand", AlcoholType.BEER, "180001", ProductSource.DOMESTIC);

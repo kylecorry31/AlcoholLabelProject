@@ -31,8 +31,8 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="32.0">
                      <children>
                         <JFXTextField fx:id="searchbox" prefHeight="26.0" prefWidth="524.0" promptText="Search" styleClass="custom-jfx-text-field" />
-                        <JFXButton onMouseClicked="#searchDatabase" styleClass="button-raised" text="Search" />
-                        <JFXButton onMouseClicked="#feelingThirsty" styleClass="button-raised" text="Random COLA" />
+                        <JFXButton fx:id="searchBtn" onMouseClicked="#searchDatabase" styleClass="button-raised" text="Search" />
+                        <JFXButton fx:id="randomBtn" onMouseClicked="#feelingThirsty" styleClass="button-raised" text="Random COLA" />
                      </children>
                   </HBox>
                       <GridPane alignment="CENTER" prefHeight="407.0" prefWidth="838.0" styleClass="card">

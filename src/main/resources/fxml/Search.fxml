@@ -29,7 +29,7 @@
             <fx:include source="toolbar.fxml" />
          </children>
         </Pane>
-        <Pane prefHeight="115.0" prefWidth="1024.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+        <Pane fx:id="searchPage" prefHeight="115.0" prefWidth="1024.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
             <children>
                 <Label fx:id="descriptionLabel" alignment="CENTER" layoutY="81.0" prefHeight="20.0" prefWidth="1024.0" text="N/A" />
             <Hyperlink layoutX="25.0" layoutY="29.0" onMouseClicked="#advancedSearch" text="Advanced Search" />
