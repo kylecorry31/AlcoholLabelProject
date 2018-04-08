@@ -23,6 +23,9 @@ public class StorageTest {
     @Before
     public void setup(){
         database = new ApacheDerbyDatabase("colaTest.db");
+        database.connect();
+        database.dropTable(COLA.DB_TABLE);
+        database.dropTable(User.DB_TABLE);
         storage = Storage.getInstance();
         storage.setDatabase(database);
         LogManager.getInstance().setShouldWrite(false);
