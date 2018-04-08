@@ -4,6 +4,9 @@ import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.COLASearchHandler;
 import com.emeraldElves.alcohollabelproject.data.search.*;
+import com.emeraldElves.alcohollabelproject.database.CSVWriter;
+import com.emeraldElves.alcohollabelproject.exporter.ApplicationExporter;
+import com.emeraldElves.alcohollabelproject.ui.DialogFileSelector;
 import com.emeraldElves.alcohollabelproject.ui.ImageUtils;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.data.COLA;
@@ -23,6 +26,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -54,6 +60,8 @@ public class COLASearchController implements Initializable {
     @FXML
     private GridPane pane;
 
+    private List<COLA> colasOnDisplay;
+
 
     private COLASearchHandler colaSearchHandler;
 
@@ -80,16 +88,16 @@ public class COLASearchController implements Initializable {
     }
 
     private void populateList(){
-        List<COLA> colas = colaSearchHandler.filteredSearch(genFilter());
+        colasOnDisplay= colaSearchHandler.filteredSearch(genFilter());
 
 
         SearchRanking maxRanking = new MaxSearchRanking(new FuzzyBrandNameRanking(searchTerm), new FuzzyFancifulNameRanking(searchTerm));
 
-        colas.sort(Comparator.comparingInt(maxRanking::rank).reversed());
+        colasOnDisplay.sort(Comparator.comparingInt(maxRanking::rank).reversed());
 
         searchList.getChildren().clear();
 
-        if(colas.isEmpty()){
+        if(colasOnDisplay.isEmpty()){
             VBox userListItem = new VBox();
             Label emptyLabel = new Label();
             emptyLabel.setText("No applications");
@@ -98,7 +106,7 @@ public class COLASearchController implements Initializable {
             searchList.getChildren().add(userListItem);
         }
 
-        for(COLA c: colas){
+        for(COLA c: colasOnDisplay){
             HBox applicationListItem = new HBox();
             VBox itemName = new VBox();
             itemName.setAlignment(Pos.CENTER_LEFT);
@@ -170,9 +178,9 @@ public class COLASearchController implements Initializable {
             searchList.getChildren().add(applicationListItem);
         }
 
-        descriptionLabel.setText("Showing top " + colas.size() + " results for \"" + searchTerm + "\"");
+        descriptionLabel.setText("Showing top " + colasOnDisplay.size() + " results for \"" + searchTerm + "\"");
         descriptionLabel.setVisible(true);
-        saveBtn.setDisable(colas.size() == 0);
+        saveBtn.setDisable(colasOnDisplay.size() == 0);
 
     }
 
@@ -225,10 +233,9 @@ public class COLASearchController implements Initializable {
 
     }
 
-    public void saveCSV(ActionEvent e) {
-
-//        ApplicationExporter exporter = new ApplicationExporter(new CSVExporter());
-//        exporter.export(data);
+    public void saveCSV() {
+        ExportApplicationsController controller = new ExportApplicationsController();
+        controller.export(colasOnDisplay);
     }
 
     @Override
