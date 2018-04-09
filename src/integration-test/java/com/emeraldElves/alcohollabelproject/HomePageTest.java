@@ -25,6 +25,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 
+import java.time.LocalDate;
 import java.util.concurrent.TimeoutException;
 
 import static org.testfx.api.FxAssert.verifyThat;
@@ -45,6 +46,7 @@ public class HomePageTest extends ApplicationTest {
         Storage.getInstance().setDatabase(database);
         COLA c1 = new COLA(1, "Test'Brand", AlcoholType.BEER, "180001", ProductSource.DOMESTIC);
         c1.setAlcoholContent(10);
+        c1.setApprovalDate(LocalDate.of(2018, 7, 31));
         c1.setFancifulName("TestFanciful");
         c1.setStatus(ApplicationStatus.APPROVED);
         Storage.getInstance().saveCOLA(c1);
@@ -56,6 +58,7 @@ public class HomePageTest extends ApplicationTest {
         primaryStage.setScene(new Scene(root,1024,768));
         primaryStage.show();
         primaryStage.toFront();
+        primaryStage.requestFocus();
     }
 
 
@@ -65,6 +68,22 @@ public class HomePageTest extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         database.disconnect();
+    }
+
+    @Test
+    public void testRecents() throws InterruptedException {
+        Thread.sleep(screenLoadWaitTime);
+        verifyThat("#brand1", LabeledMatchers.hasText("Test'Brand".toUpperCase()));
+        verifyThat("#fanciful1", LabeledMatchers.hasText("TestFanciful"));
+        verifyThat("#content1", LabeledMatchers.hasText("10.0%"));
+        verifyThat("#date1", LabeledMatchers.hasText(LocalDate.of(2018, 7, 31).toString()));
+        verifyThat("#alc1", Node::isVisible);
+        verifyThat("#brand2", LabeledMatchers.hasText(""));
+        verifyThat("#fanciful2", LabeledMatchers.hasText(""));
+        verifyThat("#fanciful2", LabeledMatchers.hasText(""));
+        verifyThat("#content2", LabeledMatchers.hasText(""));
+        verifyThat("#date2", LabeledMatchers.hasText(""));
+        verifyThat("#alc2", Node::isVisible);
     }
 
     @Test
