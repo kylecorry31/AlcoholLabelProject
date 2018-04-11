@@ -1,10 +1,11 @@
 * {
-    -color-primary: #008000;
-    -color-primary-dark: #233d66;
+    -color-primary: #003a6c;
+    -color-primary-dark: #003a6c;
     -color-primary-light: #3c6ab2;
-    -color-accent: #008000;
+    -color-accent: #003a6c;
     -color-background: #f2f2f2;
     -color-text: BLACK;
+    -color-header: WHITE;
     -color-button-text: WHITE;
     -color-approved: #008000;
     -color-rejected: #800000;
@@ -171,8 +172,12 @@
 }
 
 #toolbar-title {
-    -fx-text-fill: -color-button-text;
+    -fx-text-fill: -color-header;
     -fx-font-size: 24px;
+}
+
+.toolbar-text {
+    -fx-text-fill: -color-header;
 }
 
 .table-view, .tree-table-view {
@@ -287,6 +292,10 @@
 .approved {
     -fx-text-fill: -color-approved;
     -fx-font-weight: bold;
+}
+
+.approve-button {
+    -fx-background-color: #008000;
 }
 
 .rejected {

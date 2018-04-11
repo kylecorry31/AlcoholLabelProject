@@ -19,7 +19,9 @@ public class COLAApprovalHandler {
     }
 
     public synchronized List<COLA> getAssignedApplications(User user){
-        return storage.getAssignedCOLAs(user);
+        List<COLA> applications = storage.getAssignedCOLAs(user);
+        applications.removeIf(cola -> cola.getStatus() != ApplicationStatus.RECEIVED);
+        return applications;
     }
 
     public synchronized List<COLA> assignCOLAs(User user, int count){

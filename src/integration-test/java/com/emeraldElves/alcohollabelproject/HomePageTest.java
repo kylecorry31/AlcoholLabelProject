@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
@@ -36,9 +37,8 @@ public class HomePageTest extends ApplicationTest {
 
     private long screenLoadWaitTime = 500;
 
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    @Before
+    public void setup() throws Exception {
         database = new ApacheDerbyDatabase("colaTest.db");
         database.connect();
         database.dropTable(COLA.DB_TABLE);
@@ -50,12 +50,19 @@ public class HomePageTest extends ApplicationTest {
         c1.setFancifulName("TestFanciful");
         c1.setStatus(ApplicationStatus.APPROVED);
         Storage.getInstance().saveCOLA(c1);
-        primaryStage.setTitle("Alcohol Label Project");
-        primaryStage.getIcons().add(new Image(("images/logo.png")));
-        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.HOME_PAGE);
-        Parent root = page.getRoot();
-        root.getStylesheets().add("/style/style.css");
-        primaryStage.setScene(new Scene(root,1024,768));
+        ApplicationTest.launch(Main.class);
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+//        primaryStage.setTitle("Alcohol Label Project");
+//        primaryStage.getIcons().add(new Image(("images/logo.png")));
+//        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.HOME_PAGE);
+//        Parent root = page.getRoot();
+//        root.getStylesheets().add("/style/style.css");
+//        primaryStage.setScene(new Scene(root,1024,768));
         primaryStage.show();
         primaryStage.toFront();
         primaryStage.requestFocus();

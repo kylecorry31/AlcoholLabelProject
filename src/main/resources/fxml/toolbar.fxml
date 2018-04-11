@@ -12,17 +12,17 @@
       <Label id="toolbar-title" fx:id="toolbarTitle" layoutX="31.0" layoutY="-1.0" onMouseClicked="#goHome" prefHeight="96.0" prefWidth="323.0" text="Emerald Elves COLA" />
       <HBox alignment="CENTER_RIGHT" layoutX="395.0" layoutY="26.0" prefHeight="42.0" prefWidth="615.0" spacing="32.0">
          <children>
-            <JFXButton fx:id="extraButton" onMouseClicked="#extraFunction" text="Review all Applications">
+            <JFXButton fx:id="extraButton" onMouseClicked="#extraFunction" styleClass="toolbar-text" text="Review all Applications">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="utility" onMouseClicked="#utilityButton" text="Apply for Account">
+            <JFXButton fx:id="utility" onMouseClicked="#utilityButton" styleClass="toolbar-text" text="Apply for Account">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="logButton" onMouseClicked="#loadLog" styleClass="button-flat" text="Log Out">
+            <JFXButton fx:id="logButton" onMouseClicked="#loadLog" styleClass="toolbar-text" text="Log Out">
                <font>
                   <Font size="18.0" />
                </font>
