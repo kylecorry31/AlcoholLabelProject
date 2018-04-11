@@ -37,8 +37,8 @@ public class HomePageTest extends ApplicationTest {
 
     private long screenLoadWaitTime = 1000;
 
-    @Before
-    public void setup() throws Exception {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
         database = new ApacheDerbyDatabase("colaTest.db");
         database.connect();
         database.dropTable(COLA.DB_TABLE);
@@ -50,19 +50,12 @@ public class HomePageTest extends ApplicationTest {
         c1.setFancifulName("TestFanciful");
         c1.setStatus(ApplicationStatus.APPROVED);
         Storage.getInstance().saveCOLA(c1);
-        ApplicationTest.launch(Main.class);
-    }
-
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-//        primaryStage.setTitle("Alcohol Label Project");
-//        primaryStage.getIcons().add(new Image(("images/logo.png")));
-//        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.HOME_PAGE);
-//        Parent root = page.getRoot();
-//        root.getStylesheets().add("/style/style.css");
-//        primaryStage.setScene(new Scene(root,1024,768));
+        primaryStage.setTitle("Alcohol Label Project");
+        primaryStage.getIcons().add(new Image(("images/logo.png")));
+        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.HOME_PAGE);
+        Parent root = page.getRoot();
+        root.getStylesheets().add("/style/style.css");
+        primaryStage.setScene(new Scene(root,1024,768));
         primaryStage.show();
         primaryStage.toFront();
         primaryStage.requestFocus();
