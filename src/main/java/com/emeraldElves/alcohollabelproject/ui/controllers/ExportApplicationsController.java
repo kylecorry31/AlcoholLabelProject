@@ -4,7 +4,10 @@ import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.CSVWriter;
 import com.emeraldElves.alcohollabelproject.exporter.ApplicationExporter;
 import com.emeraldElves.alcohollabelproject.ui.DialogFileSelector;
+import com.jfoenix.controls.JFXSnackbar;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,6 +15,12 @@ import java.io.IOException;
 import java.util.List;
 
 public class ExportApplicationsController {
+
+    private Pane pane;
+
+    public ExportApplicationsController(Pane pane) {
+        this.pane = pane;
+    }
 
     public void export(List<COLA> applications){
         DialogFileSelector fileSelector = new DialogFileSelector();
@@ -27,20 +36,14 @@ public class ExportApplicationsController {
                 applicationExporter.export(cola);
             }
             fileWriter.close();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("COLA Exporter");
-            alert.setHeaderText(null);
-            alert.setContentText("COLAs have been exported to " + file.getName());
-
-            alert.showAndWait();
+            JFXSnackbar snackbar = new JFXSnackbar(pane);
+            snackbar.show("COLAs exported to " + file.getName(), 3000);
         } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("COLA Exporter");
-            alert.setHeaderText(null);
-            alert.setContentText("Error exporting COLAs to " + file.getName());
-
-            alert.showAndWait();
+            JFXSnackbar snackbar = new JFXSnackbar(pane);
+            snackbar.show("Error exporting COLAs to " + file.getName(), "RETRY", actionEvent -> {
+                export(applications);
+                snackbar.unregisterSnackbarContainer(pane);
+            });
         }
 
     }

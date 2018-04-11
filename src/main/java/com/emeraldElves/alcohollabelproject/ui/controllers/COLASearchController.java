@@ -234,7 +234,7 @@ public class COLASearchController implements Initializable {
     }
 
     public void saveCSV() {
-        ExportApplicationsController controller = new ExportApplicationsController();
+        ExportApplicationsController controller = new ExportApplicationsController(pane);
         controller.export(colasOnDisplay);
     }
 
