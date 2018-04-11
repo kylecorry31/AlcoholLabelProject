@@ -35,7 +35,7 @@ public class HomePageTest extends ApplicationTest {
 
     private IDatabase database;
 
-    private long screenLoadWaitTime = 500;
+    private long screenLoadWaitTime = 1000;
 
     @Before
     public void setup() throws Exception {

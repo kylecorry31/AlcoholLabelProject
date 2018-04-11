@@ -87,9 +87,21 @@ public class COLASearchController implements Initializable {
         populateList();
     }
 
-    private void populateList(){
-        colasOnDisplay= colaSearchHandler.filteredSearch(genFilter());
+    private void showSimpleResult(String text){
+        searchList.getChildren().clear();
+        VBox userListItem = new VBox();
+        Label emptyLabel = new Label();
+        emptyLabel.setText(text);
+        userListItem.getChildren().add(emptyLabel);
+        userListItem.getStyleClass().add("list-item-empty");
+        searchList.getChildren().add(userListItem);
+    }
 
+    private void populateList(){
+
+        showSimpleResult("Searching...");
+
+        colasOnDisplay= colaSearchHandler.filteredSearch(genFilter());
 
         SearchRanking maxRanking = new MaxSearchRanking(new FuzzyBrandNameRanking(searchTerm), new FuzzyFancifulNameRanking(searchTerm));
 
@@ -98,12 +110,7 @@ public class COLASearchController implements Initializable {
         searchList.getChildren().clear();
 
         if(colasOnDisplay.isEmpty()){
-            VBox userListItem = new VBox();
-            Label emptyLabel = new Label();
-            emptyLabel.setText("No applications");
-            userListItem.getChildren().add(emptyLabel);
-            userListItem.getStyleClass().add("list-item-empty");
-            searchList.getChildren().add(userListItem);
+            showSimpleResult("No results");
         }
 
         for(COLA c: colasOnDisplay){
@@ -242,6 +249,8 @@ public class COLASearchController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         JFXScrollPane.smoothScrolling(scrollPane);
+
+        showSimpleResult("Searching...");
 
         descriptionLabel.setVisible(false);
 
