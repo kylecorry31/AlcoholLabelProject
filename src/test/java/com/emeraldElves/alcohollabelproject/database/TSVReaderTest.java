@@ -2,7 +2,7 @@ package com.emeraldElves.alcohollabelproject.database;
 
 import org.junit.Test;
 
-import java.util.Scanner;
+import java.io.StringReader;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ public class TSVReaderTest {
 
     @Test
     public void test(){
-        TSVReader reader = new TSVReader(new Scanner(tsv));
+        TSVReader reader = new TSVReader(new StringReader(tsv));
         assertEquals(2, reader.getCount());
         assertEquals("Kyle", reader.getString("name", 0));
         assertEquals("Ryan", reader.getString("name", 1));

@@ -2,7 +2,7 @@ package com.emeraldElves.alcohollabelproject.database;
 
 import org.junit.Test;
 
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,7 +11,7 @@ public class CSVReaderIntegrationTest {
 
     @Test
     public void test(){
-        CSVReader reader = new CSVReader(new Scanner(getClass().getResourceAsStream("/files/test.csv")));
+        CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream("/files/test.csv")));
         assertEquals(2, reader.getCount());
         assertEquals("kyle", reader.getString("name", 0));
         assertEquals("ryan", reader.getString("name", 1));

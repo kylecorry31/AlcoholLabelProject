@@ -8,9 +8,9 @@ import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.database.*;
 
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class PopulateDatabase {
 
@@ -22,9 +22,9 @@ public class PopulateDatabase {
 
         InputStream ttbFile = PopulateDatabase.class.getResourceAsStream("/ttbsample.tsv");
 
-        Scanner scanner = new Scanner(ttbFile);
+        InputStreamReader fileReader = new InputStreamReader(ttbFile);
 
-        StructuredFileReader reader = new TSVReader(scanner);
+        StructuredFileReader reader = new TSVReader(fileReader);
 
         IDatabase database = new ApacheDerbyDatabase("cola.db");
         database.connect();
@@ -35,11 +35,11 @@ public class PopulateDatabase {
 
         for (int i = 0; i < reader.getCount(); i++) {
             long id = reader.getLong("CFM_APPL_ID", i, generator.generateID());
-            String brandName = reader.getString("PRODUCT_NAME", i).replace("\"\"\"", "");
+            String brandName = reader.getString("PRODUCT_NAME", i);
             AlcoholType type = getType(reader.getString("PRODUCT_TYPE", i));
-            String serialNo = reader.getString("SERIAL_NUM", i).replace("-", "");
+            String serialNo = reader.getString("SERIAL_NUM", i);
             ProductSource origin = getSource(reader.getString("ORIGIN_CODE", i));
-            String fanciful = reader.getString("FANCIFUL_NAME", i).replace("\"\"\"", "");
+            String fanciful = reader.getString("FANCIFUL_NAME", i);
             double percent = reader.getDouble("ALCOHOL_PCT", i, 0);
 
             COLA cola = new COLA(id, brandName, type, serialNo, origin);

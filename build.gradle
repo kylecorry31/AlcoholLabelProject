@@ -43,6 +43,7 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'com.jfoenix:jfoenix:8.0.2'
     compile 'me.xdrop:fuzzywuzzy:1.1.9'
+    compile 'com.opencsv:opencsv:4.0'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile "org.testfx:openjfx-monocle:8u76-b04" // jdk-9+181 for Java 9
     testCompile "org.testfx:testfx-core:4.0.13-alpha"

@@ -1,23 +1,34 @@
 package com.emeraldElves.alcohollabelproject.database;
 
-import com.emeraldElves.alcohollabelproject.LogManager;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.*;
 
 public class StructuredFileReader {
 
     private Map<String, List<String>> data;
     private int count;
-    private String delimiter;
+    private CSVReader reader;
 
-    public StructuredFileReader(Scanner dataStream, String delimiter) {
-        if (delimiter == null) {
-            delimiter = ",";
-        }
-        this.delimiter = delimiter;
+    public StructuredFileReader(Reader dataStream, char delimiter, char quoteChar, char escapeChar) {
         data = new HashMap<>();
         count = 0;
-        parseData(dataStream);
+        reader = new CSVReaderBuilder(dataStream)
+                .withCSVParser(new CSVParserBuilder().withSeparator(delimiter).withQuoteChar(quoteChar).withEscapeChar(escapeChar).build())
+                .build();
+        parseData();
+    }
+
+    public StructuredFileReader(Reader dataStream, char delimiter, char quoteChar){
+        this(dataStream, delimiter, quoteChar, '\'');
+    }
+
+    public StructuredFileReader(Reader dataStream, char delimiter){
+        this(dataStream, delimiter, '"', '\'');
     }
 
     public int getCount() {
@@ -52,24 +63,23 @@ public class StructuredFileReader {
         }
     }
 
-    private void parseData(Scanner dataStream) {
-        if (dataStream == null || !dataStream.hasNextLine()) {
-            return;
-        }
-        String header = dataStream.nextLine();
-        String[] colNames = header.split(delimiter);
-        for (String col : colNames) {
-            data.put(col, new LinkedList<>());
-        }
-
-        count = 0;
-        while (dataStream.hasNextLine()) {
-            String line = dataStream.nextLine();
-            String[] cols = line.split(delimiter);
-            for (int i = 0; (i < cols.length) && (i < colNames.length); i++) {
-                data.get(colNames[i]).add(cols[i]);
+    private void parseData() {
+        try {
+            String[] colNames = reader.readNext();
+            for (String col : colNames) {
+                data.put(col, new LinkedList<>());
             }
-            count++;
+
+            count = 0;
+            List<String[]> lines = reader.readAll();
+            for (String[] cols : lines) {
+                for (int j = 0; (j < cols.length) && (j < colNames.length); j++) {
+                    data.get(colNames[j]).add(cols[j]);
+                }
+                count++;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 

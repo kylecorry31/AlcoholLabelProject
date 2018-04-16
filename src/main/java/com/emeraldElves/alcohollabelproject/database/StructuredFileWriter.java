@@ -1,20 +1,25 @@
 package com.emeraldElves.alcohollabelproject.database;
 
+import com.opencsv.CSVWriter;
+
 import java.io.IOException;
 import java.io.Writer;
 
 public class StructuredFileWriter {
 
-    private String delimiter;
-    private Writer writer;
+    private CSVWriter csvWriter;
 
-    public StructuredFileWriter(Writer writer, String[] headerCols, String delimiter) {
-        if (delimiter == null){
-            delimiter = ",";
-        }
-        this.delimiter = delimiter;
-        this.writer = writer;
+    public StructuredFileWriter(Writer writer, String[] headerCols, char delimiter, char quoteChar, char escapeChar) {
+        csvWriter = new CSVWriter(writer, delimiter, quoteChar, escapeChar, System.lineSeparator());
         write(headerCols);
+    }
+
+    public StructuredFileWriter(Writer writer, String[] headerCols, char delimiter, char quoteChar) {
+        this(writer, headerCols, delimiter, quoteChar, '"');
+    }
+
+    public StructuredFileWriter(Writer writer, String[] headerCols, char delimiter) {
+        this(writer, headerCols, delimiter, '\'', '"');
     }
 
     /**
@@ -22,15 +27,10 @@ public class StructuredFileWriter {
      * @param values The values to write.
      */
     public void write(String[] values){
-        if(values == null || writer == null){
+        if(values == null){
             return;
         }
-
-        try {
-            writer.write(String.join(delimiter, values) + System.lineSeparator());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        csvWriter.writeNext(values, false);
     }
 
     /**
@@ -38,7 +38,7 @@ public class StructuredFileWriter {
      */
     public void close() {
         try {
-            writer.close();
+            csvWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
