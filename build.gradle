@@ -54,6 +54,7 @@ dependencies {
     compile 'org.bouncycastle:bcprov-jdk15on:1.54'
     compile 'org.bouncycastle:bcmail-jdk15on:1.54'
     compile 'org.bouncycastle:bcpkix-jdk15on:1.54'
+    compile 'com.nulab-inc:zxcvbn:1.2.5'
 }
 
 check.dependsOn integrationTest

@@ -53,6 +53,26 @@
     -fx-background-insets: 0, 0, 0, 0;
 }
 
+.password-strength-weak > .bar {
+    -fx-background-color: #F44336;
+}
+
+.password-strength-fair > .bar {
+    -fx-background-color: #FFC107;
+}
+
+.password-strength-good > .bar {
+    -fx-background-color: #4CAF50;
+}
+
+.password-strength-strong > .bar {
+    -fx-background-color: #4CAF50;
+}
+
+.password-strength-very-strong > .bar {
+    -fx-background-color: #4CAF50;
+}
+
 .settingsPane, .settingsPaneHolder {
     -fx-background-color: -color-background;
 }

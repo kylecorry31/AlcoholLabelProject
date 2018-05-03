@@ -3,6 +3,7 @@ package com.emeraldElves.alcohollabelproject.ui.controllers;
 import com.emeraldElves.alcohollabelproject.Data.PhoneNumber;
 import com.emeraldElves.alcohollabelproject.Data.UserType;
 import com.emeraldElves.alcohollabelproject.LogManager;
+import com.emeraldElves.alcohollabelproject.PasswordStrengthChecker;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
@@ -33,11 +34,17 @@ public class CreateAccountController implements Initializable {
     @FXML
     private JFXButton createButton;
 
+    @FXML
+    private JFXProgressBar passwordStrength;
+
     private List<ValidatorBase> validators;
+
+    private PasswordStrengthChecker strengthChecker;
 
 
     public CreateAccountController() {
         validators = new LinkedList<>();
+        strengthChecker = new PasswordStrengthChecker();
     }
 
     @Override
@@ -60,6 +67,42 @@ public class CreateAccountController implements Initializable {
                 permitText.setVisible(true);
                 companyText.setVisible(true);
                 addressText.setVisible(true);
+            }
+        });
+
+        passwordText.textProperty().addListener(observable -> {
+            if (passwordText.getText().isEmpty()){
+                passwordStrength.setProgress(0);
+            } else {
+                PasswordStrengthChecker.Strength strength = strengthChecker.check(passwordText.getText());
+                String[] strengthStyles = {"password-strength-weak", "password-strength-fair", "password-strength-good", "password-strength-strong", "password-strength-very-strong"};
+                switch (strength) {
+                    case WEAK:
+                        passwordStrength.setProgress(0.2);
+                        passwordStrength.getStyleClass().removeAll(strengthStyles);
+                        passwordStrength.getStyleClass().add(strengthStyles[0]);
+                        break;
+                    case FAIR:
+                        passwordStrength.setProgress(0.4);
+                        passwordStrength.getStyleClass().removeAll(strengthStyles);
+                        passwordStrength.getStyleClass().add(strengthStyles[1]);
+                        break;
+                    case GOOD:
+                        passwordStrength.setProgress(0.6);
+                        passwordStrength.getStyleClass().removeAll(strengthStyles);
+                        passwordStrength.getStyleClass().add(strengthStyles[2]);
+                        break;
+                    case STRONG:
+                        passwordStrength.setProgress(0.8);
+                        passwordStrength.getStyleClass().removeAll(strengthStyles);
+                        passwordStrength.getStyleClass().add(strengthStyles[3]);
+                        break;
+                    case VERY_STRONG:
+                        passwordStrength.setProgress(1);
+                        passwordStrength.getStyleClass().removeAll(strengthStyles);
+                        passwordStrength.getStyleClass().add(strengthStyles[4]);
+                        break;
+                }
             }
         });
 

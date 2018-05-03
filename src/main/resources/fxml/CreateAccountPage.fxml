@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.CreateAccountController">
+<GridPane alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.CreateAccountController">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -38,6 +39,7 @@
                   </HBox>
                   <JFXTextField fx:id="nameText" labelFloat="true" promptText="Name" styleClass="custom-jfx-text-field" />
                   <JFXPasswordField fx:id="passwordText" labelFloat="true" promptText="Password" styleClass="custom-jfx-text-field" />
+                  <JFXProgressBar fx:id="passwordStrength" prefWidth="960.0" progress="0.0" />
                   <JFXTextField fx:id="companyText" labelFloat="true" promptText="Company" styleClass="custom-jfx-text-field" />
                   <JFXTextField fx:id="addressText" labelFloat="true" promptText="Address" styleClass="custom-jfx-text-field" />
                   <JFXTextField fx:id="phoneText" labelFloat="true" promptText="Phone Number" styleClass="custom-jfx-text-field" />
