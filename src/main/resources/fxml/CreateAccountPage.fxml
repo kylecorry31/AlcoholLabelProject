@@ -40,6 +40,7 @@
                   <JFXTextField fx:id="nameText" labelFloat="true" promptText="Name" styleClass="custom-jfx-text-field" />
                   <JFXPasswordField fx:id="passwordText" labelFloat="true" promptText="Password" styleClass="custom-jfx-text-field" />
                   <JFXProgressBar fx:id="passwordStrength" prefWidth="960.0" progress="0.0" />
+                  <JFXPasswordField fx:id="confirmPasswordText" labelFloat="true" layoutX="42.0" layoutY="148.0" promptText="Confirm Password" styleClass="custom-jfx-text-field" />
                   <JFXTextField fx:id="companyText" labelFloat="true" promptText="Company" styleClass="custom-jfx-text-field" />
                   <JFXTextField fx:id="addressText" labelFloat="true" promptText="Address" styleClass="custom-jfx-text-field" />
                   <JFXTextField fx:id="phoneText" labelFloat="true" promptText="Phone Number" styleClass="custom-jfx-text-field" />

@@ -26,7 +26,7 @@ public class CreateAccountController implements Initializable {
     private JFXTextField emailText, nameText, companyText, addressText, phoneText, repText, permitText;
 
     @FXML
-    private JFXPasswordField passwordText;
+    private JFXPasswordField passwordText, confirmPasswordText;
 
     @FXML
     private JFXRadioButton radioAlcoholProducer, radioTTBAgent;
@@ -112,6 +112,7 @@ public class CreateAccountController implements Initializable {
         addValidator(passwordText, new RequiredFieldValidator(), "Password required");
         addValidator(repText, new OptionalNumberValidator(), "Representative ID must be a number");
         addValidator(emailText, new UniqueUserValidator(), "Email address taken");
+        addValidator(confirmPasswordText, new TextEqualValidator(passwordText), "Passwords are different");
 
     }
 
