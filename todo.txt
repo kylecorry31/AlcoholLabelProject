@@ -23,6 +23,7 @@ Applicants
 * Allow multiple photos to be submitted
 * Add all other fields
 * Allow multiple permits / company locations / companies (maybe add a company database)
+* Import application from pdf
 
 Other
 -----

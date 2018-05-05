@@ -164,12 +164,20 @@ public class ApproveUserController implements Initializable {
         user.setApproved(true);
         Storage.getInstance().updateUser(user);
         LogManager.getInstance().log(ApproveUserController.class.getSimpleName(), "Approved user " + user.getEmail().getEmailAddress());
+        EmailController emailController = new EmailController();
+        if(user != null) {
+            emailController.sendEmail(user.getEmail(),"COLA Account Update", "Your COLA account has been approved.");
+        }
         populateUsers();
     }
 
     private void reject(){
         Storage.getInstance().deleteUser(user);
         LogManager.getInstance().log(ApproveUserController.class.getSimpleName(), "Rejected user " + user.getEmail().getEmailAddress());
+        EmailController emailController = new EmailController();
+        if(user != null) {
+            emailController.sendEmail(user.getEmail(),"COLA Account Update", "Your COLA account has been rejected.");
+        }
         populateUsers();
     }
 

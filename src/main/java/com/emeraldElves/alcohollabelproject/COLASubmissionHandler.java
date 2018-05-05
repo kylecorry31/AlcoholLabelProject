@@ -7,6 +7,7 @@ import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
+import com.emeraldElves.alcohollabelproject.ui.controllers.EmailController;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,12 +27,21 @@ public class COLASubmissionHandler {
         if(cola.getStatus() != ApplicationStatus.WITHDRAWN) {
             cola.setStatus(ApplicationStatus.RECEIVED);
         }
+        EmailController emailController = new EmailController();
         if(inDBCOLA == null){
             LogManager.getInstance().log(getClass().getSimpleName(), "Submitted COLA " + cola.getId());
             storage.saveCOLA(cola);
+            User user = Storage.getInstance().getUser(cola.getApplicantID());
+            if(user != null) {
+                emailController.sendEmail(user.getEmail(),"COLA Submission Update", String.format("A COLA has been submitted on behalf of your account with the ID %d", cola.getId()));
+            }
         } else {
             LogManager.getInstance().log(getClass().getSimpleName(), "Updated COLA " + cola.getId());
             storage.updateCOLA(cola);
+            User user = Storage.getInstance().getUser(cola.getApplicantID());
+            if(user != null) {
+                emailController.sendEmail(user.getEmail(),"COLA Submission Update", String.format("A COLA has been updated on behalf of your account with the ID %d", cola.getId()));
+            }
         }
     }
 
