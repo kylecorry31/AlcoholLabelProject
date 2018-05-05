@@ -96,7 +96,11 @@ public class ApplicationApprovalController implements Initializable {
 
         Platform.runLater(() -> {
             assignedApplications = colaApprovalHandler.getAssignedApplications(user);
-            populateApplications();
+            if (assignedApplications.size() < 10){
+                fetchMoreApplications();
+            } else {
+                populateApplications();
+            }
         });
     }
 
@@ -168,7 +172,6 @@ public class ApplicationApprovalController implements Initializable {
         colas.removeIf(cola1 -> cola1.getStatus() != ApplicationStatus.RECEIVED);
 
         applicationList.getChildren().clear();
-
         if(colas.isEmpty()){
             VBox userListItem = new VBox();
             Label emptyLabel = new Label();
@@ -215,7 +218,8 @@ public class ApplicationApprovalController implements Initializable {
         }
 
         colaApprovalHandler.approveCOLA(cola, "Your application has been approved");
-        Platform.runLater(this::populateApplications);
+        assignedApplications.remove(cola);
+        Platform.runLater(this::fetchMoreApplications);
     }
 
     private void reject(){
@@ -223,7 +227,8 @@ public class ApplicationApprovalController implements Initializable {
             return;
 
         colaApprovalHandler.rejectCOLA(cola, "Your application has been rejected");
-        Platform.runLater(this::populateApplications);
+        assignedApplications.remove(cola);
+        Platform.runLater(this::fetchMoreApplications);
     }
 
     private void noApplicationSelected(){
