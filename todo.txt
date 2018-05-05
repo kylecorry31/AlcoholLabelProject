@@ -27,10 +27,8 @@ Applicants
 
 Other
 -----
-* Send email when application or account status changes
 * Improve advanced search features
 * Ensure all these fields are accurate: https://www.ttbonline.gov/colasonline/defOfTerms.do
 * Assign TTB ID only after application is submitted
 * Add other application statuses
 * Make formula link to formula ttb site (optional)
-* Allow exporting of all applications
