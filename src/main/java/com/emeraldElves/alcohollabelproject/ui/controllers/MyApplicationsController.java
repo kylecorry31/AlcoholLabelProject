@@ -220,7 +220,7 @@ public class MyApplicationsController implements Initializable {
         UIManager.getInstance().displayPage(scrollPane.getScene(), UIManager.NEW_APPLICATION_PAGE);
     }
 
-    private void exportAsPDF(){
+    public void exportAsPDF(){
         ExportApplicationsController exporter = new ExportApplicationsController(root);
         if(cola != null) {
             exporter.exportPDF(cola, user);
