@@ -29,6 +29,12 @@ public class DialogFileSelector {
         return fileChooser.showSaveDialog(null);
     }
 
+    public File saveFileWithName(String fileTypePrompt, String initialFileName, String... fileExtensions) {
+        FileChooser fileChooser = createFileChooser(fileTypePrompt, fileExtensions);
+        fileChooser.setInitialFileName(initialFileName);
+        return fileChooser.showSaveDialog(null);
+    }
+
     private FileChooser createFileChooser(String fileTypePrompt, String... fileExtensions) {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(fileTypePrompt, fileExtensions);

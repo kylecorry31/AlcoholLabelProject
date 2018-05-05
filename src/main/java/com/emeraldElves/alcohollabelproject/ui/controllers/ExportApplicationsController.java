@@ -49,7 +49,7 @@ public class ExportApplicationsController {
 
     public void exportPDF(COLA application, User user){
         DialogFileSelector fileSelector = new DialogFileSelector();
-        File file = fileSelector.saveFile("PDF", "*.pdf");
+        File file = fileSelector.saveFileWithName("PDF", application.getId() + ".pdf", "*.pdf");
         NotificationController notifier = new NotificationController();
         if (file == null){
             return;
