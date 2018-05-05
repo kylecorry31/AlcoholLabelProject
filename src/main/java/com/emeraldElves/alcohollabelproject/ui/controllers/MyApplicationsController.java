@@ -6,6 +6,7 @@ import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.COLASubmissionHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
+import com.emeraldElves.alcohollabelproject.exporter.PDFExporter;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -53,6 +55,9 @@ public class MyApplicationsController implements Initializable {
 
     @FXML
     private Label noApplication;
+
+    @FXML
+    private GridPane root;
 
     private COLASubmissionHandler colaSubmissionHandler;
 
@@ -213,6 +218,16 @@ public class MyApplicationsController implements Initializable {
 
     private void createNew(){
         UIManager.getInstance().displayPage(scrollPane.getScene(), UIManager.NEW_APPLICATION_PAGE);
+    }
+
+    private void exportAsPDF(){
+        ExportApplicationsController exporter = new ExportApplicationsController(root);
+        if(cola != null) {
+            exporter.exportPDF(cola, user);
+        } else {
+            NotificationController notificationController = new NotificationController();
+            notificationController.notify(root, "No COLA selected");
+        }
     }
 
     private void noApplicationSelected(){

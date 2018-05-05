@@ -28,6 +28,7 @@ public class ExportApplicationsController {
     public void export(List<COLA> applications){
         DialogFileSelector fileSelector = new DialogFileSelector();
         File file = fileSelector.saveFile("Comma Separated Values (CSV)", "*.csv");
+        NotificationController notifier = new NotificationController();
         if (file == null){
             return;
         }
@@ -39,14 +40,9 @@ public class ExportApplicationsController {
                 applicationExporter.export(cola);
             }
             fileWriter.close();
-            JFXSnackbar snackbar = new JFXSnackbar(pane);
-            snackbar.show("COLAs exported to " + file.getName(), 3000);
+            notifier.notify(pane, "COLAs exported to " + file.getName());
         } catch (IOException e) {
-            JFXSnackbar snackbar = new JFXSnackbar(pane);
-            snackbar.show("Error exporting COLAs to " + file.getName(), "RETRY", actionEvent -> {
-                export(applications);
-                snackbar.unregisterSnackbarContainer(pane);
-            });
+            notifier.notify(pane, "Error exporting COLAs to " + file.getName(), "RETRY", () -> export(applications));
         }
 
     }
@@ -54,20 +50,16 @@ public class ExportApplicationsController {
     public void exportPDF(COLA application, User user){
         DialogFileSelector fileSelector = new DialogFileSelector();
         File file = fileSelector.saveFile("PDF", "*.pdf");
+        NotificationController notifier = new NotificationController();
         if (file == null){
             return;
         }
         try {
             PDFExporter pdfExporter = new PDFExporter(new File(getClass().getResource("/forms/cola.pdf").toURI()));
             pdfExporter.export(application, user, file);
-            JFXSnackbar snackbar = new JFXSnackbar(pane);
-            snackbar.show("COLA exported to " + file.getName(), 3000);
+            notifier.notify(pane, "COLA exported to " + file.getName());
         } catch (Exception e) {
-            JFXSnackbar snackbar = new JFXSnackbar(pane);
-            snackbar.show("Error exporting COLA to " + file.getName(), "RETRY", actionEvent -> {
-                exportPDF(application, user);
-                snackbar.unregisterSnackbarContainer(pane);
-            });
+            notifier.notify(pane, "Error exporting COLA to " + file.getName(), "RETRY", () -> exportPDF(application, user));
         }
 
     }
