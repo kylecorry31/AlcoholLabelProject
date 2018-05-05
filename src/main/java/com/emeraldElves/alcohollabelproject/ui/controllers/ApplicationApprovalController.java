@@ -8,6 +8,7 @@ import com.emeraldElves.alcohollabelproject.COLAApprovalHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -55,6 +56,9 @@ public class ApplicationApprovalController implements Initializable {
 
     @FXML
     private HBox winePHHbox, vintageYearHbox;
+
+    @FXML
+    private JFXDatePicker expirationDate;
 
     private COLAApprovalHandler colaApprovalHandler;
 
@@ -203,8 +207,12 @@ public class ApplicationApprovalController implements Initializable {
     }
 
     private void approve(){
-        if(cola == null)
+        if (cola == null)
             return;
+
+        if (expirationDate.getValue() != null){
+            cola.setExpirationDate(expirationDate.getValue());
+        }
 
         colaApprovalHandler.approveCOLA(cola, "Your application has been approved");
         Platform.runLater(this::populateApplications);

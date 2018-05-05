@@ -51,6 +51,7 @@ public class StorageTest {
         test.setApprovalDate(LocalDate.of(2018, 3, 2));
         test.setApplicantID(10);
         test.setFormula(1798);
+        test.setExpirationDate(LocalDate.of(2018, 7, 31));
         storage.saveCOLA(test);
 
         List<COLA> infos = storage.getAllCOLAs();
