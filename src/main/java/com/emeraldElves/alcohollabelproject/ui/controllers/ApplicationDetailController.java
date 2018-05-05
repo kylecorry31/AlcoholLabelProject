@@ -25,10 +25,10 @@ public class ApplicationDetailController implements Initializable {
     private Label brandNameText, typeText, serialText, originText, fancifulText, alcoholContentText, formulaText, approvalDateText;
 
     @FXML
-    private Label winePHText, vintageYearText;
+    private Label winePHText, vintageYearText, appellationText, varietalsText;
 
     @FXML
-    private HBox winePHHbox, vintageYearHbox;
+    private HBox winePHHbox, vintageYearHbox, appellationBox, varietalsBox;
 
     @FXML
     private ImageView labelImage;
@@ -65,6 +65,8 @@ public class ApplicationDetailController implements Initializable {
         if(alcohol.getType() == AlcoholType.WINE){
             winePHHbox.setVisible(true);
             vintageYearHbox.setVisible(true);
+            appellationBox.setVisible(true);
+            varietalsBox.setVisible(true);
 
             if(alcohol.getWinePH() != -1.0){
                 winePHText.setText(String.format("%.1f", alcohol.getWinePH()));
@@ -77,9 +79,23 @@ public class ApplicationDetailController implements Initializable {
             } else {
                 vintageYearHbox.setVisible(false);
             }
+
+            if (!alcohol.getAppellation().isEmpty()){
+                appellationText.setText(alcohol.getAppellation());
+            } else {
+                appellationBox.setVisible(false);
+            }
+
+            if (!alcohol.getVarietals().isEmpty()){
+                varietalsText.setText(alcohol.getVarietals());
+            } else {
+                varietalsBox.setVisible(false);
+            }
         } else {
             winePHHbox.setVisible(false);
             vintageYearHbox.setVisible(false);
+            appellationBox.setVisible(false);
+            varietalsBox.setVisible(false);
         }
 
         brandNameText.setText(alcohol.getBrandName());
@@ -124,6 +140,8 @@ public class ApplicationDetailController implements Initializable {
 
         winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
         vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
+        appellationBox.managedProperty().bind(appellationBox.visibleProperty());
+        varietalsBox.managedProperty().bind(varietalsBox.visibleProperty());
 
         backBtn.setOnMouseClicked(mouseEvent -> {
             UIManager.Page page = UIManager.getInstance().loadPage(UIManager.SEARCH_PAGE);

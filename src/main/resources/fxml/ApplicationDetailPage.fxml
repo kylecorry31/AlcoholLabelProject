@@ -97,6 +97,18 @@
                                           <Label fx:id="vintageYearText" text="Label" wrapText="true" />
                                        </children>
                                     </HBox>
+                                    <HBox fx:id="appellationBox" alignment="CENTER_LEFT" spacing="32.0">
+                                       <children>
+                                          <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Appellation" />
+                                          <Label fx:id="appellationText" text="Label" wrapText="true" />
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="varietalsBox" alignment="CENTER_LEFT" spacing="32.0">
+                                       <children>
+                                          <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Varietals" />
+                                          <Label fx:id="varietalsText" text="Label" wrapText="true" />
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                               <ImageView fx:id="labelImage" fitWidth="480.0" pickOnBounds="true" preserveRatio="true" />
