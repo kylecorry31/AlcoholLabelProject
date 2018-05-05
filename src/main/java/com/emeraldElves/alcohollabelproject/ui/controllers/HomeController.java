@@ -104,19 +104,17 @@ public class HomeController implements Initializable {
     }
 
     public void feelingThirsty() {
-        Random random = new Random();
-        COLA app;
-        if (alcohol.isEmpty()) {
-            app = null;
-        } else {
+        if (!alcohol.isEmpty()) {
+            Random random = new Random();
             int pos = random.nextInt(alcohol.size());
-            app = alcohol.get(pos);
+            COLA app = alcohol.get(pos);
+            UIManager.Page page = UIManager.getInstance().loadPage(UIManager.APPLICATION_DETAIL_PAGE);
+            ApplicationDetailController controller = page.getController();
+            controller.setAlcohol(app);
+            UIManager.getInstance().displayPage(searchbox.getScene(), page);
         }
 
-        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.APPLICATION_DETAIL_PAGE);
-        ApplicationDetailController controller = page.getController();
-        controller.setAlcohol(app);
-        UIManager.getInstance().displayPage(searchbox.getScene(), page);
+
     }
 
 
