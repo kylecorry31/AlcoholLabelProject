@@ -52,10 +52,10 @@ public class ApplicationApprovalController implements Initializable {
     private Label noApplication;
 
     @FXML
-    private Label winePHText, vintageYearText;
+    private Label winePHText, vintageYearText, appellationText, varietalsText;
 
     @FXML
-    private HBox winePHHbox, vintageYearHbox;
+    private HBox winePHHbox, vintageYearHbox, appellationBox, varietalsBox;
 
     @FXML
     private JFXDatePicker expirationDate;
@@ -111,6 +111,8 @@ public class ApplicationApprovalController implements Initializable {
         if(cola.getType() == AlcoholType.WINE){
             winePHHbox.setVisible(true);
             vintageYearHbox.setVisible(true);
+            appellationBox.setVisible(true);
+            varietalsBox.setVisible(true);
 
             if(cola.getWinePH() != -1.0){
                 winePHText.setText(String.format("%.1f", cola.getWinePH()));
@@ -123,9 +125,23 @@ public class ApplicationApprovalController implements Initializable {
             } else {
                 vintageYearHbox.setVisible(false);
             }
+
+            if (!cola.getAppellation().isEmpty()){
+                appellationText.setText(cola.getAppellation());
+            } else {
+                appellationBox.setVisible(false);
+            }
+
+            if (!cola.getVarietals().isEmpty()){
+                varietalsText.setText(cola.getVarietals());
+            } else {
+                varietalsBox.setVisible(false);
+            }
         } else {
             winePHHbox.setVisible(false);
             vintageYearHbox.setVisible(false);
+            appellationBox.setVisible(false);
+            varietalsBox.setVisible(false);
         }
 
         noApplication.setVisible(false);
