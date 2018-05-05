@@ -167,7 +167,6 @@
 }
 
 .root{
-    -fx-base: -color-accent;
     -fx-background: -color-background;
 }
 

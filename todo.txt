@@ -1,8 +1,6 @@
 Accounts
 --------
-* Improve password strength requirements
 * Allow user to see their password when typing it (little eye icon)
-* Confirm password field
 * Find what rep id means
 
 TTB Agent
@@ -34,4 +32,4 @@ Other
 * Assign TTB ID only after application is submitted
 * Add other application statuses
 * Make formula link to formula ttb site (optional)
-* Allow exporting of applications
+* Allow exporting of all applications
