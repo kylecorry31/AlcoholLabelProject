@@ -217,6 +217,8 @@ public class ApplicationApprovalController implements Initializable {
             cola.setExpirationDate(expirationDate.getValue());
         }
 
+        expirationDate.setValue(null);
+
         colaApprovalHandler.approveCOLA(cola, "Your application has been approved");
         assignedApplications.remove(cola);
         Platform.runLater(this::fetchMoreApplications);
@@ -225,6 +227,8 @@ public class ApplicationApprovalController implements Initializable {
     private void reject(){
         if(cola == null)
             return;
+
+        expirationDate.setValue(null);
 
         colaApprovalHandler.rejectCOLA(cola, "Your application has been rejected");
         assignedApplications.remove(cola);
