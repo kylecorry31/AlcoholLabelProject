@@ -16,10 +16,11 @@ import java.util.List;
 public class PDFExporter {
 
     private PDDocument template;
-    private File output;
+    private File templateFile;
 
     public PDFExporter(File template){
         try {
+            this.templateFile = template;
             this.template = PDDocument.load(template);
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,6 +36,7 @@ public class PDFExporter {
 
         if(form != null){
             try {
+                form.setNeedAppearances(true);
                 form.setXFA(null);
                 if (cola.getApplicantID() != -1) {
                     form.getField("1").setValue(String.valueOf(cola.getApplicantID()));
@@ -77,30 +79,35 @@ public class PDFExporter {
 
                 form.getField("9").setValue(cola.getFormula() != -1 ? String.valueOf(cola.getFormula()) : "N/A");
 
-                form.getField("12").setValue(user.getPhoneNumber().getFormattedNumber()); // TODO: didn't show up
+                form.getField("12").setValue(user.getPhoneNumber().getFormattedNumber());
 
-                form.getField("13").setValue(user.getEmail().getEmailAddress()); // TODO: didn't show up
+                form.getField("13").setValue(user.getEmail().getEmailAddress());
 
 
                 form.getField("16").setValue(cola.getSubmissionDate().toString());
 
                 if(cola.getStatus() == ApplicationStatus.APPROVED) {
-                    form.getField("19").setValue(cola.getApprovalDate().toString()); // TODO: blank if not approved
+                    form.getField("19").setValue(cola.getApprovalDate().toString());
                 }
-//                form.getField("20").setValue(String.valueOf(cola.getAssignedTo())); // TODO: Get agent name
+
+                if (cola.getStatus() == ApplicationStatus.REJECTED || cola.getStatus() == ApplicationStatus.NEEDS_CORRECTION) {
+                    form.getField("Check Box302").setValue("yse"); // spelling not typo
+                }
+
+                form.getField("Check Box109").setValue("yes");
+
 
                 form.getField("8").setValue(user.getName() + ", " + user.getAddress());
 
                 form.getField("18").setValue(user.getName());
 
                 if (cola.getType() == AlcoholType.WINE){
-//                    form.getField("11").setValue(String.valueOf(cola.getVintageYear()));
+                    // TODO: Appellation and varietals
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
 
         try {
@@ -109,7 +116,12 @@ public class PDFExporter {
             e.printStackTrace();
         }
 
-        // TODO: Reset form
+        try {
+            template = PDDocument.load(templateFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
