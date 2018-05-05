@@ -44,7 +44,7 @@ public class ApplicationSubmissionController implements Initializable{
     private JFXTextField alcoholContent;
 
     @FXML
-    private JFXTextField winePH, wineVintageYear;
+    private JFXTextField winePH, wineVintageYear, wineAppellation, wineVarietals;
 
     @FXML
     private Label ttbID;
@@ -152,6 +152,12 @@ public class ApplicationSubmissionController implements Initializable{
             } catch (Exception e){
                 // EMPTY
             }
+
+            String appellation = wineAppellation.getText();
+            String varietals = wineVarietals.getText();
+
+            cola.setAppellation(appellation);
+            cola.setVarietals(varietals);
         }
 
         if(labelFile != null) {
@@ -192,9 +198,13 @@ public class ApplicationSubmissionController implements Initializable{
 
         winePH.managedProperty().bind(winePH.visibleProperty());
         wineVintageYear.managedProperty().bind(wineVintageYear.visibleProperty());
+        wineVarietals.managedProperty().bind(wineVarietals.visibleProperty());
+        wineAppellation.managedProperty().bind(wineAppellation.visibleProperty());
 
         winePH.visibleProperty().bind(wineRadio.selectedProperty());
         wineVintageYear.visibleProperty().bind(wineRadio.selectedProperty());
+        wineVarietals.visibleProperty().bind(wineRadio.selectedProperty());
+        wineAppellation.visibleProperty().bind(wineRadio.selectedProperty());
 
         wineRadio.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
             winePH.clear();

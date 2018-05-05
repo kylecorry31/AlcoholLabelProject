@@ -42,10 +42,10 @@ public class MyApplicationsController implements Initializable {
     private VBox applicationList, alcInfoVbox;
 
     @FXML
-    private Label winePHText, vintageYearText;
+    private Label winePHText, vintageYearText, appellationText, varietalsText;
 
     @FXML
-    private HBox winePHHbox, vintageYearHbox;
+    private HBox winePHHbox, vintageYearHbox, appellationBox, varietalsBox;
 
     @FXML
     private HBox actionButtons;
@@ -86,6 +86,8 @@ public class MyApplicationsController implements Initializable {
         actionButtons.managedProperty().bind(actionButtons.visibleProperty());
         winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
         vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
+        appellationBox.managedProperty().bind(appellationBox.visibleProperty());
+        varietalsBox.managedProperty().bind(varietalsBox.visibleProperty());
 
         noApplicationSelected();
 
@@ -116,6 +118,8 @@ public class MyApplicationsController implements Initializable {
         if(cola.getType() == AlcoholType.WINE){
             winePHHbox.setVisible(true);
             vintageYearHbox.setVisible(true);
+            appellationBox.setVisible(true);
+            varietalsBox.setVisible(true);
 
             if(cola.getWinePH() != -1.0){
                 winePHText.setText(String.format("%.1f", cola.getWinePH()));
@@ -128,9 +132,24 @@ public class MyApplicationsController implements Initializable {
             } else {
                 vintageYearHbox.setVisible(false);
             }
+
+            if (!cola.getAppellation().isEmpty()){
+                appellationText.setText(cola.getAppellation());
+            } else {
+                appellationBox.setVisible(false);
+            }
+
+            if (!cola.getVarietals().isEmpty()){
+                varietalsText.setText(cola.getVarietals());
+            } else {
+                varietalsBox.setVisible(false);
+            }
+
         } else {
             winePHHbox.setVisible(false);
             vintageYearHbox.setVisible(false);
+            appellationBox.setVisible(false);
+            varietalsBox.setVisible(false);
         }
 
         noApplication.setVisible(false);

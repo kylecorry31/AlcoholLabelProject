@@ -62,6 +62,8 @@
                         <JFXTextField fx:id="formulaText" labelFloat="true" prefHeight="24.0" prefWidth="360.0" promptText="Formula (TTB Formula ID)" styleClass="custom-jfx-text-field" />
                         <JFXTextField fx:id="winePH" labelFloat="true" promptText="Wine PH" styleClass="custom-jfx-text-field" />
                         <JFXTextField fx:id="wineVintageYear" labelFloat="true" promptText="Wine Vintage Year" styleClass="custom-jfx-text-field" />
+                        <JFXTextField fx:id="wineAppellation" labelFloat="true" promptText="Wine Appellation" styleClass="custom-jfx-text-field" />
+                        <JFXTextField fx:id="wineVarietals" labelFloat="true" layoutX="42.0" layoutY="816.0" promptText="Wine Varietals" styleClass="custom-jfx-text-field" />
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <JFXButton fx:id="uploadButton" styleClass="button-raised" text="Upload Label" />

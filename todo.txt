@@ -22,6 +22,7 @@ Applicants
 * Add all other fields
 * Allow multiple permits / company locations / companies (maybe add a company database)
 * Import application from pdf
+* Allow editing of company information
 
 Other
 -----

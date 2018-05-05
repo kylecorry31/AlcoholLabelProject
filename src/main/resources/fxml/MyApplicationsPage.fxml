@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="root" alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.MyApplicationsController">
+<GridPane fx:id="root" alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.MyApplicationsController">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -143,6 +143,18 @@
                                                    <children>
                                                       <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Vintage Year" />
                                                       <Label fx:id="vintageYearText" text="Label" wrapText="true" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="appellationBox" alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Appellation" />
+                                                      <Label fx:id="appellationText" text="Label" wrapText="true" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="varietalsBox" alignment="CENTER_LEFT" spacing="32.0">
+                                                   <children>
+                                                      <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="label-header" text="Varietals" />
+                                                      <Label fx:id="varietalsText" text="Label" wrapText="true" />
                                                    </children>
                                                 </HBox>
                                              </children>

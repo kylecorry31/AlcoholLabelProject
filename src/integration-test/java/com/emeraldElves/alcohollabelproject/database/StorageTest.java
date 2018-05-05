@@ -63,6 +63,8 @@ public class StorageTest {
         test2.setAlcoholContent(5);
         test2.setWinePH(10);
         test2.setVintageYear(2018);
+        test2.setAppellation("test");
+        test2.setVarietals("testing, testing2");
         storage.saveCOLA(test2);
 
         infos = storage.getAllCOLAs();

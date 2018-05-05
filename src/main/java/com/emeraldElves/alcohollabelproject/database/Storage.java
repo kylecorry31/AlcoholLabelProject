@@ -15,7 +15,7 @@ import java.util.List;
 public class Storage {
 
     private IDatabase database;
-    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
+    private final String ALCOHOL_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
             COLA.DB_ID, COLA.DB_BRAND_NAME, COLA.DB_ALCOHOL_TYPE,
             COLA.DB_SERIAL_NUMBER, COLA.DB_ORIGIN,
             COLA.DB_ALCOHOL_CONTENT, COLA.DB_FANCIFUL_NAME,
@@ -23,7 +23,10 @@ public class Storage {
             COLA.DB_APPROVAL_DATE, COLA.DB_LABEL_IMAGE,
             COLA.DB_APPLICANT_ID, COLA.DB_ASSIGNED_TO,
             COLA.DB_FORMULA, COLA.DB_WINE_PH,
-            COLA.DB_WINE_VINTAGE_YEAR, COLA.DB_LAST_UPDATED,
+            COLA.DB_WINE_VINTAGE_YEAR,
+            COLA.DB_WINE_APPELLATION,
+            COLA.DB_WINE_VARIETALS,
+            COLA.DB_LAST_UPDATED,
             COLA.DB_EXPIRATION_DATE);
     private final String USER_VALUES = String.format("( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )",
             User.DB_NAME, User.DB_PASSWORD,
@@ -63,6 +66,8 @@ public class Storage {
                 String.valueOf(info.getFormula()),
                 String.valueOf(info.getWinePH()),
                 String.valueOf(info.getVintageYear()),
+                ApacheDerbyDatabase.addQuotes(info.getAppellation()),
+                ApacheDerbyDatabase.addQuotes(info.getVarietals()),
                 ApacheDerbyDatabase.addQuotes(info.getLastUpdated().toString()),
                 ApacheDerbyDatabase.addQuotes(info.getExpirationDate().toString()),
         });
@@ -109,6 +114,8 @@ public class Storage {
                 String.format("%s = %d", COLA.DB_FORMULA, info.getFormula()),
                 String.format("%s = %f", COLA.DB_WINE_PH, info.getWinePH()),
                 String.format("%s = %d", COLA.DB_WINE_VINTAGE_YEAR, info.getVintageYear()),
+                String.format("%s = '%s'", COLA.DB_WINE_APPELLATION, info.getAppellation()),
+                String.format("%s = '%s'", COLA.DB_WINE_VARIETALS, info.getVarietals()),
                 String.format("%s = '%s'", COLA.DB_LAST_UPDATED, info.getLastUpdated()),
                 String.format("%s = '%s'", COLA.DB_EXPIRATION_DATE, info.getExpirationDate()),
         };
@@ -251,6 +258,8 @@ public class Storage {
             double winePH = resultSet.getDouble(COLA.DB_WINE_PH);
             LocalDate expirationDate = resultSet.getDate(COLA.DB_EXPIRATION_DATE).toLocalDate();
             LocalDate lastUpdated = resultSet.getDate(COLA.DB_LAST_UPDATED).toLocalDate();
+            String appellation = resultSet.getString(COLA.DB_WINE_APPELLATION);
+            String varietals = resultSet.getString(COLA.DB_WINE_VARIETALS);
 
             COLA cola = new COLA(id, brandName, type, serialNumber, origin);
             cola.setAlcoholContent(alcoholContent);
@@ -266,6 +275,8 @@ public class Storage {
             cola.setWinePH(winePH);
             cola.setExpirationDate(expirationDate);
             cola.setLastUpdated(lastUpdated);
+            cola.setAppellation(appellation);
+            cola.setVarietals(varietals);
 
             return cola;
         } catch (SQLException e) {
@@ -362,6 +373,8 @@ public class Storage {
                     String.format("%s BIGINT", COLA.DB_FORMULA),
                     String.format("%s DOUBLE", COLA.DB_WINE_PH),
                     String.format("%s INT", COLA.DB_WINE_VINTAGE_YEAR),
+                    String.format("%s VARCHAR (256)", COLA.DB_WINE_APPELLATION),
+                    String.format("%s VARCHAR (256)", COLA.DB_WINE_VARIETALS),
                     String.format("%s DATE", COLA.DB_LAST_UPDATED),
                     String.format("%s DATE", COLA.DB_EXPIRATION_DATE),
             });
