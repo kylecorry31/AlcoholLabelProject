@@ -8,8 +8,6 @@ TTB Agent
 * Prefer type of application
 * Transfer application to another agent
 * Attach message to application
-* Assign expiration date (or auto assign)
-* Agents don't need most of the create user fields
 
 Super Agent
 -----------
