@@ -29,6 +29,8 @@ public class ApplicationExporter {
                 "formula",
                 "wine_ph",
                 "wine_vintage_year",
+                "wine_varietals",
+                "wine_appellation",
                 "last_updated",
                 "expiration_date"
         };
@@ -52,6 +54,8 @@ public class ApplicationExporter {
                 String.valueOf(cola.getFormula()),
                 String.valueOf(cola.getWinePH()),
                 String.valueOf(cola.getVintageYear()),
+                cola.getVarietals(),
+                cola.getAppellation(),
                 cola.getLastUpdated().toString(),
                 cola.getExpirationDate().toString()
         };

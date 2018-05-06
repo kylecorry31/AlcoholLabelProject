@@ -99,6 +99,8 @@ public class ApplicationExporterTest {
                 String.valueOf(cola.getFormula()),
                 String.valueOf(cola.getWinePH()),
                 String.valueOf(cola.getVintageYear()),
+                cola.getVarietals(),
+                cola.getAppellation(),
                 cola.getLastUpdated().toString(),
                 cola.getExpirationDate().toString()
         };
