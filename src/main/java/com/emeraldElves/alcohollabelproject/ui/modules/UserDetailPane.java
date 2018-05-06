@@ -11,7 +11,7 @@ import java.io.IOException;
 public class UserDetailPane extends VBox {
 
     @FXML
-    private Label userNameText, emailText, phoneText, companyText, permitText, addressText;
+    private Label userNameText, emailText, phoneText, companyText, permitText, addressText, repText;
 
     private User user;
 
@@ -45,6 +45,7 @@ public class UserDetailPane extends VBox {
         companyText.setText(user.getCompany());
         permitText.setText(user.getPermitNo());
         addressText.setText(user.getAddress());
+        repText.setText(String.valueOf(user.getRepID()));
     }
 
 }
