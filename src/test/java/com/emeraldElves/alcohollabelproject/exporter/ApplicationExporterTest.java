@@ -76,6 +76,8 @@ public class ApplicationExporterTest {
         cola2.setLastUpdated(LocalDate.of(2018, 8, 1));
         cola2.setWinePH(7);
         cola2.setVintageYear(1990);
+        cola2.setAppellation("Appellation");
+        cola2.setVarietals("Varietals");
         exporter.export(cola2);
 
         assertEquals(header + System.lineSeparator() + colaString(cola) + System.lineSeparator() + colaString(cola2) + System.lineSeparator(), writer.toString());
