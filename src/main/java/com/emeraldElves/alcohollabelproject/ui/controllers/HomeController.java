@@ -163,7 +163,7 @@ public class HomeController implements Initializable {
                 }
 
                 autoCompletionBinding = TextFields.bindAutoCompletion(searchbox, possibleSuggestions);
-                autoCompletionBinding.setPrefWidth(searchbox.getPrefWidth());
+                autoCompletionBinding.setPrefWidth(searchbox.getWidth());
 
                 searchbox.setOnKeyPressed(ke -> autoCompletionBinding.setUserInput(searchbox.getText().trim()));
             });
