@@ -103,6 +103,8 @@ public class PDFExporter {
 
                 if (cola.getType() == AlcoholType.WINE){
                     // TODO: Appellation and varietals
+                    form.getField("10").setValue(cola.getVarietals());
+                    form.getField("11").setValue(cola.getAppellation());
                 }
 
             } catch (IOException e) {

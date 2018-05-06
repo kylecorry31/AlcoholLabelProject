@@ -22,9 +22,11 @@ public class PDFExporterTest {
     public void setup() throws URISyntaxException {
         input = new File(getClass().getResource("/forms/cola.pdf").toURI());
         output = new File("test.pdf");
-        cola = new COLA(1, "Test'Brand", AlcoholType.BEER, "180001", ProductSource.DOMESTIC);
+        cola = new COLA(1, "Test'Brand", AlcoholType.WINE, "180001", ProductSource.DOMESTIC);
         cola.setAlcoholContent(10);
         cola.setFancifulName("TestFanciful");
+        cola.setVarietals("Varietals");
+        cola.setAppellation("Appellation");
 
         user = new User("test@test.com", "Test", "pass", UserType.APPLICANT);
         user.setPermitNo("12345");
