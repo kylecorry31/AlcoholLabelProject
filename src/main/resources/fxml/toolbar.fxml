@@ -9,7 +9,7 @@
 
 <Pane prefHeight="96.0" prefWidth="1024.0" style="-fx-background-color: -color-primary;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.ToolbarController">
    <children>
-      <Label id="toolbar-title" fx:id="toolbarTitle" layoutX="31.0" layoutY="-1.0" onMouseClicked="#goHome" prefHeight="96.0" prefWidth="323.0" text="Emerald Elves COLA" />
+      <Label id="toolbar-title" fx:id="toolbarTitle" layoutX="31.0" layoutY="-1.0" onMouseClicked="#goHome" prefHeight="96.0" prefWidth="323.0" text="COLA Prototype" />
       <HBox alignment="CENTER_RIGHT" layoutX="395.0" layoutY="26.0" prefHeight="42.0" prefWidth="615.0" spacing="32.0">
          <children>
             <JFXButton fx:id="extraButton" onMouseClicked="#extraFunction" styleClass="toolbar-text" text="Review all Applications">
