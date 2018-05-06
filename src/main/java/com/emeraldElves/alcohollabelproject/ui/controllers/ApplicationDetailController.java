@@ -1,22 +1,18 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
-import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.emeraldElves.alcohollabelproject.ui.ImageUtils;
-import com.emeraldElves.alcohollabelproject.ui.PagePrinter;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -25,7 +21,7 @@ import java.util.ResourceBundle;
 public class ApplicationDetailController implements Initializable {
 
     @FXML
-    private VBox colaInfo;
+    private COLADetailPane colaInfo;
 
     @FXML
     private ImageView labelImage;
@@ -60,11 +56,7 @@ public class ApplicationDetailController implements Initializable {
     private void updateUI(){
         if(alcohol == null)
             return;
-        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.COLA_DETAIL_PANE);
-        COLADetailPaneController controller = page.getController();
-        controller.setCOLA(alcohol);
-        colaInfo.getChildren().clear();
-        colaInfo.getChildren().add(page.getRoot());
+        colaInfo.setCOLA(alcohol);
         ttbID.setText("TTB ID #" + String.valueOf(alcohol.getId()));
         labelImage.setImage(alcohol.getLabelImage().display());
         ImageUtils.centerImage(labelImage);

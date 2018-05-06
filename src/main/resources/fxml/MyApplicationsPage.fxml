@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.emeraldElves.alcohollabelproject.ui.controllers.COLADetailPane?>
 <GridPane fx:id="root" alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.MyApplicationsController">
     <columnConstraints>
         <ColumnConstraints />
@@ -77,7 +78,7 @@
                                     </Label>
                                     <HBox prefWidth="724.0">
                                        <children>
-                                          <VBox fx:id="colaInfo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="424.0" spacing="32.0" />
+                                          <COLADetailPane fx:id="colaInfo" prefWidth="424.0"/>
                                           <ImageView fx:id="labelImage" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </HBox>

@@ -3,14 +3,14 @@ package com.emeraldElves.alcohollabelproject.ui.controllers;
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
-public class COLADetailPaneController implements Initializable {
+public class COLADetailPane extends VBox {
 
     @FXML
     private Label brandNameText, typeText, serialText, originText, fancifulText,
@@ -24,8 +24,19 @@ public class COLADetailPaneController implements Initializable {
 
     private COLA cola;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public COLADetailPane(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/COLADetailPane.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        setSpacing(32);
+
         winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
         vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
         appellationBox.managedProperty().bind(appellationBox.visibleProperty());
@@ -33,6 +44,8 @@ public class COLADetailPaneController implements Initializable {
         approvalDateBox.managedProperty().bind(approvalDateBox.visibleProperty());
         submissionDateBox.managedProperty().bind(submissionDateBox.visibleProperty());
     }
+
+
 
     public void setCOLA(COLA cola){
         this.cola = cola;

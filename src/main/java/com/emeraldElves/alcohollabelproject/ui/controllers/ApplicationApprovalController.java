@@ -1,13 +1,11 @@
 package com.emeraldElves.alcohollabelproject.ui.controllers;
 
 import com.emeraldElves.alcohollabelproject.Authenticator;
-import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.Data.ApplicationStatus;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.COLAApprovalHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
-import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXScrollPane;
@@ -27,9 +25,6 @@ import java.util.ResourceBundle;
 
 public class ApplicationApprovalController implements Initializable {
 
-
-    @FXML
-    private VBox colaInfo;
 
     @FXML
     private Label userNameText, emailText, phoneText, companyText, repText, permitText, addressText;
@@ -55,6 +50,7 @@ public class ApplicationApprovalController implements Initializable {
     @FXML
     private JFXDatePicker expirationDate;
 
+
     private COLAApprovalHandler colaApprovalHandler;
 
     private List<COLA> assignedApplications;
@@ -62,7 +58,8 @@ public class ApplicationApprovalController implements Initializable {
     private User user;
     private COLA cola;
 
-    private COLADetailPaneController controller;
+    @FXML
+    private COLADetailPane colaInfo;
 
 
     public ApplicationApprovalController(){
@@ -77,13 +74,6 @@ public class ApplicationApprovalController implements Initializable {
         fetchBtn.setOnMouseClicked(mouseEvent -> fetchMoreApplications());
 
         applicationList.getChildren().clear();
-
-        UIManager.Page colaDetailsPane = UIManager.getInstance().loadPage(UIManager.COLA_DETAIL_PANE);
-        controller = colaDetailsPane.getController();
-        controller.setCOLA(null);
-
-        colaInfo.getChildren().clear();
-        colaInfo.getChildren().add(colaDetailsPane.getRoot());
 
         noApplication.managedProperty().bind(noApplication.visibleProperty());
         alcInfoVbox.managedProperty().bind(alcInfoVbox.visibleProperty());
@@ -110,7 +100,7 @@ public class ApplicationApprovalController implements Initializable {
     private void setApplication(COLA cola){
         this.cola = cola;
 
-        controller.setCOLA(cola);
+        colaInfo.setCOLA(cola);
 
         noApplication.setVisible(false);
 
