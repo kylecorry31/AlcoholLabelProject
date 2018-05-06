@@ -7,6 +7,7 @@ import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.COLAApprovalHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
+import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXScrollPane;
@@ -28,7 +29,7 @@ public class ApplicationApprovalController implements Initializable {
 
 
     @FXML
-    private Label brandNameText, typeText, serialText, originText, fancifulText, alcoholContentText, formulaText, submissionDateText;
+    private VBox colaInfo;
 
     @FXML
     private Label userNameText, emailText, phoneText, companyText, repText, permitText, addressText;
@@ -52,12 +53,6 @@ public class ApplicationApprovalController implements Initializable {
     private Label noApplication;
 
     @FXML
-    private Label winePHText, vintageYearText, appellationText, varietalsText;
-
-    @FXML
-    private HBox winePHHbox, vintageYearHbox, appellationBox, varietalsBox;
-
-    @FXML
     private JFXDatePicker expirationDate;
 
     private COLAApprovalHandler colaApprovalHandler;
@@ -66,6 +61,8 @@ public class ApplicationApprovalController implements Initializable {
 
     private User user;
     private COLA cola;
+
+    private COLADetailPaneController controller;
 
 
     public ApplicationApprovalController(){
@@ -81,11 +78,16 @@ public class ApplicationApprovalController implements Initializable {
 
         applicationList.getChildren().clear();
 
+        UIManager.Page colaDetailsPane = UIManager.getInstance().loadPage(UIManager.COLA_DETAIL_PANE);
+        controller = colaDetailsPane.getController();
+        controller.setCOLA(null);
+
+        colaInfo.getChildren().clear();
+        colaInfo.getChildren().add(colaDetailsPane.getRoot());
+
         noApplication.managedProperty().bind(noApplication.visibleProperty());
         alcInfoVbox.managedProperty().bind(alcInfoVbox.visibleProperty());
         actionButtons.managedProperty().bind(actionButtons.visibleProperty());
-        winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
-        vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
 
         noApplicationSelected();
 
@@ -108,59 +110,12 @@ public class ApplicationApprovalController implements Initializable {
     private void setApplication(COLA cola){
         this.cola = cola;
 
-        if(cola.getType() == AlcoholType.WINE){
-            winePHHbox.setVisible(true);
-            vintageYearHbox.setVisible(true);
-            appellationBox.setVisible(true);
-            varietalsBox.setVisible(true);
-
-            if(cola.getWinePH() != -1.0){
-                winePHText.setText(String.format("%.1f", cola.getWinePH()));
-            } else {
-                winePHHbox.setVisible(false);
-            }
-
-            if(cola.getVintageYear() != -1){
-                vintageYearText.setText(String.format("%d", cola.getVintageYear()));
-            } else {
-                vintageYearHbox.setVisible(false);
-            }
-
-            if (!cola.getAppellation().isEmpty()){
-                appellationText.setText(cola.getAppellation());
-            } else {
-                appellationBox.setVisible(false);
-            }
-
-            if (!cola.getVarietals().isEmpty()){
-                varietalsText.setText(cola.getVarietals());
-            } else {
-                varietalsBox.setVisible(false);
-            }
-        } else {
-            winePHHbox.setVisible(false);
-            vintageYearHbox.setVisible(false);
-            appellationBox.setVisible(false);
-            varietalsBox.setVisible(false);
-        }
+        controller.setCOLA(cola);
 
         noApplication.setVisible(false);
 
         alcInfoVbox.setVisible(true);
         actionButtons.setVisible(true);
-
-        brandNameText.setText(cola.getBrandName());
-        typeText.setText(cola.getType().getDisplayName());
-        serialText.setText(cola.getSerialNumber());
-        originText.setText(cola.getOrigin().getDisplayName());
-        fancifulText.setText(cola.getFancifulName());
-        alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", cola.getAlcoholContent(), cola.getProof()));
-        if(cola.getFormula() == -1){
-            formulaText.setText("N/A");
-        } else {
-            formulaText.setText(String.valueOf(cola.getFormula()));
-        }
-        submissionDateText.setText(cola.getSubmissionDate().toString());
 
         labelImage.setImage(cola.getLabelImage().display());
 

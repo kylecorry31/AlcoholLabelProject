@@ -29,8 +29,7 @@ public class MyApplicationsController implements Initializable {
 
 
     @FXML
-    private Label brandNameText, typeText, serialText, originText, fancifulText,
-            alcoholContentText, formulaText, submissionDateText, statusText;
+    private VBox colaInfo;
 
     @FXML
     private ImageView labelImage;
@@ -40,12 +39,6 @@ public class MyApplicationsController implements Initializable {
 
     @FXML
     private VBox applicationList, alcInfoVbox;
-
-    @FXML
-    private Label winePHText, vintageYearText, appellationText, varietalsText;
-
-    @FXML
-    private HBox winePHHbox, vintageYearHbox, appellationBox, varietalsBox;
 
     @FXML
     private HBox actionButtons;
@@ -66,6 +59,8 @@ public class MyApplicationsController implements Initializable {
     private User user;
     private COLA cola;
 
+    private COLADetailPaneController controller;
+
 
     public MyApplicationsController(){
         colaSubmissionHandler = new COLASubmissionHandler();
@@ -78,16 +73,19 @@ public class MyApplicationsController implements Initializable {
         editBtn.setOnMouseClicked(mouseEvent -> edit());
         withdrawBtn.setOnMouseClicked(mouseEvent -> withdraw());
 
+        UIManager.Page colaDetailsPane = UIManager.getInstance().loadPage(UIManager.COLA_DETAIL_PANE);
+        controller = colaDetailsPane.getController();
+        controller.setCOLA(null);
+
+        colaInfo.getChildren().clear();
+        colaInfo.getChildren().add(colaDetailsPane.getRoot());
+
         applicationList.getChildren().clear();
 
         withdrawBtn.managedProperty().bind(withdrawBtn.visibleProperty());
         noApplication.managedProperty().bind(noApplication.visibleProperty());
         alcInfoVbox.managedProperty().bind(alcInfoVbox.visibleProperty());
         actionButtons.managedProperty().bind(actionButtons.visibleProperty());
-        winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
-        vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
-        appellationBox.managedProperty().bind(appellationBox.visibleProperty());
-        varietalsBox.managedProperty().bind(varietalsBox.visibleProperty());
 
         noApplicationSelected();
 
@@ -107,7 +105,6 @@ public class MyApplicationsController implements Initializable {
             cola.setStatus(ApplicationStatus.WITHDRAWN);
             colaSubmissionHandler.submitCOLA(cola);
             withdrawBtn.setVisible(false);
-            statusText.setText(cola.getStatus().getMessage());
         }
     }
 
@@ -115,61 +112,12 @@ public class MyApplicationsController implements Initializable {
     private void setApplication(COLA cola){
         this.cola = cola;
 
-        if(cola.getType() == AlcoholType.WINE){
-            winePHHbox.setVisible(true);
-            vintageYearHbox.setVisible(true);
-            appellationBox.setVisible(true);
-            varietalsBox.setVisible(true);
-
-            if(cola.getWinePH() != -1.0){
-                winePHText.setText(String.format("%.1f", cola.getWinePH()));
-            } else {
-                winePHHbox.setVisible(false);
-            }
-
-            if(cola.getVintageYear() != -1){
-                vintageYearText.setText(String.format("%d", cola.getVintageYear()));
-            } else {
-                vintageYearHbox.setVisible(false);
-            }
-
-            if (!cola.getAppellation().isEmpty()){
-                appellationText.setText(cola.getAppellation());
-            } else {
-                appellationBox.setVisible(false);
-            }
-
-            if (!cola.getVarietals().isEmpty()){
-                varietalsText.setText(cola.getVarietals());
-            } else {
-                varietalsBox.setVisible(false);
-            }
-
-        } else {
-            winePHHbox.setVisible(false);
-            vintageYearHbox.setVisible(false);
-            appellationBox.setVisible(false);
-            varietalsBox.setVisible(false);
-        }
+        controller.setCOLA(cola);
 
         noApplication.setVisible(false);
 
         alcInfoVbox.setVisible(true);
         actionButtons.setVisible(true);
-
-        brandNameText.setText(cola.getBrandName());
-        typeText.setText(cola.getType().getDisplayName());
-        serialText.setText(cola.getSerialNumber());
-        originText.setText(cola.getOrigin().getDisplayName());
-        fancifulText.setText(cola.getFancifulName());
-        alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", cola.getAlcoholContent(), cola.getProof()));
-        if(cola.getFormula() == -1){
-            formulaText.setText("N/A");
-        } else {
-            formulaText.setText(String.valueOf(cola.getFormula()));
-        }
-        submissionDateText.setText(cola.getSubmissionDate().toString());
-        statusText.setText(cola.getStatus().getMessage());
 
         labelImage.setImage(cola.getLabelImage().display());
 

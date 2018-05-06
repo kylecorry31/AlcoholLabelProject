@@ -10,11 +10,14 @@ import com.emeraldElves.alcohollabelproject.ui.UIManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,13 +25,7 @@ import java.util.ResourceBundle;
 public class ApplicationDetailController implements Initializable {
 
     @FXML
-    private Label brandNameText, typeText, serialText, originText, fancifulText, alcoholContentText, formulaText, approvalDateText;
-
-    @FXML
-    private Label winePHText, vintageYearText, appellationText, varietalsText;
-
-    @FXML
-    private HBox winePHHbox, vintageYearHbox, appellationBox, varietalsBox;
+    private VBox colaInfo;
 
     @FXML
     private ImageView labelImage;
@@ -45,6 +42,8 @@ public class ApplicationDetailController implements Initializable {
     @FXML
     private Label ttbID;
 
+    @FXML
+    private GridPane root;
 
     private COLA alcohol;
     private String searchTerm;
@@ -61,57 +60,13 @@ public class ApplicationDetailController implements Initializable {
     private void updateUI(){
         if(alcohol == null)
             return;
-
-        if(alcohol.getType() == AlcoholType.WINE){
-            winePHHbox.setVisible(true);
-            vintageYearHbox.setVisible(true);
-            appellationBox.setVisible(true);
-            varietalsBox.setVisible(true);
-
-            if(alcohol.getWinePH() != -1.0){
-                winePHText.setText(String.format("%.1f", alcohol.getWinePH()));
-            } else {
-                winePHHbox.setVisible(false);
-            }
-
-            if(alcohol.getVintageYear() != -1){
-                vintageYearText.setText(String.format("%d", alcohol.getVintageYear()));
-            } else {
-                vintageYearHbox.setVisible(false);
-            }
-
-            if (!alcohol.getAppellation().isEmpty()){
-                appellationText.setText(alcohol.getAppellation());
-            } else {
-                appellationBox.setVisible(false);
-            }
-
-            if (!alcohol.getVarietals().isEmpty()){
-                varietalsText.setText(alcohol.getVarietals());
-            } else {
-                varietalsBox.setVisible(false);
-            }
-        } else {
-            winePHHbox.setVisible(false);
-            vintageYearHbox.setVisible(false);
-            appellationBox.setVisible(false);
-            varietalsBox.setVisible(false);
-        }
-
-        brandNameText.setText(alcohol.getBrandName());
-        fancifulText.setText(alcohol.getFancifulName());
-        alcoholContentText.setText(String.format("%.1f%% (%.1f Proof)", alcohol.getAlcoholContent(), alcohol.getProof()));
-        serialText.setText(alcohol.getSerialNumber());
-        originText.setText(alcohol.getOrigin().getDisplayName());
-        typeText.setText(alcohol.getType().getDisplayName());
-        approvalDateText.setText(alcohol.getApprovalDate().toString());
+        UIManager.Page page = UIManager.getInstance().loadPage(UIManager.COLA_DETAIL_PANE);
+        COLADetailPaneController controller = page.getController();
+        controller.setCOLA(alcohol);
+        colaInfo.getChildren().clear();
+        colaInfo.getChildren().add(page.getRoot());
         ttbID.setText("TTB ID #" + String.valueOf(alcohol.getId()));
         labelImage.setImage(alcohol.getLabelImage().display());
-        if(alcohol.getFormula() == -1){
-            formulaText.setText("N/A");
-        } else {
-            formulaText.setText(String.valueOf(alcohol.getFormula()));
-        }
         ImageUtils.centerImage(labelImage);
 
         User user = Storage.getInstance().getUser(alcohol.getApplicantID());
@@ -130,24 +85,17 @@ public class ApplicationDetailController implements Initializable {
 
     }
 
-    public void printPage(){
-        PagePrinter.print(brandNameText.getScene());
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         JFXScrollPane.smoothScrolling(scrollPane);
 
-        winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
-        vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
-        appellationBox.managedProperty().bind(appellationBox.visibleProperty());
-        varietalsBox.managedProperty().bind(varietalsBox.visibleProperty());
 
         backBtn.setOnMouseClicked(mouseEvent -> {
             UIManager.Page page = UIManager.getInstance().loadPage(UIManager.SEARCH_PAGE);
             COLASearchController controller = page.getController();
             controller.setSearchTerm(searchTerm == null ? "" : searchTerm);
-            UIManager.getInstance().displayPage(brandNameText.getScene(), page);
+            UIManager.getInstance().displayPage(root.getScene(), page);
         });
     }
 }

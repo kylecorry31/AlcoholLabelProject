@@ -55,6 +55,8 @@ public class COLA {
     private String varietals;
     private String appellation;
 
+    public static final LocalDate NULL_DATE = LocalDate.of(1990, 1, 1);
+
     public COLA(long id, String brandName, AlcoholType type, String serialNumber, ProductSource origin) {
         this.brandName = brandName;
         this.type = type;
@@ -67,7 +69,7 @@ public class COLA {
         applicantID = -1;
         assignedTo = -1;
         submissionDate = LocalDate.now();
-        approvalDate = LocalDate.of(1990, 1, 1);
+        approvalDate = NULL_DATE;
         status = ApplicationStatus.RECEIVED;
         labelImage = new ProxyLabelImage(DEFAULT_LABEL_IMAGE);
         vintageYear = -1;
@@ -75,7 +77,7 @@ public class COLA {
         appellation = "";
         varietals = "";
         lastUpdated = submissionDate;
-        expirationDate = LocalDate.now().plusYears(1);
+        expirationDate = NULL_DATE;
     }
 
     public int getVintageYear() {
