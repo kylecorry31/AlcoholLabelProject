@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml" spacing="32">
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="32.0">
+         <children>
+            <Label prefWidth="150.0" styleClass="label-header" text="Name" />
+            <Label fx:id="userNameText" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="32.0">
+         <children>
+            <Label prefWidth="150.0" styleClass="label-header" text="Phone Number" />
+            <Label fx:id="phoneText" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="32.0">
+         <children>
+            <Label prefWidth="150.0" styleClass="label-header" text="Email Address" />
+            <Label fx:id="emailText" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="32.0">
+         <children>
+            <Label prefWidth="150.0" styleClass="label-header" text="Representative ID" />
+            <Label fx:id="repText" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="32.0">
+         <children>
+            <Label prefWidth="150.0" styleClass="label-header" text="Permit Number" />
+            <Label fx:id="permitText" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="32.0">
+         <children>
+            <Label prefWidth="150.0" styleClass="label-header" text="Company" />
+            <Label fx:id="companyText" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="32.0">
+         <children>
+            <Label prefWidth="150.0" styleClass="label-header" text="Address" />
+            <Label fx:id="addressText" text="Label" wrapText="true" />
+         </children>
+      </HBox>
+   </children>
+</fx:root>

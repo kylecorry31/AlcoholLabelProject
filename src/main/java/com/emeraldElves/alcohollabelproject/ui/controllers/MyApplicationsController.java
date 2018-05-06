@@ -6,6 +6,7 @@ import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.COLASubmissionHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
+import com.emeraldElves.alcohollabelproject.ui.modules.COLADetailPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.application.Platform;

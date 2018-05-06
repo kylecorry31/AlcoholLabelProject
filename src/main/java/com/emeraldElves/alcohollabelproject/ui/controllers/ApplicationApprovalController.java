@@ -6,6 +6,8 @@ import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.COLAApprovalHandler;
 import com.emeraldElves.alcohollabelproject.data.User;
 import com.emeraldElves.alcohollabelproject.database.Storage;
+import com.emeraldElves.alcohollabelproject.ui.modules.COLADetailPane;
+import com.emeraldElves.alcohollabelproject.ui.modules.UserDetailPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXScrollPane;
@@ -25,9 +27,8 @@ import java.util.ResourceBundle;
 
 public class ApplicationApprovalController implements Initializable {
 
-
     @FXML
-    private Label userNameText, emailText, phoneText, companyText, repText, permitText, addressText;
+    private UserDetailPane userInfo;
 
     @FXML
     private ImageView labelImage;
@@ -112,13 +113,7 @@ public class ApplicationApprovalController implements Initializable {
         User submitter = Storage.getInstance().getUser(cola.getApplicantID());
 
         if(submitter != null){
-            userNameText.setText(submitter.getName());
-            emailText.setText(submitter.getEmail().getEmailAddress());
-            phoneText.setText(submitter.getPhoneNumber().getFormattedNumber());
-            companyText.setText(submitter.getCompany());
-            addressText.setText(submitter.getAddress());
-            repText.setText(String.valueOf(submitter.getRepID()));
-            permitText.setText(submitter.getPermitNo());
+            userInfo.setUser(submitter);
         }
 
     }

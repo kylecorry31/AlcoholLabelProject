@@ -5,6 +5,8 @@ import com.emeraldElves.alcohollabelproject.database.Storage;
 import com.emeraldElves.alcohollabelproject.ui.ImageUtils;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.ui.UIManager;
+import com.emeraldElves.alcohollabelproject.ui.modules.COLADetailPane;
+import com.emeraldElves.alcohollabelproject.ui.modules.UserDetailPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.fxml.FXML;
@@ -13,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,7 +34,7 @@ public class ApplicationDetailController implements Initializable {
     private ScrollPane scrollPane;
 
     @FXML
-    private Label userNameText, emailText, phoneText, companyText, permitText, addressText;
+    private UserDetailPane userInfo;
 
     @FXML
     private Label ttbID;
@@ -63,12 +64,7 @@ public class ApplicationDetailController implements Initializable {
 
         User user = Storage.getInstance().getUser(alcohol.getApplicantID());
         if(user != null) {
-            userNameText.setText(user.getName());
-            emailText.setText(user.getEmail().getEmailAddress());
-            phoneText.setText(user.getPhoneNumber().getFormattedNumber());
-            companyText.setText(user.getCompany());
-            permitText.setText(user.getPermitNo());
-            addressText.setText(user.getAddress());
+            userInfo.setUser(user);
         }
 
     }

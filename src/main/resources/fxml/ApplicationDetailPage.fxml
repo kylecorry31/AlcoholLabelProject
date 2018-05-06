@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import com.emeraldElves.alcohollabelproject.ui.controllers.COLADetailPane?>
+<?import com.emeraldElves.alcohollabelproject.ui.modules.COLADetailPane?>
+<?import com.emeraldElves.alcohollabelproject.ui.modules.UserDetailPane?>
 <GridPane fx:id="root" alignment="center" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emeraldElves.alcohollabelproject.ui.controllers.ApplicationDetailController">
     <columnConstraints>
         <ColumnConstraints />
@@ -45,46 +46,7 @@
                               <Insets bottom="16.0" top="48.0" />
                            </VBox.margin>
                         </Label>
-                        <VBox spacing="32.0">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" spacing="32.0">
-                                 <children>
-                                    <Label prefWidth="150.0" styleClass="label-header" text="Name" />
-                                    <Label fx:id="userNameText" text="Label" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="32.0">
-                                 <children>
-                                    <Label prefWidth="150.0" styleClass="label-header" text="Phone Number" />
-                                    <Label fx:id="phoneText" text="Label" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="32.0">
-                                 <children>
-                                    <Label prefWidth="150.0" styleClass="label-header" text="Email Address" />
-                                    <Label fx:id="emailText" text="Label" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="32.0">
-                                 <children>
-                                    <Label prefWidth="150.0" styleClass="label-header" text="Permit Number" />
-                                    <Label fx:id="permitText" text="Label" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="32.0">
-                                 <children>
-                                    <Label prefWidth="150.0" styleClass="label-header" text="Company" />
-                                    <Label fx:id="companyText" text="Label" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="32.0">
-                                 <children>
-                                    <Label prefWidth="150.0" styleClass="label-header" text="Address" />
-                                    <Label fx:id="addressText" text="Label" wrapText="true" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
+                        <UserDetailPane fx:id="userInfo"/>
                      </children>
                      <padding>
                         <Insets top="16.0" />

@@ -1,4 +1,4 @@
-package com.emeraldElves.alcohollabelproject.ui.controllers;
+package com.emeraldElves.alcohollabelproject.ui.modules;
 
 import com.emeraldElves.alcohollabelproject.Data.AlcoholType;
 import com.emeraldElves.alcohollabelproject.data.COLA;
@@ -34,8 +34,6 @@ public class COLADetailPane extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        setSpacing(32);
 
         winePHHbox.managedProperty().bind(winePHHbox.visibleProperty());
         vintageYearHbox.managedProperty().bind(vintageYearHbox.visibleProperty());
