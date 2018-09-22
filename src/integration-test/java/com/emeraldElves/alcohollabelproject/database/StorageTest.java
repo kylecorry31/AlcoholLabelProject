@@ -9,6 +9,7 @@ import com.emeraldElves.alcohollabelproject.data.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -112,6 +113,9 @@ public class StorageTest {
         assertEquals(1, users.size());
         assertTrue(users.contains(u1));
 
+        // Hashing
+        assertTrue(BCrypt.checkpw("password", users.get(0).getPassword()));
+
         storage.saveUser(u2);
         u2.setId(2);
 
@@ -119,6 +123,7 @@ public class StorageTest {
         assertEquals(2, users.size());
         assertTrue(users.contains(u1));
         assertTrue(users.contains(u2));
+
 
         User u = storage.getUser("test@gmail.com", "pword");
         assertEquals(u, u2);

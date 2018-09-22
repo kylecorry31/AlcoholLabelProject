@@ -146,7 +146,6 @@ public class User {
                 approved == user.approved &&
                 repID == user.repID &&
                 Objects.equals(name, user.name) &&
-                Objects.equals(password, user.password) &&
                 type == user.type &&
                 Objects.equals(company, user.company) &&
                 Objects.equals(address, user.address) &&
