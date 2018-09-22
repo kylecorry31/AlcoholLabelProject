@@ -3,9 +3,9 @@ package com.emeraldElves.alcohollabelproject.database;
 import com.emeraldElves.alcohollabelproject.Data.*;
 import com.emeraldElves.alcohollabelproject.IDGenerator.IDCounter;
 import com.emeraldElves.alcohollabelproject.LogManager;
+import com.emeraldElves.alcohollabelproject.Password;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -77,7 +77,7 @@ public class Storage {
     public void saveUser(User user){
         database.insert(User.DB_TABLE + USER_VALUES, new String[]{
                 ApacheDerbyDatabase.addQuotes(user.getName()),
-                ApacheDerbyDatabase.addQuotes(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(14))),
+                ApacheDerbyDatabase.addQuotes(Password.hash(user.getPassword(), 14)),
                 ApacheDerbyDatabase.addQuotes(user.getType().toString()),
                 String.valueOf(user.isApproved()),
                 ApacheDerbyDatabase.addQuotes(user.getCompany()),
@@ -192,7 +192,7 @@ public class Storage {
         );
         User user = getUser(resultSet);
         if (user != null) {
-            if (BCrypt.checkpw(password, user.getPassword())){
+            if (Password.matches(password, user.getPassword())){
                 return user;
             }
         }
