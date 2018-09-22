@@ -20,7 +20,7 @@ public class PopulateDatabase {
 
         LogManager.getInstance().setShouldWrite(false);
 
-        InputStream ttbFile = PopulateDatabase.class.getResourceAsStream("/ttbsample.tsv");
+        InputStream ttbFile = PopulateDatabase.class.getResourceAsStream(FILE_NAME);
 
         InputStreamReader fileReader = new InputStreamReader(ttbFile);
 
