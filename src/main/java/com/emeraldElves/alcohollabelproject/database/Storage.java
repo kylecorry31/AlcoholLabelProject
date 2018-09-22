@@ -5,6 +5,7 @@ import com.emeraldElves.alcohollabelproject.IDGenerator.IDCounter;
 import com.emeraldElves.alcohollabelproject.LogManager;
 import com.emeraldElves.alcohollabelproject.data.COLA;
 import com.emeraldElves.alcohollabelproject.data.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,7 +77,7 @@ public class Storage {
     public void saveUser(User user){
         database.insert(User.DB_TABLE + USER_VALUES, new String[]{
                 ApacheDerbyDatabase.addQuotes(user.getName()),
-                ApacheDerbyDatabase.addQuotes(user.getPassword()),
+                ApacheDerbyDatabase.addQuotes(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(14))),
                 ApacheDerbyDatabase.addQuotes(user.getType().toString()),
                 String.valueOf(user.isApproved()),
                 ApacheDerbyDatabase.addQuotes(user.getCompany()),
@@ -185,11 +186,17 @@ public class Storage {
 
     public User getUser(String email, String password) {
         ResultSet resultSet = database.query(User.DB_TABLE, null,
-                User.DB_EMAIL + " = ? AND " + User.DB_PASSWORD + " = ?",
-                new String[]{email, password},
+                User.DB_EMAIL + " = ?",
+                new String[]{email},
                 null
         );
-        return getUser(resultSet);
+        User user = getUser(resultSet);
+        if (user != null) {
+            if (BCrypt.checkpw(password, user.getPassword())){
+                return user;
+            }
+        }
+        return null;
     }
 
     public User getUser(String email) {
